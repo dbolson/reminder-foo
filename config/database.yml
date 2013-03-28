@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: reminders-api_development
+  pool: 5
+  username: reminders-api
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: reminders-api_test
+  pool: 5
+  username: reminders-api
+  password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: reminders-api_production
+  pool: 5
+  username: reminders-api
+  password:
