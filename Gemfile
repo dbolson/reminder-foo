@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
+gem 'api_doc', '~> 0.0.11'
 gem 'awesome_print', '~> 1.1.0'
 gem 'jquery-rails', '~> 2.2.1'
 gem 'oj', '~> 2.0.10'

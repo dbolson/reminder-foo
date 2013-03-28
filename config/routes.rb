@@ -1,4 +1,6 @@
 RemindersApi::Application.routes.draw do
+  mount ApiDoc::Engine => "/api_docs"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
