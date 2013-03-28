@@ -3,6 +3,9 @@
 ### References
 * https://app.zencoder.com/docs/api
 * http://engineering.gomiso.com/2011/06/27/building-a-platform-api-on-rails/
+* https://github.com/ccocchi/rabl-rails
+* http://blogs.plexibus.com/2009/01/15/rest-esting-with-curl/
+* https://github.com/rack/rack/blob/master/lib/rack/utils.rb#L453
 
 ### A client can access:
 * a list of event lists
