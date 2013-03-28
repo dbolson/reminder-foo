@@ -1,19 +1,19 @@
 # Reminders API
 
-event_lists
-  events
-    reminder_dates
+### References
+* https://app.zencoder.com/docs/api
+* http://engineering.gomiso.com/2011/06/27/building-a-platform-api-on-rails/
 
-A client can access:
-
-a list of event lists
-a list of events
-  scoped to event lists
-a list of reminder dates
-  scoped to events
+### A client can access:
+* a list of event lists
+* a list of events
+  * scoped to event lists
+* a list of reminder dates
+  * scoped to events
 * a list of subscribers
-    scoped to a reminder list
+    * scoped to a reminder list
 
+```
 Module Api
   module V1
     class EventListsController
@@ -38,13 +38,18 @@ Module Api
     end
   end
 end
+```
 
-API DOC
+### API DOC
+```
 describe 'index' do
   it 'returns a list of questions', :api_doc => true do
     get :index
     response.status.should be(200)
   end
 end
+
 rake api:doc
+```
+
 go to /api_docs
