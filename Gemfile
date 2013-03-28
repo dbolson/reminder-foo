@@ -8,6 +8,7 @@ gem 'oj', '~> 2.0.10'
 gem 'pg', '~> 0.14.1'
 gem 'rabl', '~> 0.8.2'
 gem 'rails', '3.2.13'
+gem 'rails_best_practices', '~> 1.13.4'
 gem 'thin', '~> 1.5.1'
 gem 'twilio-ruby', '~> 3.9.0'
 
