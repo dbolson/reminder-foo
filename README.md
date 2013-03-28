@@ -11,6 +11,8 @@ a list of events
   scoped to event lists
 a list of reminder dates
   scoped to events
+* a list of subscribers
+    scoped to a reminder list
 
 Module Api
   module V1
@@ -27,6 +29,12 @@ Module Api
     end
 
     class Events::ReminderDatesController
+    end
+
+    class SubscribersController
+    end
+
+    class EventLists::SubscribersController
     end
   end
 end
