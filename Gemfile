@@ -19,8 +19,3 @@ group :development, :test do
   gem 'faker', '~> 1.1.2'
   gem 'rspec-rails', '~> 2.13.0'
 end
-
-group :development do
-  gem 'better_errors', '~> 0.7.2'
-  gem 'binding_of_caller', '~> 0.7.1'
-end
