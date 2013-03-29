@@ -1,3 +1,3 @@
 collection @event_lists
 
-attributes :name
+attributes :id, :name

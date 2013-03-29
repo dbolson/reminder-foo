@@ -1,3 +1,3 @@
 object @event_list
 
-attributes :name
+attributes :id, :name
