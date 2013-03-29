@@ -11,6 +11,20 @@ class EventListsController < ApplicationController
     @event_list = EventList.find(params[:id])
   end
 
+  def new
+    @event_list = EventList.new
+  end
+
+  def create
+    @event_list = EventList.new(params[:event_list])
+
+    if @event_list.save
+      render json: @event_list, status: :created
+    else
+      render json: @event_list, status: :bad_request
+    end
+  end
+
   def edit
     @event_list = EventList.find(params[:id])
   end
