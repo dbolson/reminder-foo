@@ -1,4 +1,6 @@
 class EventListsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :render_errors
+
   respond_to :json, :xml
 
   def index
@@ -19,7 +21,13 @@ class EventListsController < ApplicationController
     if @event_list.update_attributes(params[:event_list])
       render json: @event_list
     else
-      render json: @event_list, status: :unprocessable_entity
+      render json: @event_list, status: :not_modified
     end
+  end
+
+  private
+
+  def render_errors(exception)
+    render json: { error: exception.message }, status: :not_found
   end
 end
