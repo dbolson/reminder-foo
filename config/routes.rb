@@ -1,7 +1,5 @@
 RemindersApi::Application.routes.draw do
-  root to: 'event_lists#index'
-
-  resources :event_lists
+  resources :event_lists, only: [:index, :show, :update, :create, :destroy]
 
   match '/404', to: 'errors#not_found'
 

@@ -9,31 +9,23 @@ class EventListsController < ApplicationController
     @event_list = EventList.find(params[:id])
   end
 
-  def new
-    @event_list = EventList.new
-  end
-
   def create
     @event_list = EventList.new(params[:event_list])
 
     if @event_list.save
-      #render @event_list, status: :created
+      render nil
     else
-      #render @event_list, status: :bad_request
+      render nil, status: :bad_request
     end
-  end
-
-  def edit
-    @event_list = EventList.find(params[:id])
   end
 
   def update
     @event_list = EventList.find(params[:id])
 
     if @event_list.update_attributes(params[:event_list])
-      render @event_list
+      render nil
     else
-      render @event_list, status: :not_modified
+      render nil, status: :not_modified
     end
   end
 
