@@ -17,9 +17,9 @@ class EventListsController < ApplicationController
     @event_list = EventList.new(params[:event_list])
 
     if @event_list.save
-      render json: @event_list, status: :created
+      render @event_list, status: :created
     else
-      render json: @event_list, status: :bad_request
+      render @event_list, status: :bad_request
     end
   end
 
@@ -31,9 +31,9 @@ class EventListsController < ApplicationController
     @event_list = EventList.find(params[:id])
 
     if @event_list.update_attributes(params[:event_list])
-      render json: @event_list
+      render @event_list
     else
-      render json: @event_list, status: :not_modified
+      render @event_list, status: :not_modified
     end
   end
 end
