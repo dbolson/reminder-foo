@@ -8,26 +8,27 @@ describe EventListsController do
     end
 
     describe '#show' do
-      def get_action
+      def do_action
         get :show, id: record.id, format: :json
       end
 
       let(:record) { FactoryGirl.create(:event_list) }
 
       it 'is successful' do
-        get_action
+        do_action
         response.status.should == 200
       end
 
       it 'is a json response' do
-        get_action
+        do_action
         response.header['Content-Type'].should include('application/json')
       end
 
       it 'displays the attributes of the record' do
-        get_action
-        JSON.parse(response.body)['id'].should == record.id
-        JSON.parse(response.body)['name'].should == record.name
+        do_action
+        body = JSON.parse(response.body)
+        body['id'].should == record.id
+        body['name'].should == record.name
       end
     end
   end

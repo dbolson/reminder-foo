@@ -1,0 +1,9 @@
+object @event_list
+
+extends 'event_lists/show'
+
+if @event_list.errors.any?
+  node :errors do |n|
+    @event_list.errors
+  end
+end

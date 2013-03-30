@@ -17,9 +17,9 @@ class EventListsController < ApplicationController
     @event_list = EventList.new(params[:event_list])
 
     if @event_list.save
-      render @event_list, status: :created
+      #render @event_list, status: :created
     else
-      render @event_list, status: :bad_request
+      #render @event_list, status: :bad_request
     end
   end
 
