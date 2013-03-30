@@ -1,3 +1,3 @@
-collection @event_lists
+object @event_lists
 
-attributes :id, :name
+extends 'event_lists/show'
