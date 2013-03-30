@@ -36,4 +36,9 @@ class EventListsController < ApplicationController
       render @event_list, status: :not_modified
     end
   end
+
+  def destroy
+    @event_list = EventList.find(params[:id])
+    @event_list.destroy
+  end
 end
