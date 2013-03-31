@@ -18,12 +18,12 @@ describe EventListsController do
         record_type.stub(:all) { [record1, record2] }
       end
 
-      it 'is successful' do
+      it 'is successful', api_doc: true do
         do_action
         response.status.should == 200
       end
 
-      it 'displays the records' do
+      it 'displays the records', api_doc: true do
         do_action
         body = JSON.parse(response.body)
         body.should include('id' => '1', 'name' => 'fake 1')
@@ -43,12 +43,12 @@ describe EventListsController do
           record_type.stub(:find).with('10') { record }
         end
 
-        it 'is successful' do
+        it 'is successful', api_doc: true do
           do_action('10')
           response.status.should == 200
         end
 
-        it 'displays the attributes of the record' do
+        it 'displays the attributes of the record', api_doc: true do
           do_action('10')
           body = JSON.parse(response.body)
           body['id'].should == record.id
@@ -80,12 +80,12 @@ describe EventListsController do
           record.stub(:save) { true }
         end
 
-        it 'is successful' do
+        it 'is successful', api_doc: true do
           do_action(params)
           response.status.should == 200
         end
 
-        it 'displays the record' do
+        it 'displays the record', api_doc: true do
           do_action(params)
           body = JSON.parse(response.body)
           body['id'].should == record.id
@@ -102,12 +102,12 @@ describe EventListsController do
           record.stub(:errors) {{'error' => 'message'}}
         end
 
-        it 'is a bad request' do
+        it 'is a bad request', api_doc: true do
           do_action(params)
           response.status.should == 400
         end
 
-        it 'displays the errors' do
+        it 'displays the errors', api_doc: true do
           do_action(params)
           body = JSON.parse(response.body)
           body['errors'].should == { 'error' => 'message' }
@@ -130,12 +130,12 @@ describe EventListsController do
           record.stub(:update_attributes).with(params) { true }
         end
 
-        it 'is successful' do
+        it 'is successful', api_doc: true do
           do_action(params)
           response.status.should == 200
         end
 
-        it 'displays the record' do
+        it 'displays the record', api_doc: true do
           do_action(params)
           body = JSON.parse(response.body)
           body['id'].should == record.id
@@ -152,12 +152,12 @@ describe EventListsController do
           record.stub(:errors) {{'error' => 'message'}}
         end
 
-        it 'is not modified' do
+        it 'is not modified', api_doc: true do
           do_action(params)
           response.status.should == 304
         end
 
-        it 'displays errors' do
+        it 'displays errors', api_doc: true do
           do_action(params)
           body = JSON.parse(response.body)
           body['errors'].should == { 'error' => 'message' }
@@ -178,12 +178,12 @@ describe EventListsController do
         record.stub(:destroyed?) { true }
       end
 
-      it 'is successful' do
+      it 'is successful', api_doc: true do
         do_action('10')
         response.status.should == 200
       end
 
-      it 'displays the record' do
+      it 'displays the record', api_doc: true do
         do_action('10')
         body = JSON.parse(response.body)
         body['id'].should == record.id
