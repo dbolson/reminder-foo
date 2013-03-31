@@ -37,19 +37,19 @@ describe EventListsController do
       end
 
       context 'with a valid id' do
-        let!(:record) { FactoryGirl.build_stubbed(:event_list) }
+        let!(:record) { FactoryGirl.build_stubbed(:event_list, id: '10') }
 
         before do
-          record_type.stub(:find).with(record.id.to_s) { record }
+          record_type.stub(:find).with('10') { record }
         end
 
         it 'is successful' do
-          do_action(record.id)
+          do_action('10')
           response.status.should == 200
         end
 
         it 'displays the attributes of the record' do
-          do_action(record.id)
+          do_action('10')
           body = JSON.parse(response.body)
           body['id'].should == record.id
           body['name'].should == record.name
@@ -112,6 +112,83 @@ describe EventListsController do
           body = JSON.parse(response.body)
           body['errors'].should == { 'error' => 'message' }
         end
+      end
+    end
+
+    describe '#update' do
+      def do_action(params)
+        put :update, id: '10', event_list: params, format: :json
+      end
+
+      let!(:record) { FactoryGirl.build_stubbed(:event_list, id: '10') }
+
+      context 'with valid parameters' do
+        let(:params) {{ 'valid' => 'params' }}
+
+        before do
+          record_type.stub(:find).with('10') { record }
+          record.stub(:update_attributes).with(params) { true }
+        end
+
+        it 'is successful' do
+          do_action(params)
+          response.status.should == 200
+        end
+
+        it 'displays the record' do
+          do_action(params)
+          body = JSON.parse(response.body)
+          body['id'].should == record.id
+          body['name'].should == record.name
+        end
+      end
+
+      context 'with invalid parameters' do
+        let(:params) {{ 'invalid' => 'params' }}
+
+        before do
+          record_type.stub(:find).with('10') { record }
+          record.stub(:update_attributes).with(params) { false }
+          record.stub(:errors) {{'error' => 'message'}}
+        end
+
+        it 'is not modified' do
+          do_action(params)
+          response.status.should == 304
+        end
+
+        it 'displays errors' do
+          do_action(params)
+          body = JSON.parse(response.body)
+          body['errors'].should == { 'error' => 'message' }
+        end
+      end
+    end
+
+    describe '#destroy' do
+      def do_action(id)
+        delete :destroy, id: id, format: :json
+      end
+
+      let!(:record) { FactoryGirl.build_stubbed(:event_list, id: '10') }
+
+      before do
+        record_type.stub(:find).with('10') { record }
+        record.should_receive(:destroy)
+        record.stub(:destroyed?) { true }
+      end
+
+      it 'is successful' do
+        do_action('10')
+        response.status.should == 200
+      end
+
+      it 'displays the record' do
+        do_action('10')
+        body = JSON.parse(response.body)
+        body['id'].should == record.id
+        body['name'].should == record.name
+        body['destroyed?'].should be_true
       end
     end
   end
