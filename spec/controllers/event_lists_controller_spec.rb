@@ -55,14 +55,6 @@ describe EventListsController do
           body['name'].should == record.name
         end
       end
-
-      context 'with an invalid id' do
-        it 'is unsuccessful' do
-          expect {
-            do_action(-1)
-          }.to raise_error(ActiveRecord::RecordNotFound)
-        end
-      end
     end
 
     describe '#create' do
@@ -74,6 +66,7 @@ describe EventListsController do
 
       context 'with valid parameters' do
         let(:params) {{ 'valid' => 'params' }}
+        let(:errors) { stub(:errors, any?: false) }
 
         before do
           record_type.stub(:new).with(params) { record }
@@ -95,11 +88,12 @@ describe EventListsController do
 
       context 'without valid parameters' do
         let(:params) {{ 'invalid' => 'params' }}
+        let(:errors) { stub(:errors, any?: true, full_messages: 'message') }
 
         before do
           record_type.stub(:new).with(params) { record }
           record.stub(:save) { false }
-          record.stub(:errors) {{'error' => 'message'}}
+          record.stub(:errors) { errors }
         end
 
         it 'is a bad request', api_doc: true do
@@ -110,7 +104,7 @@ describe EventListsController do
         it 'displays the errors', api_doc: true do
           do_action(params)
           body = JSON.parse(response.body)
-          body['errors'].should == { 'error' => 'message' }
+          body['errors'].should == 'message'
         end
       end
     end
@@ -124,6 +118,7 @@ describe EventListsController do
 
       context 'with valid parameters' do
         let(:params) {{ 'valid' => 'params' }}
+        let(:errors) { stub(:errors, any?: false) }
 
         before do
           record_type.stub(:find).with('10') { record }
@@ -145,11 +140,12 @@ describe EventListsController do
 
       context 'with invalid parameters' do
         let(:params) {{ 'invalid' => 'params' }}
+        let(:errors) { stub(:errors, any?: true, full_messages: 'message') }
 
         before do
           record_type.stub(:find).with('10') { record }
           record.stub(:update_attributes).with(params) { false }
-          record.stub(:errors) {{'error' => 'message'}}
+          record.stub(:errors) { errors }
         end
 
         it 'is not modified', api_doc: true do
@@ -160,7 +156,7 @@ describe EventListsController do
         it 'displays errors', api_doc: true do
           do_action(params)
           body = JSON.parse(response.body)
-          body['errors'].should == { 'error' => 'message' }
+          body['errors'].should == 'message'
         end
       end
     end
