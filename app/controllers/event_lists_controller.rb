@@ -3,12 +3,10 @@ class EventListsController < ApplicationController
 
   def index
     @event_lists = EventList.all
-    respond_with(@event_lists)
   end
 
   def show
     @event_list = EventList.find(params[:id])
-    respond_with(@event_list)
   end
 
   def create
@@ -17,7 +15,7 @@ class EventListsController < ApplicationController
     if @event_list.save
       render nil
     else
-      render nil, status: :bad_request
+      render nil, status: :unprocessable_entity
     end
   end
 
@@ -34,6 +32,5 @@ class EventListsController < ApplicationController
   def destroy
     @event_list = EventList.find(params[:id])
     @event_list.destroy
-    respond_with(@event_list)
   end
 end

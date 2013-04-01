@@ -11,8 +11,12 @@ describe EventListsController do
         get :index, format: :json
       end
 
-      let(:record1) { stub(:event_list, id: '1', name: 'fake 1') }
-      let(:record2) { stub(:event_list, id: '2', name: 'fake 2') }
+      let!(:record1) do
+        FactoryGirl.build_stubbed(:event_list, id: '1', name: 'fake 1')
+      end
+      let!(:record2) do
+        FactoryGirl.build_stubbed(:event_list, id: '2', name: 'fake 2')
+      end
 
       before do
         record_type.stub(:all) { [record1, record2] }
@@ -26,8 +30,8 @@ describe EventListsController do
       it 'displays the records', api_doc: true do
         do_action
         body = JSON.parse(response.body)
-        body.should include('id' => '1', 'name' => 'fake 1')
-        body.should include('id' => '2', 'name' => 'fake 2')
+        body.should include({ 'event_list' => { 'id' => 1, 'name' => 'fake 1' }})
+        body.should include({ 'event_list' => { 'id' => 2, 'name' => 'fake 2' }})
       end
     end
 
@@ -50,7 +54,7 @@ describe EventListsController do
 
         it 'displays the attributes of the record', api_doc: true do
           do_action('10')
-          body = JSON.parse(response.body)
+          body = JSON.parse(response.body)['event_list']
           body['id'].should == record.id
           body['name'].should == record.name
         end
@@ -80,7 +84,7 @@ describe EventListsController do
 
         it 'displays the record', api_doc: true do
           do_action(params)
-          body = JSON.parse(response.body)
+          body = JSON.parse(response.body)['event_list']
           body['id'].should == record.id
           body['name'].should == record.name
         end
@@ -98,12 +102,12 @@ describe EventListsController do
 
         it 'is a bad request', api_doc: true do
           do_action(params)
-          response.status.should == 400
+          response.status.should == 422
         end
 
         it 'displays the errors', api_doc: true do
           do_action(params)
-          body = JSON.parse(response.body)
+          body = JSON.parse(response.body)['event_list']
           body['errors'].should == 'message'
         end
       end
@@ -132,7 +136,7 @@ describe EventListsController do
 
         it 'displays the record', api_doc: true do
           do_action(params)
-          body = JSON.parse(response.body)
+          body = JSON.parse(response.body)['event_list']
           body['id'].should == record.id
           body['name'].should == record.name
         end
@@ -155,7 +159,7 @@ describe EventListsController do
 
         it 'displays errors', api_doc: true do
           do_action(params)
-          body = JSON.parse(response.body)
+          body = JSON.parse(response.body)['event_list']
           body['errors'].should == 'message'
         end
       end
@@ -181,7 +185,7 @@ describe EventListsController do
 
       it 'displays the record', api_doc: true do
         do_action('10')
-        body = JSON.parse(response.body)
+        body = JSON.parse(response.body)['event_list']
         body['id'].should == record.id
         body['name'].should == record.name
         body['destroyed?'].should be_true
