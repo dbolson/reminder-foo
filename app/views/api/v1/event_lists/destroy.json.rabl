@@ -2,4 +2,4 @@ object @event_list
 
 attributes :destroyed?
 
-extends 'event_lists/show'
+extends 'api/v1/event_lists/show'

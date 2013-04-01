@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EventListsController do
+describe Api::V1::EventListsController do
   render_views
 
   let(:record_type) { EventList }

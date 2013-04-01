@@ -1,6 +1,6 @@
 object @event_list
 
-extends 'event_lists/show'
+extends 'api/v1/event_lists/show'
 
 if @event_list.errors.any?
   node :errors do |n|

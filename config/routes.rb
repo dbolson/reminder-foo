@@ -1,5 +1,11 @@
 RemindersApi::Application.routes.draw do
-  resources :event_lists, only: [:index, :show, :update, :create, :destroy]
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :event_lists, only: [
+        :index, :show, :update, :create, :destroy
+      ]
+    end
+  end
 
   match '/404', to: 'errors#not_found'
 

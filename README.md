@@ -17,21 +17,21 @@
 ### curl
 ```
 # GET
-curl -i -H "Accept: application/json" http://localhost:3000/event_lists/1
-curl -i -H "Accept: application/json" http://localhost:3000/event_lists/-1
+curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/1
+curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/-1
 
 # POST
-curl -i -H "Accept: application/json" -X POST -d "event_list[name]=e+name" http://localhost:3000/event_lists/
-curl -i -H "Accept: application/json" -X POST -d "event_list[name]=" http://localhost:3000/event_lists/
-curl -i -H "Accept: application/json" -X POST -d "" http://localhost:3000/event_lists/
+curl -i -H "Accept: application/json" -X POST -d "event_list[name]=e+name" http://localhost:3000/api/v1/event_lists/
+curl -i -H "Accept: application/json" -X POST -d "event_list[name]=" http://localhost:3000/api/v1/event_lists/
+curl -i -H "Accept: application/json" -X POST -d "" http://localhost:3000/api/v1/event_lists/
 
 # PUT
-curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=another+name" http://localhost:3000/event_lists/1
-curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=" http://localhost:3000/event_lists/1
+curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=another+name" http://localhost:3000/api/v1/event_lists/1
+curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=" http://localhost:3000/api/v1/event_lists/1
 
 # DELETE
-curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/event_lists/1
-curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/event_lists/-1
+curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/event_lists/1
+curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/event_lists/-1
 ```
 
 ### A client can access:
@@ -41,7 +41,7 @@ curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/event_list
 * a list of reminder dates
   * scoped to events
 * a list of subscribers
-    * scoped to a reminder list
+  * scoped to a reminder list
 
 ```
 Module Api
@@ -69,17 +69,3 @@ Module Api
   end
 end
 ```
-
-### API DOC
-```
-describe 'index' do
-  it 'returns a list of questions', :api_doc => true do
-    get :index
-    response.status.should be(200)
-  end
-end
-
-rake api:doc
-```
-
-go to /api_docs
