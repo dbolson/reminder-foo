@@ -17,16 +17,7 @@
 * http://stackoverflow.com/questions/7342851/catch-unknown-action-in-rails-3-for-custom-404
 
 ### Access Token
-* api_key model, access_token, user_id
-* add unique constraint on db column
 ```
-before_create :generate_access_token
-def generate_access_token
-  begin
-    self.access_token = SecureRandom.hex
-  end while self.class.exists?(access_token: access_token)
-end
-
 # controller
 before_filter :restrict_access
 def restrict_access
