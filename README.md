@@ -5,14 +5,36 @@
 * http://engineering.gomiso.com/2011/06/27/building-a-platform-api-on-rails/
 * https://github.com/ccocchi/rabl-rails
 * http://blogs.plexibus.com/2009/01/15/rest-esting-with-curl/
+* https://github.com/applicake/doorkeeper
 
 ### REST Responses
+* SSL
 * include status code
 * include error messages
 * include hyperlinks to help for errors
 * https://github.com/rack/rack/blob/master/lib/rack/utils.rb#L453
 * https://dev.twitter.com/docs/error-codes-responses
 * http://stackoverflow.com/questions/7342851/catch-unknown-action-in-rails-3-for-custom-404
+
+### Access Token
+* api_key model, access_token, user_id
+* add unique constraint on db column
+```
+before_create :generate_access_token
+def generate_access_token
+  begin
+    self.access_token = SecureRandom.hex
+  end while self.class.exists?(access_token: access_token)
+end
+
+# controller
+before_filter :restrict_access
+def restrict_access
+  api_key = ApiKey.find_by_access_token(params[:access_token])
+  head :unauthorized unless api_key
+end
+```
+* can use ActionController::HttpAuthentication::Token to pass in header
 
 ### curl
 ```
