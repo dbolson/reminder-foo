@@ -1,6 +1,6 @@
 module Api
   module V1
-    class EventListsController < ApplicationController
+    class EventListsController < Api::ApiController
       respond_to :json, :xml
 
       def index

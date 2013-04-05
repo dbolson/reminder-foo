@@ -6,6 +6,10 @@ describe Api::V1::EventListsController do
   let(:record_type) { EventList }
 
   context 'json' do
+    before do
+      authenticate
+    end
+
     describe '#index' do
       def do_action
         get :index, format: :json

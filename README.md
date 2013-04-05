@@ -17,34 +17,26 @@
 * http://stackoverflow.com/questions/7342851/catch-unknown-action-in-rails-3-for-custom-404
 
 ### Access Token
-```
-# controller
-before_filter :restrict_access
-def restrict_access
-  api_key = ApiKey.find_by_access_token(params[:access_token])
-  head :unauthorized unless api_key
-end
-```
 * can use ActionController::HttpAuthentication::Token to pass in header
 
 ### curl
 ```
 # GET
-curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/1
-curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/-1
+curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
+curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/-1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
 
 # POST
-curl -i -H "Accept: application/json" -X POST -d "event_list[name]=e+name" http://localhost:3000/api/v1/event_lists/
-curl -i -H "Accept: application/json" -X POST -d "event_list[name]=" http://localhost:3000/api/v1/event_lists/
-curl -i -H "Accept: application/json" -X POST -d "" http://localhost:3000/api/v1/event_lists/
+curl -i -H "Accept: application/json" -X POST -d "event_list[name]=e+name" http://localhost:3000/api/v1/event_lists/?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
+curl -i -H "Accept: application/json" -X POST -d "event_list[name]=" http://localhost:3000/api/v1/event_lists/?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
+curl -i -H "Accept: application/json" -X POST -d "" http://localhost:3000/api/v1/event_lists/?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
 
 # PUT
-curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=another+name" http://localhost:3000/api/v1/event_lists/1
-curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=" http://localhost:3000/api/v1/event_lists/1
+curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=another+name" http://localhost:3000/api/v1/event_lists/1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
+curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=" http://localhost:3000/api/v1/event_lists/1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
 
 # DELETE
-curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/event_lists/1
-curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/event_lists/-1
+curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/event_lists/1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
+curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/event_lists/-1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
 ```
 
 ### A client can access:
