@@ -8,6 +8,4 @@ RemindersApi::Application.routes.draw do
   end
 
   match '/404', to: 'errors#not_found'
-
-  mount ApiDoc::Engine => '/api_docs'
 end
