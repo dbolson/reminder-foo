@@ -24,6 +24,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.13.0'
 end
 
+group :development do
+  gem 'brakeman', '~> 1.9.5', require: false
+end
+
 group :test do
   gem 'shoulda-matchers', '~> 1.5.4'
 end
