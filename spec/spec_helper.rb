@@ -34,4 +34,11 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  RspecApiDocumentation.configure do |config|
+    config.docs_dir = Rails.root.join('public', 'docs')
+    config.format = [:json, :html]
+    config.url_prefix = '/docs'
+    config.keep_source_order = true
+  end
 end
