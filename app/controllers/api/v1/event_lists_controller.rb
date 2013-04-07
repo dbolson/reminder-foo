@@ -12,7 +12,8 @@ module Api
       end
 
       def create
-        @event_list = current_account.event_lists.new(params[:event_list])
+        @event_list = current_account.event_lists
+          .new(params[:event_list].merge(account: current_account))
 
         if @event_list.save
           render 'create'

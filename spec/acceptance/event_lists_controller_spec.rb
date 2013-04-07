@@ -6,24 +6,30 @@ resource 'Event List' do
   header 'Content-Type', 'application/json'
 
   get '/api/v1/event_lists' do
-    let(:record_type) { EventList }
-    let!(:record1) {
+    let!(:event_list1) {
       FactoryGirl.build_stubbed(:event_list, id: '1', name: 'event list 1')
     }
-    let!(:record2) {
+    let!(:event_list2) {
       FactoryGirl.build_stubbed(:event_list, id: '2', name: 'event list 2')
     }
 
+    let(:event_lists) { stub(:event_lists) }
+    let(:account) { stub(:account, event_lists: event_lists) }
+
     before do
-      authenticate
-      record_type.stub(:all) { [record1, record2] }
+      ApiKey.stub(:find_by_access_token) { stub(:api_token, account: account) }
+      event_lists.stub(:all) { [event_list1, event_list2] }
     end
 
     example_request 'get a list of all event lists' do
       status.should == 200
       body = JSON.parse(response_body)
-      body.should include({ 'event_list' => { 'id' => 1, 'name' => 'event list 1' }})
-      body.should include({ 'event_list' => { 'id' => 2, 'name' => 'event list 2' }})
+      expect(body).to include({ 'event_list' => {
+        'id' => 1, 'name' => 'event list 1' }
+      })
+      expect(body).to include({ 'event_list' => {
+        'id' => 2, 'name' => 'event list 2' }
+      })
     end
   end
 end

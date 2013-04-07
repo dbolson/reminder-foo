@@ -3,11 +3,13 @@ require 'spec_helper'
 describe Api::V1::EventListsController do
   render_views
 
-  let(:record_type) { EventList }
+  let(:event_lists) { stub(:event_lists) }
+  let(:account) { stub(:account, event_lists: event_lists) }
 
   context 'json' do
     before do
-      authenticate
+      ApiKey.stub(:find_by_access_token) { stub(:api_token, account: nil) }
+      controller.stub(:current_account) { account }
     end
 
     describe '#index' do
@@ -15,15 +17,15 @@ describe Api::V1::EventListsController do
         get :index, format: :json
       end
 
-      let!(:record1) do
+      let!(:event_list1) {
         FactoryGirl.build_stubbed(:event_list, id: '1', name: 'fake 1')
-      end
-      let!(:record2) do
+      }
+      let!(:event_list2) {
         FactoryGirl.build_stubbed(:event_list, id: '2', name: 'fake 2')
-      end
+      }
 
       before do
-        record_type.stub(:all) { [record1, record2] }
+        event_lists.stub(:all) { [event_list1, event_list2] }
       end
 
       it 'is successful' do
@@ -31,7 +33,7 @@ describe Api::V1::EventListsController do
         response.status.should == 200
       end
 
-      it 'displays the records' do
+      it 'displays the event_lists' do
         do_action
         body = JSON.parse(response.body)
         body.should include({ 'event_list' => { 'id' => 1, 'name' => 'fake 1' }})
@@ -45,10 +47,10 @@ describe Api::V1::EventListsController do
       end
 
       context 'with a valid id' do
-        let!(:record) { FactoryGirl.build_stubbed(:event_list, id: '10') }
+        let!(:event_list) { FactoryGirl.build_stubbed(:event_list, id: '10') }
 
         before do
-          record_type.stub(:find).with('10') { record }
+          event_lists.stub(:find).with('10') { event_list }
         end
 
         it 'is successful' do
@@ -56,11 +58,11 @@ describe Api::V1::EventListsController do
           response.status.should == 200
         end
 
-        it 'displays the attributes of the record' do
+        it 'displays the attributes of the event list' do
           do_action('10')
           body = JSON.parse(response.body)['event_list']
-          body['id'].should == record.id
-          body['name'].should == record.name
+          body['id'].should == event_list.id
+          body['name'].should == event_list.name
         end
       end
     end
@@ -70,15 +72,16 @@ describe Api::V1::EventListsController do
         post :create, event_list: params, format: :json
       end
 
-      let!(:record) { FactoryGirl.build_stubbed(:event_list) }
+      let!(:event_list) { FactoryGirl.build_stubbed(:event_list) }
 
       context 'with valid parameters' do
         let(:params) {{ 'valid' => 'params' }}
         let(:errors) { stub(:errors, any?: false) }
 
         before do
-          record_type.stub(:new).with(params) { record }
-          record.stub(:save) { true }
+          event_list.stub(:save) { true }
+          event_lists.stub(:new)
+            .with('valid' => 'params', 'account' => account) { event_list }
         end
 
         it 'is successful' do
@@ -86,11 +89,11 @@ describe Api::V1::EventListsController do
           response.status.should == 200
         end
 
-        it 'displays the record' do
+        it 'displays the event list' do
           do_action(params)
           body = JSON.parse(response.body)['event_list']
-          body['id'].should == record.id
-          body['name'].should == record.name
+          body['id'].should == event_list.id
+          body['name'].should == event_list.name
         end
       end
 
@@ -99,9 +102,10 @@ describe Api::V1::EventListsController do
         let(:errors) { stub(:errors, any?: true, full_messages: 'message') }
 
         before do
-          record_type.stub(:new).with(params) { record }
-          record.stub(:save) { false }
-          record.stub(:errors) { errors }
+          event_list.stub(:save) { false }
+          event_list.stub(:errors) { errors }
+          event_lists.stub(:new)
+            .with('invalid' => 'params', 'account' => account) { event_list }
         end
 
         it 'is a bad request' do
@@ -122,15 +126,15 @@ describe Api::V1::EventListsController do
         put :update, id: '10', event_list: params, format: :json
       end
 
-      let!(:record) { FactoryGirl.build_stubbed(:event_list, id: '10') }
+      let!(:event_list) { FactoryGirl.build_stubbed(:event_list, id: '10') }
 
       context 'with valid parameters' do
         let(:params) {{ 'valid' => 'params' }}
         let(:errors) { stub(:errors, any?: false) }
 
         before do
-          record_type.stub(:find).with('10') { record }
-          record.stub(:update_attributes).with(params) { true }
+          event_lists.stub(:find).with('10') { event_list }
+          event_list.stub(:update_attributes).with(params) { true }
         end
 
         it 'is successful' do
@@ -138,11 +142,11 @@ describe Api::V1::EventListsController do
           response.status.should == 200
         end
 
-        it 'displays the record' do
+        it 'displays the event list' do
           do_action(params)
           body = JSON.parse(response.body)['event_list']
-          body['id'].should == record.id
-          body['name'].should == record.name
+          body['id'].should == event_list.id
+          body['name'].should == event_list.name
         end
       end
 
@@ -151,9 +155,9 @@ describe Api::V1::EventListsController do
         let(:errors) { stub(:errors, any?: true, full_messages: 'message') }
 
         before do
-          record_type.stub(:find).with('10') { record }
-          record.stub(:update_attributes).with(params) { false }
-          record.stub(:errors) { errors }
+          event_lists.stub(:find).with('10') { event_list }
+          event_list.stub(:update_attributes).with(params) { false }
+          event_list.stub(:errors) { errors }
         end
 
         it 'is not modified' do
@@ -174,12 +178,12 @@ describe Api::V1::EventListsController do
         delete :destroy, id: id, format: :json
       end
 
-      let!(:record) { FactoryGirl.build_stubbed(:event_list, id: '10') }
+      let!(:event_list) { FactoryGirl.build_stubbed(:event_list, id: '10') }
 
       before do
-        record_type.stub(:find).with('10') { record }
-        record.should_receive(:destroy)
-        record.stub(:destroyed?) { true }
+        event_lists.stub(:find).with('10') { event_list }
+        event_list.should_receive(:destroy)
+        event_list.stub(:destroyed?) { true }
       end
 
       it 'is successful' do
@@ -187,11 +191,11 @@ describe Api::V1::EventListsController do
         response.status.should == 200
       end
 
-      it 'displays the record' do
+      it 'displays the event list' do
         do_action('10')
         body = JSON.parse(response.body)['event_list']
-        body['id'].should == record.id
-        body['name'].should == record.name
+        body['id'].should == event_list.id
+        body['name'].should == event_list.name
         body['destroyed?'].should be_true
       end
     end

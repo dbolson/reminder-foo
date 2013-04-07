@@ -23,21 +23,21 @@
 ### curl
 ```
 # GET
-curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
-curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/-1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
+curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/1?access_token=ee8fb0303b4066b297266c1f06a24945
+curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/-1?access_token=ee8fb0303b4066b297266c1f06a24945
 
 # POST
-curl -i -H "Accept: application/json" -X POST -d "event_list[name]=e+name" http://localhost:3000/api/v1/event_lists/?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
-curl -i -H "Accept: application/json" -X POST -d "event_list[name]=" http://localhost:3000/api/v1/event_lists/?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
-curl -i -H "Accept: application/json" -X POST -d "" http://localhost:3000/api/v1/event_lists/?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
+curl -i -H "Accept: application/json" -X POST -d "event_list[name]=e+name" http://localhost:3000/api/v1/event_lists/?access_token=ee8fb0303b4066b297266c1f06a24945
+curl -i -H "Accept: application/json" -X POST -d "event_list[name]=" http://localhost:3000/api/v1/event_lists/?access_token=ee8fb0303b4066b297266c1f06a24945
+curl -i -H "Accept: application/json" -X POST -d "" http://localhost:3000/api/v1/event_lists/?access_token=ee8fb0303b4066b297266c1f06a24945
 
 # PUT
-curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=another+name" http://localhost:3000/api/v1/event_lists/1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
-curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=" http://localhost:3000/api/v1/event_lists/1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
+curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=another+name" http://localhost:3000/api/v1/event_lists/1?access_token=ee8fb0303b4066b297266c1f06a24945
+curl -i -H "Accept: application/json" -X PUT -d "event_list[name]=" http://localhost:3000/api/v1/event_lists/1?access_token=ee8fb0303b4066b297266c1f06a24945
 
 # DELETE
-curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/event_lists/1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
-curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/event_lists/-1?access_token=6e8e2d30cf65779a3d04f5164cecb6f0
+curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/event_lists/1?access_token=ee8fb0303b4066b297266c1f06a24945
+curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/event_lists/-1?access_token=ee8fb0303b4066b297266c1f06a24945
 ```
 
 ### A client can access:

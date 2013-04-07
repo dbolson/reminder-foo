@@ -8,9 +8,9 @@ module Api
       end
 
       def create
-        @account = Account.new(params[:account])
+        @account = Services::AccountCreating.create(params[:account])
 
-        if @account.save
+        if @account.persisted?
           render 'create'
         else
           render 'create', status: :unprocessable_entity
