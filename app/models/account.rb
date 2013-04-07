@@ -6,5 +6,6 @@ class Account < ActiveRecord::Base
 
   validates :email,
             presence: true,
-            uniqueness: true
+            uniqueness: true,
+            format: /@/
 end
