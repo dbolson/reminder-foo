@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Account do
   describe 'with relationships' do
-    it { should have_one(:api_key) }
-    it { should have_many(:event_lists) }
+    it { should have_one(:api_key).dependent(:destroy) }
+    it { should have_many(:event_lists).dependent(:destroy) }
   end
 
   describe 'with validations' do

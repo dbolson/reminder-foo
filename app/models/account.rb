@@ -1,6 +1,8 @@
 class Account < ActiveRecord::Base
-  has_one :api_key
-  has_many :event_lists
+  has_one :api_key,
+          dependent: :destroy
+  has_many :event_lists,
+          dependent: :destroy
 
   attr_accessible :email
 
