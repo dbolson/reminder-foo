@@ -3,6 +3,7 @@ class Account < ActiveRecord::Base
           dependent: :destroy
   has_many :event_lists,
           dependent: :destroy
+  has_many :events
 
   attr_accessible :email
 

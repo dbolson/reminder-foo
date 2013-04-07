@@ -4,6 +4,7 @@ describe Account do
   describe 'with relationships' do
     it { should have_one(:api_key).dependent(:destroy) }
     it { should have_many(:event_lists).dependent(:destroy) }
+    it { should have_many(:events) }
   end
 
   describe 'with validations' do

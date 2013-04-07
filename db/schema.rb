@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130405124112) do
+ActiveRecord::Schema.define(:version => 20130407165825) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",      :null => false
@@ -37,5 +37,18 @@ ActiveRecord::Schema.define(:version => 20130405124112) do
   end
 
   add_index "event_lists", ["account_id"], :name => "index_event_lists_on_account_id"
+
+  create_table "events", :force => true do |t|
+    t.integer  "account_id",    :null => false
+    t.integer  "event_list_id", :null => false
+    t.string   "name",          :null => false
+    t.string   "description",   :null => false
+    t.datetime "due_at",        :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "events", ["account_id"], :name => "index_events_on_account_id"
+  add_index "events", ["event_list_id"], :name => "index_events_on_event_list_id"
 
 end
