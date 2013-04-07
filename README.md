@@ -41,8 +41,8 @@ curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/eve
 ```
 
 ### A client can access:
-* a list of event lists
-* a list of events
+* a list of event lists @done
+* a list of events @done
   * scoped to event lists
 * a list of reminder dates
   * scoped to events

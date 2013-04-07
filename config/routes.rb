@@ -4,7 +4,7 @@ RemindersApi::Application.routes.draw do
       resources :accounts, only: [:show, :update, :create, :destroy]
       resources :event_lists,
         only: [:index, :show, :update, :create, :destroy]
-      resources :event, only: [:index, :show, :update, :destroy]
+      resources :events, only: [:index, :show, :update, :destroy]
     end
   end
 
