@@ -10,10 +10,21 @@ describe Api::ApiController do
   end
 
   context 'with a valid api key' do
+    let(:account) { stub(:account) }
+    let(:api_key) { stub(:api_key, account: account) }
+
+    before do
+      ApiKey.stub(:find_by_access_token).with('valid token') { api_key }
+    end
+
     it 'allows access' do
-      ApiKey.stub(:find_by_access_token).with('valid token') { stub }
       get :index, access_token: 'valid token'
-      response.status.should == 200
+      expect(response.status).to eq 200
+    end
+
+    it 'sets the current account' do
+      get :index, access_token: 'valid token'
+      expect(controller.send(:current_account)).to eq account
     end
   end
 
@@ -21,7 +32,7 @@ describe Api::ApiController do
     it 'prevents access' do
       ApiKey.stub(:find_by_access_token).with('invalid token') { nil }
       get :index, access_token: 'invalid token'
-      response.status.should == 401
+      expect(response.status).to eq 401
     end
   end
 
@@ -29,7 +40,7 @@ describe Api::ApiController do
     it 'prevents access' do
       ApiKey.stub(:find_by_access_token) { nil }
       get :index
-      response.status.should == 401
+      expect(response.status).to eq 401
     end
   end
 end

@@ -4,9 +4,15 @@ module Api
 
     private
 
+    attr_accessor :current_account
+
     def restrict_access
       api_key = ApiKey.find_by_access_token(params[:access_token])
-      head :unauthorized unless api_key
+      if api_key
+        @current_account = api_key.account
+      else
+        head :unauthorized
+      end
     end
   end
 end

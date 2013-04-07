@@ -4,15 +4,15 @@ module Api
       respond_to :json, :xml
 
       def index
-        @event_lists = EventList.all
+        @event_lists = current_account.event_lists.all
       end
 
       def show
-        @event_list = EventList.find(params[:id])
+        @event_list = current_account.event_lists.find(params[:id])
       end
 
       def create
-        @event_list = EventList.new(params[:event_list])
+        @event_list = current_account.event_lists.new(params[:event_list])
 
         if @event_list.save
           render 'create'
@@ -22,7 +22,7 @@ module Api
       end
 
       def update
-        @event_list = EventList.find(params[:id])
+        @event_list = current_account.event_lists.find(params[:id])
 
         if @event_list.update_attributes(params[:event_list])
           render 'update'
@@ -32,7 +32,7 @@ module Api
       end
 
       def destroy
-        @event_list = EventList.find(params[:id])
+        @event_list = current_account.event_lists.find(params[:id])
         @event_list.destroy
       end
     end
