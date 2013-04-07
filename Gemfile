@@ -19,7 +19,7 @@ end
 
 group :development, :test do
   gem 'factory_girl_rails', '~> 4.2.1'
-  gem 'faker', '~> 1.1.2'
+  gem 'ffaker', '~> 1.15.0'
   gem 'rspec_api_documentation', '~> 0.9.0'
   gem 'rspec-rails', '~> 2.13.0'
 end
