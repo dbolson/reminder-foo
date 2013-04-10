@@ -81,7 +81,7 @@ describe Api::V1::EventListsController do
         before do
           event_list.stub(:save) { true }
           event_lists.stub(:new)
-            .with('valid' => 'params', 'account' => account) { event_list }
+            .with('valid' => 'params') { event_list }
         end
 
         it 'is successful' do
@@ -105,7 +105,7 @@ describe Api::V1::EventListsController do
           event_list.stub(:save) { false }
           event_list.stub(:errors) { errors }
           event_lists.stub(:new)
-            .with('invalid' => 'params', 'account' => account) { event_list }
+            .with('invalid' => 'params') { event_list }
         end
 
         it 'is a bad request' do
