@@ -43,35 +43,8 @@ curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/eve
 ### A client can access:
 * a list of event lists @done
 * a list of events @done
-  * scoped to event lists
+  * scoped to event lists @done
 * a list of reminder dates
   * scoped to events
 * a list of subscribers
   * scoped to a reminder list
-
-```
-Module Api
-  module V1
-    class EventListsController
-    end
-
-    class EventsController
-    end
-
-    class ReminderDatesController
-    end
-
-    class EventLists::EventsController
-    end
-
-    class Events::ReminderDatesController
-    end
-
-    class SubscribersController
-    end
-
-    class EventLists::SubscribersController
-    end
-  end
-end
-```
