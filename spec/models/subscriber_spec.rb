@@ -8,15 +8,15 @@ describe Subscriber do
   end
 
   describe 'with validations' do
-    specify do
+    it { should validate_presence_of(:phone_number) }
+
+    it 'must have a unique phone number' do
       existing = FactoryGirl.create(:subscriber_with_account)
       new_record = FactoryGirl.build(:subscriber_with_account,
                                      phone_number: existing.phone_number)
       new_record.should_not be_valid
       new_record.errors[:phone_number].should_not be_empty
     end
-
-    it { should validate_presence_of(:phone_number) }
 
     context 'for a formatted phone number' do
       it { should allow_value('5555555555').for(:phone_number) }
