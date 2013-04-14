@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :subscription do
     trait :with_event_list do
-      association :event_list, factory: :event_list
+      association :event_list, factory: :event_list_with_account
     end
 
     trait :with_subscriber do
