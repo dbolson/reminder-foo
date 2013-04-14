@@ -11,6 +11,16 @@ module Api
         @subscriber = current_account.subscribers.find(params[:id])
       end
 
+      def create
+        @subscriber = current_account.subscribers.build(params[:subscriber])
+
+        if @subscriber.save
+          render 'create'
+        else
+          render 'create', status: :unprocessable_entity
+        end
+      end
+
       def update
         @subscriber = current_account.subscribers.find(params[:id])
 
