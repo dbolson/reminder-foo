@@ -7,38 +7,31 @@ module Api
 
       def index
         @subscribers = @event_list.subscribers.all
-        render 'subscribers/index'
+        render 'api/v1/subscribers/index'
       end
 
       def show
         @subscriber = @event_list.subscribers.find(params[:id])
-        render 'subscribers/show'
+        render 'api/v1/subscribers/show'
       end
 
       def create
-        @subscriber = @event_list.subscribers.build(params[:subscriber])
+        @subscriber = current_account.subscribers.find(params[:id])
+        @subscription = @event_list.subscriptions.build
+        @subscription.subscriber = @subscriber
 
-        if @subscriber.save
-          render 'create'
+        if @subscription.save
+          render 'api/v1/subscribers/create'
         else
-          render 'create', status: :unprocessable_entity
-        end
-      end
-
-      def update
-        @subscriber = @event_list.subscribers.find(params[:id])
-
-        if @subscriber.update_attributes(params[:subscriber])
-          render 'subscribers/update'
-        else
-          render 'subscribers/update', status: :not_modified
+          render 'api/v1/subscribers/create', status: :unprocessable_entity
         end
       end
 
       def destroy
         @subscriber = @event_list.subscribers.find(params[:id])
-        @subscriber.destroy
-        render 'subscribers/destroy'
+        @subscription = @event_list.subscriptions.find_by_subscriber_id(@subscriber)
+        @subscription.destroy
+        render 'api/v1/subscribers/destroy'
       end
 
       private
@@ -49,13 +42,3 @@ module Api
     end
   end
 end
-
-#e = EventList.first
-#s = Subscriber.first
-#e.subscribers << s
-#Account.first.subscribers.create(phone_number: '5555555555')
-
-=begin
-curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/1/subscribers?access_token=ee8fb0303b4066b297266c1f06a24945
-curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/1/subscribers/1?access_token=ee8fb0303b4066b297266c1f06a24945
-=end

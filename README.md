@@ -44,7 +44,7 @@ curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/eve
 * a list of event lists @done
 * a list of events @done
   * scoped to event lists @done
+* a list of subscribers @done
+  * scoped to a reminder list @done
 * a list of reminder dates
   * scoped to events
-* a list of subscribers @done
-  * scoped to a reminder list
