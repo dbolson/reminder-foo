@@ -3,7 +3,8 @@ RemindersApi::Application.routes.draw do
     namespace :v1 do
       resources :accounts, except: [:index, :new, :edit]
       resources :event_lists, except: [:new, :edit] do
-        resources :events, except: [:new, :edit]
+        resources :events, except: [:new, :edit],
+          controller: 'event_lists/events'
         resources :subscribers, except: [:new, :edit, :update],
           controller: 'event_lists/subscribers'
       end

@@ -5,12 +5,12 @@ module Api
 
       def index
         @events = current_account.events.all
-        render 'events/index'
+        render 'api/v1/events/index'
       end
 
       def show
         @event = current_account.events.find(params[:id])
-        render 'events/show'
+        render 'api/v1/events/show'
       end
 
       def create
@@ -29,16 +29,16 @@ module Api
         @event = current_account.events.find(params[:id])
 
         if @event.update_attributes(params[:event])
-          render 'events/update'
+          render 'api/v1/events/update'
         else
-          render 'events/update', status: :not_modified
+          render 'api/v1/events/update', status: :not_modified
         end
       end
 
       def destroy
         @event = current_account.events.find(params[:id])
         @event.destroy
-        render 'events/destroy'
+        render 'api/v1/events/destroy'
       end
     end
   end
