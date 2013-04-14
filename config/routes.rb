@@ -4,9 +4,10 @@ RemindersApi::Application.routes.draw do
       resources :accounts, except: [:index, :new, :edit]
       resources :event_lists, except: [:new, :edit] do
         resources :events, except: [:new, :edit]
+        resources :subscribers, except: [:new, :edit]
       end
       resources :events, except: [:new, :edit, :create]
-      resources :subscribers, only: [:index, :show, :create, :update, :destroy]
+      resources :subscribers, except: [:new, :edit]
     end
   end
 
