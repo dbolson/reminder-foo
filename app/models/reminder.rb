@@ -6,4 +6,14 @@ class Reminder < ActiveRecord::Base
             uniqueness: { scope: :event_id }
 
   attr_accessible :reminded_at
+
+  validate :not_in_past
+
+  private
+
+  def not_in_past
+    if reminded_at && reminded_at < Time.zone.now.beginning_of_day
+      errors.add(:reminded_at, 'cannot be in the past')
+    end
+  end
 end

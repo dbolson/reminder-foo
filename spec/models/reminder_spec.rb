@@ -16,5 +16,17 @@ describe Reminder do
       new_record.should_not be_valid
       new_record.errors[:reminded_at].should_not be_empty
     end
+
+    it 'cannot be in the past' do
+      record = FactoryGirl.build(:reminder, reminded_at: 1.day.ago)
+      record.valid?
+      record.errors[:reminded_at].should_not be_empty
+    end
+
+    it 'can be today' do
+      record = FactoryGirl.build(:reminder, reminded_at: Time.zone.now)
+      record.valid?
+      record.errors[:reminded_at].should be_empty
+    end
   end
 end
