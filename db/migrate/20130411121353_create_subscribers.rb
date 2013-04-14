@@ -5,5 +5,7 @@ class CreateSubscribers < ActiveRecord::Migration
       t.string :phone_number
       t.timestamps
     end
+
+    add_index :subscribers, :account_id
   end
 end

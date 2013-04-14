@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Subscriber do
   describe 'with relationships' do
     it { should belong_to(:account) }
+    it { should have_many(:subscriptions) }
+    it { should have_many(:event_lists).through(:subscriptions) }
   end
 
   describe 'with validations' do

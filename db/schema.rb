@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411121353) do
+ActiveRecord::Schema.define(:version => 20130414002430) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",      :null => false
@@ -57,5 +57,17 @@ ActiveRecord::Schema.define(:version => 20130411121353) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  add_index "subscribers", ["account_id"], :name => "index_subscribers_on_account_id"
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "event_list_id", :null => false
+    t.integer  "subscriber_id", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "subscriptions", ["event_list_id"], :name => "index_subscriptions_on_event_list_id"
+  add_index "subscriptions", ["subscriber_id"], :name => "index_subscriptions_on_subscriber_id"
 
 end

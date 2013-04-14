@@ -1,5 +1,7 @@
 class Subscriber < ActiveRecord::Base
   belongs_to :account
+  has_many :subscriptions
+  has_many :event_lists, through: :subscriptions
 
   attr_accessible :phone_number
 
