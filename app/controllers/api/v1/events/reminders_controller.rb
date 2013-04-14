@@ -6,12 +6,12 @@ module Api
       respond_to :json, :xml
 
       def index
-        @reminders = @event_list.reminders.all
+        @reminders = @event.reminders.all
         render 'index'
       end
 
       def show
-        @reminder = @event_list.reminders.find(params[:id])
+        @reminder = @event.reminders.find(params[:id])
         render 'show'
       end
 
@@ -25,8 +25,18 @@ module Api
         end
       end
 
+      def update
+        @reminder = @event.reminders.find(params[:id])
+
+        if @reminder.update_attributes(params[:reminder])
+          render 'update'
+        else
+          render 'update', status: :not_modified
+        end
+      end
+
       def destroy
-        @reminder = @event_list.reminders.find(params[:id])
+        @reminder = @event.reminders.find(params[:id])
         @reminder.destroy
         render 'destroy'
       end
@@ -34,7 +44,7 @@ module Api
       private
 
       def find_event
-        @event = current_account.event.find(params[:event_id])
+        @event = current_account.events.find(params[:event_id])
       end
     end
   end
