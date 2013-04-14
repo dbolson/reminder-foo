@@ -8,7 +8,10 @@ RemindersApi::Application.routes.draw do
         resources :subscribers, except: [:new, :edit, :update],
           controller: 'event_lists/subscribers'
       end
-      resources :events, except: [:new, :edit, :create]
+      resources :events, except: [:new, :edit, :create] do
+        resources :reminders, except: [:new, :edit],
+          controller: 'events/reminders'
+      end
       resources :subscribers, except: [:new, :edit]
     end
   end

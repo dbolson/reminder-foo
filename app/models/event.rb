@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :account
   belongs_to :event_list
+  has_many :reminders
 
   attr_accessible :name,
                   :description,
