@@ -1,3 +1,11 @@
-object @event_lists
+object false
 
-extends 'api/v1/event_lists/show'
+node :event_lists do |n|
+  @event_lists.each do |e|
+    e.id
+  end
+end
+
+node :status do |n|
+  @status
+end
