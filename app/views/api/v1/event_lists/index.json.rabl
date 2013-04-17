@@ -1,8 +1,13 @@
 object false
 
-node :event_lists do |n|
-  @event_lists.each do |e|
-    e.id
+@event_lists.each do |e|
+  node :event_lists do |n|
+    {
+      id: e.id,
+      name: e.name,
+      created_at: e.created_at,
+      updated_at: e.updated_at
+    }
   end
 end
 
