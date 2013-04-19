@@ -1,7 +1,7 @@
 object false
 
-@event_lists.each do |e|
-  node :event_lists do |n|
+node :event_lists do |n|
+  @event_lists.map do |e|
     {
       id: e.id,
       name: e.name,
