@@ -12,7 +12,3 @@ end
 node :status do |n|
   @status
 end
-
-node(:deleted?, if: lambda { |e| ap e.class; e.destroyed? }) do |n|
-  @event_list.destroyed?
-end

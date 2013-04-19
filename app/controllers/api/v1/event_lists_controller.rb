@@ -39,7 +39,7 @@ module Api
 
       def destroy
         @event_list = current_account.event_lists.find(params[:id])
-        #@event_list.destroy
+        @event_list.destroy
         @status = 200
       end
     end
