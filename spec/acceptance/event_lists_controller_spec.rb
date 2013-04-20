@@ -5,6 +5,10 @@ resource 'Event List' do
   header 'Accept', 'application/json'
   header 'Content-Type', 'application/json'
 
+  before do
+    Timecop.freeze(2000, 1, 1)
+  end
+
   get '/api/v1/event_lists' do
     let!(:event_list1) {
       FactoryGirl.build_stubbed(:event_list, id: '1', name: 'event list 1')
