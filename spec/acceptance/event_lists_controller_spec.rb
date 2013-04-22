@@ -20,13 +20,13 @@ resource 'Event List' do
   get '/api/v1/event_lists' do
     let!(:event_list1) {
       create(:event_list,
-             id: '1',
+             id: 1,
              name: 'event list 1',
              account: account)
     }
     let!(:event_list2) {
       create(:event_list,
-             id: '2',
+             id: 2,
              name: 'event list 2',
              account: account)
     }
@@ -57,7 +57,7 @@ resource 'Event List' do
 
   get '/api/v1/event_lists/1' do
     let!(:event_list) {
-      create(:event_list, id: '1', name: 'event list', account: account)
+      create(:event_list, id: 1, name: 'event list', account: account)
     }
     let(:body) { JSON.parse(response_body) }
 
@@ -98,6 +98,55 @@ resource 'Event List' do
       )
 
       expect(status).to eq(201)
+    end
+  end
+
+  put '/api/v1/event_lists/1' do
+    parameter :name, 'Name of event list'
+    required_parameters :name
+    scope_parameters :event_list, [:name]
+
+    let!(:event_list) {
+      create(:event_list, id: 1, name: 'event list', account: account)
+    }
+    let(:name) { 'new event list name' }
+    let(:raw_post) { params.to_json }
+    let(:body) { JSON.parse(response_body) }
+
+    example_request 'updating an event list' do
+      expect(body).to eq(
+        'event_list' => {
+          'id' => 1,
+          'name' => 'new event list name',
+          'created_at' => '2000-01-01T00:00:00Z',
+          'updated_at' => '2000-01-01T00:00:00Z'
+        },
+        'status' => 200
+      )
+
+      expect(status).to eq(200)
+    end
+  end
+
+  delete '/api/v1/event_lists/1' do
+    let!(:event_list) {
+      create(:event_list, id: 1, name: 'event list', account: account)
+    }
+    let(:raw_post) { params.to_json }
+    let(:body) { JSON.parse(response_body) }
+
+    example_request 'deleting an event list' do
+      expect(body).to eq(
+        'event_list' => {
+          'id' => 1,
+          'name' => 'event list',
+          'created_at' => '2000-01-01T00:00:00Z',
+          'updated_at' => '2000-01-01T00:00:00Z'
+        },
+        'status' => 200
+      )
+
+      expect(status).to eq(200)
     end
   end
 end
