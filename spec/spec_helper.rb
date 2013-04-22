@@ -35,6 +35,8 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  config.include FactoryGirl::Syntax::Methods
+
   RspecApiDocumentation.configure do |config|
     config.docs_dir = Rails.root.join('public', 'docs')
     config.format = [:json, :html]
