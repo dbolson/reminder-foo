@@ -103,7 +103,7 @@ describe Api::V1::EventListsController do
 
         it 'is successful' do
           do_action(params)
-          expect(response.status).to eq(200)
+          expect(response.status).to eq(201)
         end
 
         it 'displays the event list' do
@@ -116,7 +116,7 @@ describe Api::V1::EventListsController do
         it 'displays the status' do
           do_action(params)
           body = JSON.parse(response.body)
-          expect(body).to include('status' => 200)
+          expect(body).to include('status' => 201)
         end
       end
 

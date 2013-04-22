@@ -17,8 +17,8 @@ module Api
         @event_list = current_account.event_lists.new(params[:event_list])
 
         if @event_list.save
-          @status = 200
-          render 'create'
+          @status = 201
+          render 'create', status: @status
         else
           @status = 422
           render 'create', status: @status

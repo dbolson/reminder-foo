@@ -85,5 +85,29 @@ resource 'Event List' do
   end
 
   post '/api/v1/event_lists/' do
+    parameter :name, 'Name of event list'
+    required_parameters :name
+    scope_parameters :event_list, [:name]
+
+    let(:name) { 'new event list' }
+    let(:raw_post) { params.to_json }
+    let(:body) { JSON.parse(response_body) }
+    let(:generated_id) { body['event_list']['id'] }
+
+    example_request 'create an event list' do
+      explanation 'foo'
+
+      expect(body).to eq(
+        'event_list' => {
+          'id' => generated_id,
+          'name' => 'new event list',
+          'created_at' => '2000-01-01T00:00:00Z',
+          'updated_at' => '2000-01-01T00:00:00Z'
+        },
+        'status' => 201
+      )
+
+      expect(status).to eq(201)
+    end
   end
 end
