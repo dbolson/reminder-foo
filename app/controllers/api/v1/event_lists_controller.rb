@@ -5,7 +5,6 @@ module Api
 
       def index
         @event_lists = current_account.ordered_event_lists
-        @status = 200
       end
 
       def show

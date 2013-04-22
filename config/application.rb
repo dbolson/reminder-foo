@@ -67,5 +67,8 @@ module RemindersApi
 
     # Set the exceptions application to the router
     config.exceptions_app = self.routes
+
+    config.middleware.use 'StatusDisplay'
+    config.middleware.use Rack::ContentLength
   end
 end

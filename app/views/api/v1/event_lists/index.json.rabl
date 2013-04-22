@@ -10,7 +10,3 @@ node :event_lists do |n|
     }
   end
 end
-
-node :status do |n|
-  @status
-end
