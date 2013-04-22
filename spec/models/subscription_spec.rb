@@ -8,10 +8,10 @@ describe Subscription do
 
   describe 'with validations' do
     specify do
-      existing = FactoryGirl.create(:subscription_with_associations)
-      new_record = FactoryGirl.build(:subscription_with_associations,
-                                      event_list: existing.event_list,
-                                      subscriber: existing.subscriber)
+      existing = create(:subscription_with_associations)
+      new_record = build(:subscription_with_associations,
+                         event_list: existing.event_list,
+                         subscriber: existing.subscriber)
       new_record.should_not be_valid
       new_record.errors[:event_list_id].should_not be_empty
     end

@@ -19,10 +19,10 @@ describe Api::V1::EventListsController do
       end
 
       let!(:event_list1) {
-        FactoryGirl.build_stubbed(:event_list, id: '1', name: 'fake 1')
+        build_stubbed(:event_list, id: '1', name: 'fake 1')
       }
       let!(:event_list2) {
-        FactoryGirl.build_stubbed(:event_list, id: '2', name: 'fake 2')
+        build_stubbed(:event_list, id: '2', name: 'fake 2')
       }
 
       before do
@@ -58,7 +58,7 @@ describe Api::V1::EventListsController do
       end
 
       context 'with a valid id' do
-        let!(:event_list) { FactoryGirl.build_stubbed(:event_list, id: '10') }
+        let!(:event_list) { build_stubbed(:event_list, id: '10') }
 
         before do
           event_lists.stub(:find).with('10').and_return(event_list)
@@ -89,7 +89,7 @@ describe Api::V1::EventListsController do
         post :create, event_list: params, format: :json
       end
 
-      let!(:event_list) { FactoryGirl.build_stubbed(:event_list) }
+      let!(:event_list) { build_stubbed(:event_list) }
 
       context 'with valid parameters' do
         let(:params) {{ 'valid' => 'params' }}
@@ -156,7 +156,7 @@ describe Api::V1::EventListsController do
         put :update, id: '10', event_list: params, format: :json
       end
 
-      let!(:event_list) { FactoryGirl.build_stubbed(:event_list, id: '10') }
+      let!(:event_list) { build_stubbed(:event_list, id: '10') }
 
       context 'with valid parameters' do
         let(:params) {{ 'valid' => 'params' }}
@@ -220,7 +220,7 @@ describe Api::V1::EventListsController do
         delete :destroy, id: id, format: :json
       end
 
-      let!(:event_list) { FactoryGirl.build_stubbed(:event_list, id: '10') }
+      let!(:event_list) { build_stubbed(:event_list, id: '10') }
 
       before do
         event_lists.stub(:find).with('10').and_return(event_list)

@@ -11,9 +11,9 @@ describe Subscriber do
     it { should validate_presence_of(:phone_number) }
 
     it 'must have a unique phone number' do
-      existing = FactoryGirl.create(:subscriber_with_account)
-      new_record = FactoryGirl.build(:subscriber_with_account,
-                                     phone_number: existing.phone_number)
+      existing = create(:subscriber_with_account)
+      new_record = build(:subscriber_with_account,
+                         phone_number: existing.phone_number)
       new_record.should_not be_valid
       new_record.errors[:phone_number].should_not be_empty
     end
@@ -28,7 +28,7 @@ describe Subscriber do
       it { should_not allow_value('155555555555').for(:phone_number) }
 
       it 'only displays one error when empty' do
-        record = FactoryGirl.build(:subscriber, phone_number: '')
+        record = build(:subscriber, phone_number: '')
         record.valid?
         record.errors.size.should == 1
         record.errors.full_messages.should == ["Phone number can't be blank"]
@@ -38,13 +38,13 @@ describe Subscriber do
 
   describe 'when saving' do
     it 'adds area code with none' do
-      record = FactoryGirl.create(:subscriber_with_account,
-                                  phone_number: '5555555555')
+      record = create(:subscriber_with_account,
+                      phone_number: '5555555555')
       record.phone_number.should == '15555555555'
     end
 
     it 'keeps the area code with one present' do
-      record = FactoryGirl.create(:subscriber_with_account,
+      record = create(:subscriber_with_account,
                                   phone_number: '15555555555')
       record.phone_number.should == '15555555555'
     end
@@ -60,8 +60,8 @@ describe Subscriber do
       ]
 
       invalid_phone_numbers.each do |phone_number|
-        record = FactoryGirl.create(:subscriber_with_account,
-                                    phone_number: phone_number)
+        record = create(:subscriber_with_account,
+                        phone_number: phone_number)
         record.phone_number.should == '15555555555'
       end
     end

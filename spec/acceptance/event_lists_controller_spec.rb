@@ -10,7 +10,7 @@ resource 'Event List' do
       .and_return(stub(:api_token, account: account))
   end
 
-  let(:account) { FactoryGirl.create(:account) }
+  let(:account) { create(:account) }
 
   before do
     Timecop.freeze(2000, 1, 1)
@@ -57,17 +57,9 @@ resource 'Event List' do
 
   get '/api/v1/event_lists/1' do
     let!(:event_list) {
-      FactoryGirl.build_stubbed(:event_list, id: '1',
-                                name: 'event list',
-                                updated_at: Time.zone.now)
+      create(:event_list, id: '1', name: 'event list', account: account)
     }
-    let(:event_lists) { stub(:event_lists) }
-    let(:account) { stub(:account, event_lists: event_lists) }
     let(:body) { JSON.parse(response_body) }
-
-    before do
-      event_lists.stub(:find).with('1').and_return(event_list)
-    end
 
     example_request 'find an event list' do
       expect(status).to eq(200)
@@ -95,8 +87,6 @@ resource 'Event List' do
     let(:generated_id) { body['event_list']['id'] }
 
     example_request 'create an event list' do
-      explanation 'foo'
-
       expect(body).to eq(
         'event_list' => {
           'id' => generated_id,

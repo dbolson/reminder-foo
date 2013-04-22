@@ -7,14 +7,14 @@ describe ApiKey do
 
   describe 'with validations' do
     it 'must be unique' do
-      record = FactoryGirl.create(:api_key)
+      record = create(:api_key)
       expect(record).to validate_uniqueness_of(:access_token)
     end
   end
 
   describe 'when creating' do
     it 'generates an access token' do
-      record = FactoryGirl.create(:api_key, access_token: nil)
+      record = create(:api_key, access_token: nil)
       expect(record.access_token).to be_present
     end
   end
