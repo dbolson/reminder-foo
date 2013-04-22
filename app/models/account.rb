@@ -13,4 +13,8 @@ class Account < ActiveRecord::Base
             presence: true,
             uniqueness: true,
             format: /@/
+
+  def ordered_event_lists
+    event_lists.ordered.all
+  end
 end

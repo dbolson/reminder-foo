@@ -4,7 +4,7 @@ module Api
       respond_to :json, :xml
 
       def index
-        @event_lists = current_account.event_lists.all
+        @event_lists = current_account.ordered_event_lists
         @status = 200
       end
 

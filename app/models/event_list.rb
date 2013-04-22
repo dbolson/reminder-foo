@@ -8,4 +8,6 @@ class EventList < ActiveRecord::Base
   attr_accessible :name
 
   validates :name, presence: true
+
+  scope :ordered, order('event_lists.created_at DESC')
 end

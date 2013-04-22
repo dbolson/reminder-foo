@@ -26,7 +26,8 @@ describe Api::V1::EventListsController do
       }
 
       before do
-        event_lists.stub(:all).and_return([event_list1, event_list2])
+        account.stub(:ordered_event_lists)
+          .and_return([event_list1, event_list2])
       end
 
       it 'is successful' do
