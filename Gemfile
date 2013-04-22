@@ -27,6 +27,7 @@ end
 
 group :development do
   gem 'brakeman', '~> 1.9.5', require: false
+  gem 'debugger', '~> 1.5.0'
 end
 
 group :test do
