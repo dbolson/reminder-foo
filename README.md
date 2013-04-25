@@ -9,9 +9,11 @@
 
 ### REST Responses
 * SSL
-* include status code
+* include status code @done
 * include error messages
 * include hyperlinks to help for errors
+* pagination parameters
+* sorting parameters
 * https://github.com/rack/rack/blob/master/lib/rack/utils.rb#L453
 * https://dev.twitter.com/docs/error-codes-responses
 * http://stackoverflow.com/questions/7342851/catch-unknown-action-in-rails-3-for-custom-404
