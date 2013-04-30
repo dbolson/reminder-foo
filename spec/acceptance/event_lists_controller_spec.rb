@@ -17,6 +17,10 @@ resource 'Event List' do
     authenticate
   end
 
+  after do
+    Timecop.return
+  end
+
   get '/api/v1/event_lists' do
     let!(:event_list1) {
       create(:event_list,
