@@ -8,7 +8,3 @@ node :event_list do |n|
     updated_at: @event_list.updated_at
   }
 end
-
-node :status do |n|
-  @status
-end

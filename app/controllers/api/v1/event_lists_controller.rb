@@ -9,18 +9,15 @@ module Api
 
       def show
         @event_list = current_account.event_lists.find(params[:id])
-        @status = 200
       end
 
       def create
         @event_list = current_account.event_lists.new(params[:event_list])
 
         if @event_list.save
-          @status = 201
-          render 'create', status: @status
+          render 'create', status: :created
         else
-          @status = 422
-          render 'create', status: @status
+          render 'create', status: :unprocessible_entity
         end
       end
 
@@ -28,18 +25,15 @@ module Api
         @event_list = current_account.event_lists.find(params[:id])
 
         if @event_list.update_attributes(params[:event_list])
-          @status = 200
           render 'update'
         else
-          @status = 304
-          render 'update', status: @status
+          render 'update', status: :not_modified
         end
       end
 
       def destroy
         @event_list = current_account.event_lists.find(params[:id])
         @event_list.destroy
-        @status = 200
       end
     end
   end
