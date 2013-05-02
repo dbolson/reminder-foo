@@ -24,7 +24,10 @@
 
 ### curl
 ```
-# GET
+# GET#index
+curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists?access_token=ee8fb0303b4066b297266c1f06a24945
+
+# GET#show
 curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/1?access_token=ee8fb0303b4066b297266c1f06a24945
 curl -i -H "Accept: application/json" http://localhost:3000/api/v1/event_lists/-1?access_token=ee8fb0303b4066b297266c1f06a24945
 
