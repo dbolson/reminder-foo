@@ -37,8 +37,6 @@ resource 'Event List' do
     let(:body) { JSON.parse(response_body) }
 
     example_request 'find all event lists' do
-      expect(status).to eq(200)
-
       expect(body).to eq({
         'event_lists' => [
           {
@@ -53,9 +51,10 @@ resource 'Event List' do
             'created_at' => '2000-01-01T00:00:00Z',
             'updated_at' => '2000-01-01T00:00:00Z'
           }
-        ],
-        'status' => 200
+        ]
       })
+
+      expect(status).to eq(200)
     end
   end
 
@@ -66,17 +65,16 @@ resource 'Event List' do
     let(:body) { JSON.parse(response_body) }
 
     example_request 'find an event list' do
-      expect(status).to eq(200)
-
       expect(body).to eq({
         'event_list' => {
-            'id' => 1,
-            'name' => 'event list',
-            'created_at' => '2000-01-01T00:00:00Z',
-            'updated_at' => '2000-01-01T00:00:00Z'
-          },
-        'status' => 200
+          'id' => 1,
+          'name' => 'event list',
+          'created_at' => '2000-01-01T00:00:00Z',
+          'updated_at' => '2000-01-01T00:00:00Z'
+        }
       })
+
+      expect(status).to eq(200)
     end
   end
 
@@ -97,8 +95,7 @@ resource 'Event List' do
           'name' => 'new event list',
           'created_at' => '2000-01-01T00:00:00Z',
           'updated_at' => '2000-01-01T00:00:00Z'
-        },
-        'status' => 201
+        }
       )
 
       expect(status).to eq(201)
@@ -124,8 +121,7 @@ resource 'Event List' do
           'name' => 'new event list name',
           'created_at' => '2000-01-01T00:00:00Z',
           'updated_at' => '2000-01-01T00:00:00Z'
-        },
-        'status' => 200
+        }
       )
 
       expect(status).to eq(200)
@@ -146,8 +142,7 @@ resource 'Event List' do
           'name' => 'event list',
           'created_at' => '2000-01-01T00:00:00Z',
           'updated_at' => '2000-01-01T00:00:00Z'
-        },
-        'status' => 200
+        }
       )
 
       expect(status).to eq(200)

@@ -17,7 +17,7 @@ module Api
         if @event_list.save
           render 'create', status: :created
         else
-          render 'create', status: :unprocessible_entity
+          render 'create', status: :unprocessable_entity
         end
       end
 
