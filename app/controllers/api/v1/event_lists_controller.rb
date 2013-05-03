@@ -25,7 +25,7 @@ module Api
         @event_list = current_account.event_lists.find(params[:id])
 
         if @event_list.update_attributes(params[:event_list])
-          render 'update'
+          head :no_content
         else
           render 'update', status: :not_modified
         end
@@ -34,6 +34,7 @@ module Api
       def destroy
         @event_list = current_account.event_lists.find(params[:id])
         @event_list.destroy
+        head :no_content
       end
     end
   end

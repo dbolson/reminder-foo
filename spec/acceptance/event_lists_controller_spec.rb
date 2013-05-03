@@ -119,16 +119,7 @@ resource 'Event List' do
     let(:body) { JSON.parse(response_body) }
 
     example_request 'updating an event list' do
-      expect(body).to eq(
-        'event_list' => {
-          'id' => 1,
-          'name' => 'new event list name',
-          'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
-        }
-      )
-
-      expect(status).to eq(200)
+      expect(status).to eq(204)
     end
   end
 
@@ -140,16 +131,7 @@ resource 'Event List' do
     let(:body) { JSON.parse(response_body) }
 
     example_request 'deleting an event list' do
-      expect(body).to eq(
-        'event_list' => {
-          'id' => 1,
-          'name' => 'event list',
-          'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
-        }
-      )
-
-      expect(status).to eq(200)
+      expect(status).to eq(204)
     end
   end
 end
