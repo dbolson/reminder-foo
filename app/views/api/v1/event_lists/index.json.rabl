@@ -1,14 +1,3 @@
-object false
+collection @event_lists
 
-node :event_lists do |n|
-  @event_lists.map do |e|
-    {
-      event_list: {
-        id: e.id,
-        name: e.name,
-        created_at: e.created_at,
-        updated_at: e.updated_at
-      }
-    }
-  end
-end
+extends 'api/v1/event_lists/show'

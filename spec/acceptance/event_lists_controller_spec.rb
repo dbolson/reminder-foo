@@ -23,40 +23,28 @@ resource 'Event List' do
 
   get '/api/v1/event_lists' do
     let!(:event_list1) {
-      create(:event_list,
-             id: 1,
-             name: 'event list 1',
-             account: account)
+      create(:event_list, id: 1, name: 'event list 1', account: account)
     }
     let!(:event_list2) {
-      create(:event_list,
-             id: 2,
-             name: 'event list 2',
-             account: account)
+      create(:event_list, id: 2, name: 'event list 2', account: account)
     }
     let(:body) { JSON.parse(response_body) }
 
     example_request 'find all event lists' do
-      expect(body).to eq({
-        'event_lists' => [
-          {
-            'event_list' => {
-              'id' => 2,
-              'name' => 'event list 2',
-              'created_at' => '2000-01-01T00:00:00Z',
-              'updated_at' => '2000-01-01T00:00:00Z'
-            }
-          },
-          {
-            'event_list' => {
-              'id' => 1,
-              'name' => 'event list 1',
-              'created_at' => '2000-01-01T00:00:00Z',
-              'updated_at' => '2000-01-01T00:00:00Z'
-            }
-          }
-        ]
-      })
+      expect(body).to eq([
+        {
+          'id' => 2,
+          'name' => 'event list 2',
+          'created_at' => '2000-01-01T00:00:00Z',
+          'updated_at' => '2000-01-01T00:00:00Z'
+        },
+        {
+          'id' => 1,
+          'name' => 'event list 1',
+          'created_at' => '2000-01-01T00:00:00Z',
+          'updated_at' => '2000-01-01T00:00:00Z'
+        }
+      ])
 
       expect(status).to eq(200)
     end
@@ -70,12 +58,10 @@ resource 'Event List' do
 
     example_request 'find an event list' do
       expect(body).to eq({
-        'event_list' => {
-          'id' => 1,
-          'name' => 'event list',
-          'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
-        }
+        'id' => 1,
+        'name' => 'event list',
+        'created_at' => '2000-01-01T00:00:00Z',
+        'updated_at' => '2000-01-01T00:00:00Z'
       })
 
       expect(status).to eq(200)
@@ -90,17 +76,15 @@ resource 'Event List' do
     let(:name) { 'new event list' }
     let(:raw_post) { params.to_json }
     let(:body) { JSON.parse(response_body) }
-    let(:generated_id) { body['event_list']['id'] }
+    let(:generated_id) { body['id'] }
 
     example_request 'create an event list' do
-      expect(body).to eq(
-        'event_list' => {
-          'id' => generated_id,
-          'name' => 'new event list',
-          'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
-        }
-      )
+      expect(body).to eq({
+        'id' => generated_id,
+        'name' => 'new event list',
+        'created_at' => '2000-01-01T00:00:00Z',
+        'updated_at' => '2000-01-01T00:00:00Z'
+      })
 
       expect(status).to eq(201)
     end
@@ -119,14 +103,12 @@ resource 'Event List' do
     let(:body) { JSON.parse(response_body) }
 
     example_request 'updating an event list' do
-      expect(body).to eq(
-        'event_list' => {
-          'id' => 1,
-          'name' => 'new event list name',
-          'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
-        }
-      )
+      expect(body).to eq({
+        'id' => 1,
+        'name' => 'new event list name',
+        'created_at' => '2000-01-01T00:00:00Z',
+        'updated_at' => '2000-01-01T00:00:00Z'
+      })
       expect(status).to eq(200)
     end
   end
@@ -139,13 +121,12 @@ resource 'Event List' do
     let(:body) { JSON.parse(response_body) }
 
     example_request 'deleting an event list' do
-      expect(body).to eq(
-        'event_list' => {
-          'id' => 1,
-          'name' => 'event list',
-          'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
-        })
+      expect(body).to eq({
+        'id' => 1,
+        'name' => 'event list',
+        'created_at' => '2000-01-01T00:00:00Z',
+        'updated_at' => '2000-01-01T00:00:00Z'
+      })
 
       expect(status).to eq(200)
     end
