@@ -18,7 +18,7 @@ describe Api::V1::EventListsController do
           .to include({ 'errors' => ["Name can't be blank"] })
       end
 
-      it 'has a 402 status' do
+      it 'has a 422 status' do
         post :create, event_list: { name: nil }, format: :json
         expect(response.status).to eq(422)
       end
@@ -35,7 +35,7 @@ describe Api::V1::EventListsController do
           .to include({ 'errors' => ["Name can't be blank"] })
       end
 
-      it 'has a 402 status' do
+      it 'has a 422 status' do
         put :update, id: event_list.id, event_list: { name: nil }, format: :json
         expect(response.status).to eq(422)
       end
