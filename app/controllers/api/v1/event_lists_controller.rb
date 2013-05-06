@@ -27,7 +27,7 @@ module Api
         if @event_list.update_attributes(params[:event_list])
           render 'update'
         else
-          render 'update', status: :not_modified
+          render 'update', status: :unprocessable_entity
         end
       end
 
