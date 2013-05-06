@@ -2,7 +2,7 @@ class ErrorsController < ApplicationController
   respond_to :json, :xml
 
   def not_found
-    render json: { error: error_message, status: 404 },
+    render json: { errors: error_message },
            status: :not_found
   end
 
