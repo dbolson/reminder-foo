@@ -96,7 +96,7 @@ GEM
     mime-types (1.23)
     mocha (0.13.3)
       metaclass (~> 0.0.1)
-    multi_json (1.7.2)
+    multi_json (1.7.3)
     mustache (0.99.4)
     oj (2.0.12)
     pg (0.14.1)
@@ -118,7 +118,7 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
-    rails_best_practices (1.13.4)
+    rails_best_practices (1.13.5)
       activesupport
       awesome_print
       code_analyzer
