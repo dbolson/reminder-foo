@@ -46,7 +46,7 @@ resource 'Account' do
     let(:raw_post) { params.to_json }
     let(:body) { JSON.parse(response_body) }
 
-    example_request 'updating your account' do
+    example_request 'update your account' do
       expect(body).to eq({
         'id' => 1,
         'email' => 'new-email@example.com',

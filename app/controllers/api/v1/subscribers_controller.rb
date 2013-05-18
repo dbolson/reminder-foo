@@ -15,7 +15,7 @@ module Api
         @subscriber = current_account.subscribers.build(params[:subscriber])
 
         if @subscriber.save
-          render 'create'
+          render 'create', status: :created
         else
           render 'create', status: :unprocessable_entity
         end
@@ -27,7 +27,7 @@ module Api
         if @subscriber.update_attributes(params[:subscriber])
           render 'update'
         else
-          render 'update', status: :not_modified
+          render 'update', status: :unprocessable_entity
         end
       end
 

@@ -133,7 +133,7 @@ resource 'Event' do
     let(:raw_post) { params.to_json }
     let(:body) { JSON.parse(response_body) }
 
-    example_request 'updating an event' do
+    example_request 'update an event' do
       expect(body).to eq({
         'id' => 1,
         'name' => 'new event name',

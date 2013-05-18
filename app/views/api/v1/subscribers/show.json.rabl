@@ -1,3 +1,6 @@
 object @subscriber
 
-attributes :id, :phone_number
+attributes :id,
+           :phone_number,
+           :created_at,
+           :updated_at
