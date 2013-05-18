@@ -13,7 +13,7 @@ module Api
         if @account.update_attributes(params[:account])
           render 'update'
         else
-          render 'update', status: :not_modified
+          render 'update', status: :unprocessable_entity
         end
       end
     end
