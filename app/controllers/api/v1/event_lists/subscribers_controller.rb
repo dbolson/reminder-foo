@@ -21,7 +21,7 @@ module Api
         @subscription.subscriber = @subscriber
 
         if @subscription.save
-          render 'api/v1/subscribers/create'
+          render 'api/v1/subscribers/create', status: :created
         else
           render 'api/v1/subscribers/create', status: :unprocessable_entity
         end

@@ -36,13 +36,15 @@ resource 'Subscriber' do
           'id' => 2,
           'phone_number' => '16666666666',
           'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
+          'updated_at' => '2000-01-01T00:00:00Z',
+          'event_lists' => []
         },
         {
           'id' => 1,
           'phone_number' => '15555555555',
           'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
+          'updated_at' => '2000-01-01T00:00:00Z',
+          'event_lists' => []
         }
       ])
 
@@ -61,7 +63,8 @@ resource 'Subscriber' do
         'id' => 1,
         'phone_number' => '15555555555',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z'
+        'updated_at' => '2000-01-01T00:00:00Z',
+        'event_lists' => []
       })
 
       expect(status).to eq(200)
@@ -83,7 +86,8 @@ resource 'Subscriber' do
         'id' => generated_id,
         'phone_number' => '15555555555',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z'
+        'updated_at' => '2000-01-01T00:00:00Z',
+        'event_lists' => []
       })
 
       expect(status).to eq(201)
@@ -107,7 +111,8 @@ resource 'Subscriber' do
         'id' => 1,
         'phone_number' => '16666666666',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z'
+        'updated_at' => '2000-01-01T00:00:00Z',
+        'event_lists' => []
       })
       expect(status).to eq(200)
     end
@@ -125,7 +130,8 @@ resource 'Subscriber' do
         'id' => 1,
         'phone_number' => '15555555555',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z'
+        'updated_at' => '2000-01-01T00:00:00Z',
+        'event_lists' => []
       })
 
       expect(status).to eq(200)
