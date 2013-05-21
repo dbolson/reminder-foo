@@ -6,6 +6,8 @@ class Account < ActiveRecord::Base
   has_many :events
   has_many :subscribers,
            dependent: :destroy
+  has_many :subscriptions,
+           dependent: :destroy
 
   attr_accessible :email
 
