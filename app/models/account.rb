@@ -14,7 +14,7 @@ class Account < ActiveRecord::Base
   validates :email,
             presence: true,
             uniqueness: true,
-            format: /@/
+            format: /\A.+@.+\z/
 
   def ordered_event_lists
     event_lists.ordered.all
