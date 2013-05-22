@@ -76,7 +76,7 @@ GEM
       railties (>= 3.0.0)
     fastercsv (1.5.5)
     ffaker (1.15.0)
-    haml (4.0.2)
+    haml (4.0.3)
       tilt
     highline (1.6.19)
     hike (1.2.2)
