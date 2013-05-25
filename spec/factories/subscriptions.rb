@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :subscription do
     association :account
-    association :event_list, factory: :event_list_with_account
-    association :subscriber, factory: :subscriber_with_account
+    event_list { |s| s.association(:event_list, account: s.account) }
+    subscriber { |s| s.association(:subscriber, account: s.account) }
   end
 end

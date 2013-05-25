@@ -30,7 +30,7 @@ class Subscriber < ActiveRecord::Base
 
   def with_country_code
     if strip_non_numeric =~ /\A\d{10}\z/
-      "1#{strip_non_numeric }"
+      "1#{strip_non_numeric}"
     else
       strip_non_numeric
     end

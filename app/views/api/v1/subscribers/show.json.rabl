@@ -5,6 +5,10 @@ attributes :id,
            :created_at,
            :updated_at
 
-node do |n|
-  { event_lists: partial('api/v1/event_lists/show', object: n.event_lists) }
+node :event_lists do |subscriber|
+  partial 'api/v1/event_lists/show', object: subscriber.event_lists
+end
+
+node :subscriptions do |subscriber|
+  partial 'api/v1/subscriptions/subscription', object: subscriber.subscriptions
 end

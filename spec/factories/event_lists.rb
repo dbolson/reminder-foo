@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :event_list do
-    name { Faker::Lorem.word }
+    sequence(:name ) { |n| "event list #{n}" }
 
     trait :with_account do
       association :account, factory: :account

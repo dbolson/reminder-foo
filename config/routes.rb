@@ -5,19 +5,21 @@ RemindersApi::Application.routes.draw do
       match 'accounts', to: 'accounts#update', via: :put
 
       resources :event_lists, except: [:new, :edit] do
-        resources :events, except: [:new, :edit],
-          controller: 'event_lists/events'
+        get :subscribers, on: :member
+        get :subscriptions, on: :member
 
-        resources :subscribers, except: [:new, :edit, :update],
-          controller: 'event_lists/subscribers'
+        resources :events, except: [:new, :edit], controller: 'event_lists/events'
       end
 
       resources :events, except: [:new, :edit, :create] do
-        resources :reminders, except: [:new, :edit],
-          controller: 'events/reminders'
+        resources :reminders, except: [:new, :edit], controller: 'events/reminders'
       end
 
-      resources :subscribers, except: [:new, :edit]
+      resources :subscribers, except: [:new, :edit] do
+        get :event_lists, on: :member
+      end
+
+      resources :subscriptions, only: [:create, :destroy]
     end
   end
 

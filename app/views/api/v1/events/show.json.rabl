@@ -9,6 +9,6 @@ attributes :id,
 
 node do |n|
   {
-    event_list: partial('api/v1/event_lists/show', object: n.event_list)
+    event_list: partial('api/v1/event_lists/event_list', object: n.event_list)
   }
 end

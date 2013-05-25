@@ -38,9 +38,12 @@ describe Subscription do
 
     context 'with an event list and subscriber with the same account' do
       it 'creates a subscription for that account' do
-        subscription = record_type.create_for_account(account: account,
-                                                      event_list: event_list,
-                                                      subscriber: subscriber)
+        subscription = record_type.
+          create_for_account(account: account,
+                             subscription: {
+                               subscriber_id: subscriber.id,
+                               event_list_id: event_list.id
+                             })
         expect(subscription).to be_persisted
       end
     end
@@ -49,9 +52,13 @@ describe Subscription do
       let(:another_account) { create(:account) }
 
       it 'does not create a subscription' do
-        subscription = record_type.create_for_account(account: another_account,
-                                                      event_list: event_list,
-                                                      subscriber: subscriber)
+        subscription = record_type.
+          create_for_account(account: another_account,
+                             subscription: {
+                               subscriber_id: subscriber.id,
+                               event_list_id: event_list.id
+                             })
+
         expect(subscription).to_not be_persisted
       end
     end

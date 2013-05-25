@@ -16,12 +16,12 @@ class Subscription < ActiveRecord::Base
 
   def self.create_for_account(params)
     account = params.fetch(:account)
-    event_list = params.fetch(:event_list)
-    subscriber = params.fetch(:subscriber)
+    event_list_id = params[:subscription].fetch(:event_list_id)
+    subscriber_id = params[:subscription].fetch(:subscriber_id)
 
     subscription = account.subscriptions.build
-    subscription.event_list = event_list
-    subscription.subscriber = subscriber
+    subscription.event_list_id = event_list_id
+    subscription.subscriber_id = subscriber_id
     subscription.save
     subscription
   end

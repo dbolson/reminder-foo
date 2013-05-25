@@ -37,14 +37,16 @@ resource 'Subscriber' do
           'phone_number' => '16666666666',
           'created_at' => '2000-01-01T00:00:00Z',
           'updated_at' => '2000-01-01T00:00:00Z',
-          'event_lists' => []
+          'event_lists' => [],
+          'subscriptions' => []
         },
         {
           'id' => 1,
           'phone_number' => '15555555555',
           'created_at' => '2000-01-01T00:00:00Z',
           'updated_at' => '2000-01-01T00:00:00Z',
-          'event_lists' => []
+          'event_lists' => [],
+          'subscriptions' => []
         }
       ])
 
@@ -53,18 +55,17 @@ resource 'Subscriber' do
   end
 
   get '/api/v1/subscribers/1' do
-    let!(:subscribers) {
-      create(:subscriber, id: 1, phone_number: '15555555555', account: account)
-    }
+    let!(:subscriber) { create(:subscriber, id: 1, account: account) }
     let(:body) { JSON.parse(response_body) }
 
     example_request 'find a subscriber' do
       expect(body).to eq({
         'id' => 1,
-        'phone_number' => '15555555555',
+        'phone_number' => subscriber.phone_number,
         'created_at' => '2000-01-01T00:00:00Z',
         'updated_at' => '2000-01-01T00:00:00Z',
-        'event_lists' => []
+        'event_lists' => [],
+        'subscriptions' => []
       })
 
       expect(status).to eq(200)
@@ -87,7 +88,8 @@ resource 'Subscriber' do
         'phone_number' => '15555555555',
         'created_at' => '2000-01-01T00:00:00Z',
         'updated_at' => '2000-01-01T00:00:00Z',
-        'event_lists' => []
+        'event_lists' => [],
+        'subscriptions' => []
       })
 
       expect(status).to eq(201)
@@ -99,9 +101,7 @@ resource 'Subscriber' do
     required_parameters :phone_number
     scope_parameters :subscriber, [:phone_number]
 
-    let!(:subscriber) {
-      create(:subscriber, id: 1, phone_number: '15555555555', account: account)
-    }
+    let!(:subscriber) { create(:subscriber, id: 1, account: account) }
     let(:phone_number) { '16666666666' }
     let(:raw_post) { params.to_json }
     let(:body) { JSON.parse(response_body) }
@@ -112,26 +112,26 @@ resource 'Subscriber' do
         'phone_number' => '16666666666',
         'created_at' => '2000-01-01T00:00:00Z',
         'updated_at' => '2000-01-01T00:00:00Z',
-        'event_lists' => []
+        'event_lists' => [],
+        'subscriptions' => []
       })
       expect(status).to eq(200)
     end
   end
 
   delete '/api/v1/subscribers/1' do
-    let!(:subscriber) {
-      create(:subscriber, id: 1, phone_number: '15555555555', account: account)
-    }
+    let!(:subscriber) { create(:subscriber, id: 1, account: account) }
     let(:raw_post) { params.to_json }
     let(:body) { JSON.parse(response_body) }
 
     example_request 'delete a subscriber' do
       expect(body).to eq({
         'id' => 1,
-        'phone_number' => '15555555555',
+        'phone_number' => subscriber.phone_number,
         'created_at' => '2000-01-01T00:00:00Z',
         'updated_at' => '2000-01-01T00:00:00Z',
-        'event_lists' => []
+        'event_lists' => [],
+        'subscriptions' => []
       })
 
       expect(status).to eq(200)

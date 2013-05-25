@@ -36,13 +36,17 @@ resource 'Event List' do
           'id' => 2,
           'name' => 'event list 2',
           'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
+          'updated_at' => '2000-01-01T00:00:00Z',
+          'subscribers' => [],
+          'subscriptions' => []
         },
         {
           'id' => 1,
           'name' => 'event list 1',
           'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
+          'updated_at' => '2000-01-01T00:00:00Z',
+          'subscribers' => [],
+          'subscriptions' => []
         }
       ])
 
@@ -61,7 +65,93 @@ resource 'Event List' do
         'id' => 1,
         'name' => 'event list',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z'
+        'updated_at' => '2000-01-01T00:00:00Z',
+        'subscribers' => [],
+        'subscriptions' => []
+      })
+
+      expect(status).to eq(200)
+    end
+  end
+
+  get '/api/v1/event_lists/1/subscribers' do
+    let!(:event_list) { create(:event_list, account: account, id: 1) }
+    let!(:subscriber1) { create(:subscriber, account: account, id: 1) }
+    let!(:subscriber2) { create(:subscriber, account: account, id: 2) }
+    let!(:subscription1) {
+      create(:subscription, account: account, event_list: event_list, subscriber: subscriber1, id: 1)
+    }
+    let!(:subscription2) {
+      create(:subscription, account: account, event_list: event_list, subscriber: subscriber2, id: 2)
+    }
+    let(:body) { JSON.parse(response_body) }
+
+    example_request 'find the subscribers for the event list' do
+      expect(body).to eq({
+        'id' => 1,
+        'name' => event_list.name,
+        'created_at' => '2000-01-01T00:00:00Z',
+        'updated_at' => '2000-01-01T00:00:00Z',
+        'subscribers' => [
+          {
+            'id' => 1,
+            'phone_number' => subscriber1.phone_number,
+            'created_at' => '2000-01-01T00:00:00Z',
+            'updated_at' => '2000-01-01T00:00:00Z'
+          },
+          {
+            'id' => 2,
+            'phone_number' => subscriber2.phone_number,
+            'created_at' => '2000-01-01T00:00:00Z',
+            'updated_at' => '2000-01-01T00:00:00Z'
+          }
+        ],
+        'subscriptions' => [
+          {
+            'id' => 1,
+            'created_at' => '2000-01-01T00:00:00Z',
+            'updated_at' => '2000-01-01T00:00:00Z'
+          },
+          {
+            'id' => 2,
+            'created_at' => '2000-01-01T00:00:00Z',
+            'updated_at' => '2000-01-01T00:00:00Z'
+          }
+        ]
+      })
+
+      expect(status).to eq(200)
+    end
+  end
+
+  get '/api/v1/event_lists/1/subscriptions' do
+    let!(:event_list) { create(:event_list, account: account, id: 1) }
+    let!(:subscription1) {
+      create(:subscription, account: account, event_list: event_list, id: 1)
+    }
+    let!(:subscription2) {
+      create(:subscription, account: account, event_list: event_list, id: 2)
+    }
+    let(:body) { JSON.parse(response_body) }
+
+    example_request 'find the subscriptions for the event list' do
+      expect(body).to eq({
+        'id' => 1,
+        'name' => event_list.name,
+        'created_at' => '2000-01-01T00:00:00Z',
+        'updated_at' => '2000-01-01T00:00:00Z',
+        'subscriptions' => [
+          {
+            'id' => 1,
+            'created_at' => '2000-01-01T00:00:00Z',
+            'updated_at' => '2000-01-01T00:00:00Z'
+          },
+          {
+            'id' => 2,
+            'created_at' => '2000-01-01T00:00:00Z',
+            'updated_at' => '2000-01-01T00:00:00Z'
+          }
+        ]
       })
 
       expect(status).to eq(200)
@@ -83,7 +173,9 @@ resource 'Event List' do
         'id' => generated_id,
         'name' => 'new event list',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z'
+        'updated_at' => '2000-01-01T00:00:00Z',
+        'subscribers' => [],
+        'subscriptions' => []
       })
 
       expect(status).to eq(201)
@@ -96,7 +188,7 @@ resource 'Event List' do
     scope_parameters :event_list, [:name]
 
     let!(:event_list) {
-      create(:event_list, id: 1, name: 'event list', account: account)
+      create(:event_list, account: account, id: 1)
     }
     let(:name) { 'new event list name' }
     let(:raw_post) { params.to_json }
@@ -107,7 +199,9 @@ resource 'Event List' do
         'id' => 1,
         'name' => 'new event list name',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z'
+        'updated_at' => '2000-01-01T00:00:00Z',
+        'subscribers' => [],
+        'subscriptions' => []
       })
       expect(status).to eq(200)
     end
@@ -115,7 +209,7 @@ resource 'Event List' do
 
   delete '/api/v1/event_lists/1' do
     let!(:event_list) {
-      create(:event_list, id: 1, name: 'event list', account: account)
+      create(:event_list, account: account, id: 1)
     }
     let(:raw_post) { params.to_json }
     let(:body) { JSON.parse(response_body) }
@@ -123,9 +217,11 @@ resource 'Event List' do
     example_request 'delete an event list' do
       expect(body).to eq({
         'id' => 1,
-        'name' => 'event list',
+        'name' => event_list.name,
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z'
+        'updated_at' => '2000-01-01T00:00:00Z',
+        'subscribers' => [],
+        'subscriptions' => []
       })
 
       expect(status).to eq(200)

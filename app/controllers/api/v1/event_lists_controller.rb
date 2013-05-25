@@ -3,6 +3,14 @@ module Api
     class EventListsController < Api::ApiController
       respond_to :json, :xml
 
+      def subscribers
+        @event_list = current_account.event_lists.find(params[:id])
+      end
+
+      def subscriptions
+        @event_list = current_account.event_lists.find(params[:id])
+      end
+
       def index
         @event_lists = current_account.ordered_event_lists
       end
