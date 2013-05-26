@@ -5,22 +5,13 @@ attributes :id,
            :updated_at
 
 child :event_list do
-  attributes :id,
-             :name,
-             :created_at,
-             :updated_at
+  extends 'api/v1/event_lists/show'
 end
 
 child :subscriber do
-  attributes :id,
-             :phone_number,
-             :created_at,
-             :updated_at
+  extends 'api/v1/subscribers/show'
 end
 
-if @subscription.errors.any?
-  node :errors do |n|
-    @subscription.errors.full_messages
-  end
+node false do |subscription|
+  partial 'api/v1/error', object: subscription
 end
-
