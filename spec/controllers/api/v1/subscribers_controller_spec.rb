@@ -6,8 +6,7 @@ describe Api::V1::SubscribersController do
   let(:account) { create(:account) }
 
   before do
-    ApiKey.stub(:find_by_access_token)
-      .and_return(stub(:api_token, account: account))
+    ApiKey.stub(:find_by_access_token).and_return(stub(:api_token, account: account))
   end
 
   describe '#create' do

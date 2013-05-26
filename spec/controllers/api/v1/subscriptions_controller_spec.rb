@@ -1,27 +1,36 @@
 require 'spec_helper'
 
 describe Api::V1::SubscriptionsController do
-  #render_views
+  render_views
 
-  #let(:account) { create(:account) }
+  let(:account) { create(:account) }
 
-  #before do
-    #ApiKey.stub(:find_by_access_token)
-      #.and_return(stub(:api_token, account: account))
-  #end
+  before do
+    ApiKey.stub(:find_by_access_token).and_return(stub(:api_token, account: account))
+  end
 
-  #describe '#create' do
-    #context 'with errors' do
-      #it 'displays the errors' do
-        #post :create, subscriber: { phone_number: nil }, format: :json
-        #expect(JSON.parse(response.body))
-          #.to include({ 'errors' => ["Phone number can't be blank"] })
-      #end
+  describe '#create' do
+    context 'with no data' do
+      it 'displays the errors' do
+        post :create, subscription: {}, format: :json
+        response_body = JSON.parse(response.body)
+        expect(response_body['errors']).to include("Event list can't be blank")
+        expect(response_body['errors']).to include("Subscriber can't be blank")
+      end
+    end
 
-      #it 'has a 422 status' do
-        #post :create, subscriber: { phone_number: nil }, format: :json
-        #expect(response.status).to eq(422)
-      #end
-    #end
-  #end
+    context 'with invalid data' do
+      it 'displays the errors' do
+        post :create, subscription: { event_list_id: nil, subscriber_id: nil }, format: :json
+        response_body = JSON.parse(response.body)
+        expect(response_body['errors']).to include("Event list can't be blank")
+        expect(response_body['errors']).to include("Subscriber can't be blank")
+      end
+
+      it 'has a 422 status' do
+        post :create, subscription: { event_list_id: nil, subscriber_id: nil }, format: :json
+        expect(response.status).to eq(422)
+      end
+    end
+  end
 end
