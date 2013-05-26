@@ -36,17 +36,13 @@ resource 'Event List' do
           'id' => 2,
           'name' => 'event list 2',
           'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z',
-          'subscribers' => [],
-          'subscriptions' => []
+          'updated_at' => '2000-01-01T00:00:00Z'
         },
         {
           'id' => 1,
           'name' => 'event list 1',
           'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z',
-          'subscribers' => [],
-          'subscriptions' => []
+          'updated_at' => '2000-01-01T00:00:00Z'
         }
       ])
 
@@ -65,9 +61,7 @@ resource 'Event List' do
         'id' => 1,
         'name' => 'event list',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z',
-        'subscribers' => [],
-        'subscriptions' => []
+        'updated_at' => '2000-01-01T00:00:00Z'
       })
 
       expect(status).to eq(200)
@@ -102,18 +96,6 @@ resource 'Event List' do
           {
             'id' => 2,
             'phone_number' => subscriber2.phone_number,
-            'created_at' => '2000-01-01T00:00:00Z',
-            'updated_at' => '2000-01-01T00:00:00Z'
-          }
-        ],
-        'subscriptions' => [
-          {
-            'id' => 1,
-            'created_at' => '2000-01-01T00:00:00Z',
-            'updated_at' => '2000-01-01T00:00:00Z'
-          },
-          {
-            'id' => 2,
             'created_at' => '2000-01-01T00:00:00Z',
             'updated_at' => '2000-01-01T00:00:00Z'
           }
@@ -173,9 +155,7 @@ resource 'Event List' do
         'id' => generated_id,
         'name' => 'new event list',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z',
-        'subscribers' => [],
-        'subscriptions' => []
+        'updated_at' => '2000-01-01T00:00:00Z'
       })
 
       expect(status).to eq(201)
@@ -199,9 +179,7 @@ resource 'Event List' do
         'id' => 1,
         'name' => 'new event list name',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z',
-        'subscribers' => [],
-        'subscriptions' => []
+        'updated_at' => '2000-01-01T00:00:00Z'
       })
       expect(status).to eq(200)
     end
@@ -219,9 +197,7 @@ resource 'Event List' do
         'id' => 1,
         'name' => event_list.name,
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z',
-        'subscribers' => [],
-        'subscriptions' => []
+        'updated_at' => '2000-01-01T00:00:00Z'
       })
 
       expect(status).to eq(200)

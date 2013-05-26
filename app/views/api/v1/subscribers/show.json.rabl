@@ -1,14 +1,9 @@
 object @subscriber
 
-attributes :id,
-           :phone_number,
-           :created_at,
-           :updated_at
-
-node :event_lists do |subscriber|
-  partial 'api/v1/event_lists/show', object: subscriber.event_lists
+node false do |subscriber|
+  partial 'api/v1/subscribers/subscriber', object: subscriber
 end
 
-node :subscriptions do |subscriber|
-  partial 'api/v1/subscriptions/subscription', object: subscriber.subscriptions
+node :event_lists do |subscriber|
+  partial 'api/v1/event_lists/event_list', object: subscriber.event_lists
 end
