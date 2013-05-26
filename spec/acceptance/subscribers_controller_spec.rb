@@ -36,15 +36,13 @@ resource 'Subscriber' do
           'id' => 2,
           'phone_number' => '16666666666',
           'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z',
-          'event_lists' => []
+          'updated_at' => '2000-01-01T00:00:00Z'
         },
         {
           'id' => 1,
           'phone_number' => '15555555555',
           'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z',
-          'event_lists' => []
+          'updated_at' => '2000-01-01T00:00:00Z'
         }
       ])
 
@@ -61,8 +59,79 @@ resource 'Subscriber' do
         'id' => 1,
         'phone_number' => subscriber.phone_number,
         'created_at' => '2000-01-01T00:00:00Z',
+        'updated_at' => '2000-01-01T00:00:00Z'
+      })
+
+      expect(status).to eq(200)
+    end
+  end
+
+  get '/api/v1/subscribers/1/event_lists' do
+    let!(:subscriber) { create(:subscriber, account: account, id: 1) }
+    let!(:event_list1) { create(:event_list, account: account, id: 1) }
+    let!(:event_list2) { create(:event_list, account: account, id: 2) }
+    let!(:subscription1) {
+      create(:subscription, account: account, event_list: event_list1, subscriber: subscriber, id: 1)
+    }
+    let!(:subscription2) {
+      create(:subscription, account: account, event_list: event_list2, subscriber: subscriber, id: 2)
+    }
+    let(:body) { JSON.parse(response_body) }
+
+    example_request 'find the event lists for the subscriber' do
+      expect(body).to eq({
+        'id' => 1,
+        'phone_number' => subscriber.phone_number,
+        'created_at' => '2000-01-01T00:00:00Z',
         'updated_at' => '2000-01-01T00:00:00Z',
-        'event_lists' => []
+        'event_lists' => [
+          {
+            'id' => 1,
+            'name' => event_list1.name,
+            'created_at' => '2000-01-01T00:00:00Z',
+            'updated_at' => '2000-01-01T00:00:00Z'
+          },
+          {
+            'id' => 2,
+            'name' => event_list2.name,
+            'created_at' => '2000-01-01T00:00:00Z',
+            'updated_at' => '2000-01-01T00:00:00Z'
+          }
+        ]
+      })
+
+      expect(status).to eq(200)
+    end
+  end
+
+  get '/api/v1/subscribers/1/subscriptions' do
+    let!(:subscriber) { create(:subscriber, account: account, id: 1) }
+    let!(:subscription1) {
+      create(:subscription, account: account, subscriber: subscriber, id: 1)
+    }
+    let!(:subscription2) {
+      create(:subscription, account: account, subscriber: subscriber, id: 2)
+    }
+    let(:body) { JSON.parse(response_body) }
+
+    example_request 'find the subscriptions for the subscriber' do
+      expect(body).to eq({
+        'id' => 1,
+        'phone_number' => subscriber.phone_number,
+        'created_at' => '2000-01-01T00:00:00Z',
+        'updated_at' => '2000-01-01T00:00:00Z',
+        'subscriptions' => [
+          {
+            'id' => 1,
+            'created_at' => '2000-01-01T00:00:00Z',
+            'updated_at' => '2000-01-01T00:00:00Z'
+          },
+          {
+            'id' => 2,
+            'created_at' => '2000-01-01T00:00:00Z',
+            'updated_at' => '2000-01-01T00:00:00Z'
+          }
+        ]
       })
 
       expect(status).to eq(200)
@@ -84,8 +153,7 @@ resource 'Subscriber' do
         'id' => generated_id,
         'phone_number' => '15555555555',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z',
-        'event_lists' => []
+        'updated_at' => '2000-01-01T00:00:00Z'
       })
 
       expect(status).to eq(201)
@@ -107,8 +175,7 @@ resource 'Subscriber' do
         'id' => 1,
         'phone_number' => '16666666666',
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z',
-        'event_lists' => []
+        'updated_at' => '2000-01-01T00:00:00Z'
       })
       expect(status).to eq(200)
     end
@@ -124,8 +191,7 @@ resource 'Subscriber' do
         'id' => 1,
         'phone_number' => subscriber.phone_number,
         'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z',
-        'event_lists' => []
+        'updated_at' => '2000-01-01T00:00:00Z'
       })
 
       expect(status).to eq(200)

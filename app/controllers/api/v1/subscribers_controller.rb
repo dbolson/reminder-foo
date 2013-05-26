@@ -3,6 +3,14 @@ module Api
     class SubscribersController < Api::ApiController
       respond_to :json, :xml
 
+      def event_lists
+        @subscriber = current_account.subscribers.find(params[:id])
+      end
+
+      def subscriptions
+        @subscriber = current_account.subscribers.find(params[:id])
+      end
+
       def index
         @subscribers = current_account.subscribers.all
       end

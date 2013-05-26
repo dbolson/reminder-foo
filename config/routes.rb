@@ -17,6 +17,7 @@ RemindersApi::Application.routes.draw do
 
       resources :subscribers, except: [:new, :edit] do
         get :event_lists, on: :member
+        get :subscriptions, on: :member
       end
 
       resources :subscriptions, only: [:create, :destroy]
