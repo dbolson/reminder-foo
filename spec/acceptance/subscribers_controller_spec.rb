@@ -123,11 +123,15 @@ resource 'Subscriber' do
         'subscriptions' => [
           {
             'id' => 1,
+            'event_list_id' => subscription1.event_list_id,
+            'subscriber_id' => 1,
             'created_at' => '2000-01-01T00:00:00Z',
             'updated_at' => '2000-01-01T00:00:00Z'
           },
           {
             'id' => 2,
+            'event_list_id' => subscription2.event_list_id,
+            'subscriber_id' => 1,
             'created_at' => '2000-01-01T00:00:00Z',
             'updated_at' => '2000-01-01T00:00:00Z'
           }
