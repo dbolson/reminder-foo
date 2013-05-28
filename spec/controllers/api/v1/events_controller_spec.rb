@@ -6,8 +6,7 @@ describe Api::V1::EventsController do
   let(:account) { create(:account) }
 
   before do
-    ApiKey.stub(:find_by_access_token)
-      .and_return(stub(:api_token, account: account))
+    ApiKey.stub(:find_by_access_token).and_return(stub(:api_token, account: account))
   end
 
   describe '#update' do
@@ -16,8 +15,7 @@ describe Api::V1::EventsController do
 
       it 'displays the errors' do
         put :update, id: event.id, event: { name: nil }, format: :json
-        expect(JSON.parse(response.body))
-          .to include({ 'errors' => ["Name can't be blank"] })
+        expect(JSON.parse(response.body)).to include({ 'errors' => ["Name can't be blank"] })
       end
 
       it 'has a 422 status' do

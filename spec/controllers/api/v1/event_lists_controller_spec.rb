@@ -6,16 +6,14 @@ describe Api::V1::EventListsController do
   let(:account) { create(:account) }
 
   before do
-    ApiKey.stub(:find_by_access_token)
-      .and_return(stub(:api_token, account: account))
+    ApiKey.stub(:find_by_access_token).and_return(stub(:api_token, account: account))
   end
 
   describe '#create' do
     context 'with errors' do
       it 'displays the errors' do
         post :create, event_list: { name: nil }, format: :json
-        expect(JSON.parse(response.body))
-          .to include({ 'errors' => ["Name can't be blank"] })
+        expect(JSON.parse(response.body)).to include({ 'errors' => ["Name can't be blank"] })
       end
 
       it 'has a 422 status' do
@@ -31,8 +29,7 @@ describe Api::V1::EventListsController do
 
       it 'displays the errors' do
         put :update, id: event_list.id, event_list: { name: nil }, format: :json
-        expect(JSON.parse(response.body))
-          .to include({ 'errors' => ["Name can't be blank"] })
+        expect(JSON.parse(response.body)).to include({ 'errors' => ["Name can't be blank"] })
       end
 
       it 'has a 422 status' do
