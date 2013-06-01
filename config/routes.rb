@@ -24,5 +24,6 @@ RemindersApi::Application.routes.draw do
     end
   end
 
+  match '/docs' => Raddocs::App, anchor: false
   match '/404', to: 'errors#not_found'
 end

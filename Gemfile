@@ -21,6 +21,7 @@ end
 group :development, :test do
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'ffaker', '~> 1.15.0'
+  gem 'raddocs', '~> 0.1.3'
   gem 'rspec_api_documentation', '~> 0.9.0'
   gem 'rspec-rails', '~> 2.13.0'
 end

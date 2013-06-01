@@ -69,5 +69,6 @@ module RemindersApi
     config.exceptions_app = self.routes
 
     config.middleware.use Rack::ContentLength
+    config.middleware.use Raddocs::Middleware
   end
 end

@@ -38,6 +38,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   RspecApiDocumentation.configure do |config|
+    config.api_name = 'Reminder API Documentation'
     config.docs_dir = Rails.root.join('public', 'docs')
     config.format = [:json, :html]
     config.url_prefix = '/docs'
