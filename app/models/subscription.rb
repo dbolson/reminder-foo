@@ -3,16 +3,15 @@ class Subscription < ActiveRecord::Base
   belongs_to :event_list
   belongs_to :subscriber
 
+  attr_accessible :event_list, :subscriber
+
   validates :event_list_id,
             :subscriber_id,
             presence: true
-
-  attr_accessible :event_list, :subscriber
-
-  before_validation :validate_owned_by_account
-
   validates :event_list_id,
             uniqueness: { scope: :subscriber_id }
+
+  before_validation :validate_owned_by_account
 
   def self.create_for_account(params)
     account = params.fetch(:account)
