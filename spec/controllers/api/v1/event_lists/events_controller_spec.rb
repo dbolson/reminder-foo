@@ -42,7 +42,7 @@ describe Api::V1::EventLists::EventsController do
   end
 
   describe '#update' do
-    context 'with errors' do
+    context 'with invalid params' do
       let(:event) { create(:event, account: account, event_list: event_list) }
 
       it 'displays the errors' do

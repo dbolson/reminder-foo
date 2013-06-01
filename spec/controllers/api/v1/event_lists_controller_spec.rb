@@ -10,7 +10,7 @@ describe Api::V1::EventListsController do
   end
 
   describe '#create' do
-    context 'with errors' do
+    context 'with invalid params' do
       it 'displays the errors' do
         post :create, event_list: { name: nil }, format: :json
         expect(JSON.parse(response.body)).to include({ 'errors' => ["Name can't be blank"] })
@@ -24,7 +24,7 @@ describe Api::V1::EventListsController do
   end
 
   describe '#update' do
-    context 'with errors' do
+    context 'with invalid params' do
       let(:event_list) { create(:event_list, account: account) }
 
       it 'displays the errors' do

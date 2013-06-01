@@ -19,7 +19,7 @@ module Api
         @reminder = @event.reminders.build(params[:reminder])
 
         if @reminder.save
-          render 'create'
+          render 'create', status: :created
         else
           render 'create', status: :unprocessable_entity
         end
@@ -31,7 +31,7 @@ module Api
         if @reminder.update_attributes(params[:reminder])
           render 'update'
         else
-          render 'update', status: :not_modified
+          render 'update', status: :unprocessable_entity
         end
       end
 

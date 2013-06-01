@@ -11,7 +11,7 @@ describe Api::V1::AccountsController do
   end
 
   describe '#update' do
-    context 'with errors' do
+    context 'with invalid params' do
       it 'displays the errors' do
         put :update, id: account.id, account: { email: nil }, format: :json
         expect(JSON.parse(response.body)).to include({

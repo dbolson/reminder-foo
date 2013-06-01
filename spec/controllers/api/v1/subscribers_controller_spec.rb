@@ -10,7 +10,7 @@ describe Api::V1::SubscribersController do
   end
 
   describe '#create' do
-    context 'with errors' do
+    context 'with invalid params' do
       it 'displays the errors' do
         post :create, subscriber: { phone_number: nil }, format: :json
         expect(JSON.parse(response.body))
@@ -25,7 +25,7 @@ describe Api::V1::SubscribersController do
   end
 
   describe '#update' do
-    context 'with errors' do
+    context 'with invalid params' do
       let(:subscriber) { create(:subscriber, account: account) }
 
       it 'displays the errors' do
