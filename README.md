@@ -53,3 +53,16 @@ curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/eve
   * scoped to a reminder list @done
 * a list of reminder dates
   * scoped to events @done
+
+# create an event
+curl -i -H "Accept: application/json" -X POST -d "event[name]=event name" -d "event[description]=event description" -d "event[due_at]=2013-06-01" http://localhost:3000/api/v1/event_lists/3/events/?access_token=ee8fb0303b4066b297266c1f06a24945
+# show all events
+curl -i -H "Accept: application/json" http://localhost:3000/api/v1/events?access_token=ee8fb0303b4066b297266c1f06a24945
+# show an event
+curl -i -H "Accept: application/json" http://localhost:3000/api/v1/events/2?access_token=ee8fb0303b4066b297266c1f06a24945
+# update an event
+curl -i -H "Accept: application/json" -X PUT -d "event[name]=another name" http://localhost:3000/api/v1/events/2?access_token=ee8fb0303b4066b297266c1f06a24945
+# remove an event from an event list
+curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/event_lists/3/events/2?access_token=ee8fb0303b4066b297266c1f06a24945
+# delete an event
+curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/events/2?access_token=ee8fb0303b4066b297266c1f06a24945

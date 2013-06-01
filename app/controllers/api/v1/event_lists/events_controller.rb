@@ -15,8 +15,7 @@ module Api
 
       def create
         @event_list = EventList.find(params[:event_list_id])
-        create_params = params[:event].merge(account: current_account, event_list: @event_list)
-        @event = Services::EventCreating.create(create_params)
+        @event = Services::EventCreating.create(create_params(@event_list))
 
         if @event.persisted?
           render 'create', status: :created
@@ -25,10 +24,27 @@ module Api
         end
       end
 
+      def update
+        @event = current_account.events.find(params[:id])
+
+        if @event.update_attributes(params[:event])
+          render 'update'
+        else
+          render 'update', status: :unprocessable_entity
+        end
+      end
+
       def destroy
         @event = current_account.events.find(params[:id])
         @event.destroy
         render 'api/v1/events/destroy'
+      end
+
+      private
+
+      def create_params(event_list)
+        params[:event] = {} if params[:event].blank?
+        { account: current_account, event_list: event_list }.merge(params[:event])
       end
     end
   end
