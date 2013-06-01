@@ -4,7 +4,7 @@ describe Event do
   describe 'with relationships' do
     it { should belong_to(:account) }
     it { should belong_to(:event_list) }
-    it { should have_many(:reminders) }
+    it { should have_many(:reminders).dependent(:destroy) }
   end
 
   describe 'with validations' do

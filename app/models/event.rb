@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :account
   belongs_to :event_list
-  has_many :reminders
+  has_many :reminders, dependent: :destroy
 
   attr_accessible :name,
                   :description,
