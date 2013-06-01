@@ -9,11 +9,6 @@
 
 ### REST Responses
 * SSL
-* include status code @done
-* include error messages
-* include hyperlinks to help for errors
-* pagination parameters
-* sorting parameters
 * https://github.com/rack/rack/blob/master/lib/rack/utils.rb#L453
 * https://dev.twitter.com/docs/error-codes-responses
 * http://stackoverflow.com/questions/7342851/catch-unknown-action-in-rails-3-for-custom-404
@@ -51,7 +46,7 @@ curl -i -H "Accept: application/json" -X DELETE http://localhost:3000/api/v1/eve
   * scoped to event lists @done
 * a list of subscribers @done
   * scoped to a reminder list @done
-* a list of reminder dates
+* a list of reminder dates @done
   * scoped to events @done
 
 # show all events
