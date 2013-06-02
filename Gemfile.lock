@@ -95,7 +95,7 @@ GEM
     mime-types (1.23)
     mocha (0.13.3)
       metaclass (~> 0.0.1)
-    multi_json (1.7.4)
+    multi_json (1.7.5)
     mustache (0.99.4)
     oj (2.0.14)
     pg (0.14.1)
