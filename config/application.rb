@@ -68,6 +68,8 @@ module RemindersApi
     # Set the exceptions application to the router
     config.exceptions_app = self.routes
 
+    config.force_ssl = true
+
     config.middleware.use Rack::ContentLength
     config.middleware.use Raddocs::Middleware
   end
