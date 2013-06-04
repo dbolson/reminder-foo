@@ -5,23 +5,18 @@ resource 'Subscriber' do
   header 'Accept', 'application/json'
   header 'Content-Type', 'application/json'
 
-  def authenticate
-    ApiKey.stub(:find_by_access_token)
-      .and_return(stub(:api_token, account: account))
-  end
-
   let(:account) { create(:account) }
 
   before do
     Timecop.freeze(2000, 1, 1)
-    authenticate
+    grant_access
   end
 
   after do
     Timecop.return
   end
 
-  post '/api/v1/subscriptions/' do
+  post "#{host}/api/v1/subscriptions" do
     parameter :event_list_id, 1
     parameter :subscriber_id, 1
 
@@ -60,7 +55,7 @@ resource 'Subscriber' do
     end
   end
 
-  delete '/api/v1/subscriptions/1' do
+  delete "#{host}/api/v1/subscriptions/1" do
     let!(:subscription) { create(:subscription, account: account, id: 1) }
     let(:raw_post) { params.to_json }
     let(:body) { JSON.parse(response_body) }

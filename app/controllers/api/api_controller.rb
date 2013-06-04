@@ -1,6 +1,7 @@
 module Api
   class ApiController < ApplicationController
     before_filter :restrict_access
+    before_filter :log_request
 
     private
 
@@ -13,6 +14,15 @@ module Api
       else
         head :unauthorized
       end
+    end
+
+    def log_request
+      Request.log(
+        account: current_account,
+        url: request.original_url,
+        ip_address: request.remote_ip,
+        params: params
+      )
     end
   end
 end

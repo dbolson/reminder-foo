@@ -5,23 +5,18 @@ resource 'Account' do
   header 'Accept', 'application/json'
   header 'Content-Type', 'application/json'
 
-  def authenticate
-    ApiKey.stub(:find_by_access_token)
-      .and_return(stub(:api_token, account: account))
-  end
-
   let(:account) { create(:account, id: 1) }
 
   before do
     Timecop.freeze(2000, 1, 1)
-    authenticate
+    grant_access
   end
 
   after do
     Timecop.return
   end
 
-  get '/api/v1/accounts' do
+  get "#{host}/api/v1/accounts" do
     let(:body) { JSON.parse(response_body) }
 
     example_request 'find your account' do
@@ -36,7 +31,7 @@ resource 'Account' do
     end
   end
 
-  put '/api/v1/accounts' do
+  put "#{host}/api/v1/accounts" do
     parameter :email, 'Email address of your account'
     required_parameters :email
     scope_parameters :account, [:email]

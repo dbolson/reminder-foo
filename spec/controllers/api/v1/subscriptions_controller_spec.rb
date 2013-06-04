@@ -6,7 +6,7 @@ describe Api::V1::SubscriptionsController do
   let(:account) { create(:account) }
 
   before do
-    ApiKey.stub(:find_by_access_token).and_return(stub(:api_token, account: account))
+    grant_access
   end
 
   describe '#create' do

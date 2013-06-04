@@ -5,23 +5,18 @@ resource 'Subscriber' do
   header 'Accept', 'application/json'
   header 'Content-Type', 'application/json'
 
-  def authenticate
-    ApiKey.stub(:find_by_access_token)
-      .and_return(stub(:api_token, account: account))
-  end
-
   let(:account) { create(:account) }
 
   before do
     Timecop.freeze(2000, 1, 1)
-    authenticate
+    grant_access
   end
 
   after do
     Timecop.return
   end
 
-  get '/api/v1/subscribers' do
+  get "#{host}/api/v1/subscribers" do
     let!(:subscriber1) {
       create(:subscriber, id: 1, phone_number: '15555555555', account: account)
     }
@@ -50,7 +45,7 @@ resource 'Subscriber' do
     end
   end
 
-  get '/api/v1/subscribers/1' do
+  get "#{host}/api/v1/subscribers/1" do
     let!(:subscriber) { create(:subscriber, id: 1, account: account) }
     let(:body) { JSON.parse(response_body) }
 
@@ -66,7 +61,7 @@ resource 'Subscriber' do
     end
   end
 
-  get '/api/v1/subscribers/1/event_lists' do
+  get "#{host}/api/v1/subscribers/1/event_lists" do
     let!(:subscriber) { create(:subscriber, account: account, id: 1) }
     let!(:event_list1) { create(:event_list, account: account, id: 1) }
     let!(:event_list2) { create(:event_list, account: account, id: 2) }
@@ -104,7 +99,7 @@ resource 'Subscriber' do
     end
   end
 
-  get '/api/v1/subscribers/1/subscriptions' do
+  get "#{host}/api/v1/subscribers/1/subscriptions" do
     let!(:subscriber) { create(:subscriber, account: account, id: 1) }
     let!(:subscription1) {
       create(:subscription, account: account, subscriber: subscriber, id: 1)
@@ -142,7 +137,7 @@ resource 'Subscriber' do
     end
   end
 
-  post '/api/v1/subscribers/' do
+  post "#{host}/api/v1/subscribers/" do
     parameter :phone_number, '15555555555'
     required_parameters :phone_number
     scope_parameters :subscriber, [:phone_number]
@@ -164,7 +159,7 @@ resource 'Subscriber' do
     end
   end
 
-  put '/api/v1/subscribers/1' do
+  put "#{host}/api/v1/subscribers/1" do
     parameter :phone_number, '15555555555'
     required_parameters :phone_number
     scope_parameters :subscriber, [:phone_number]
@@ -185,7 +180,7 @@ resource 'Subscriber' do
     end
   end
 
-  delete '/api/v1/subscribers/1' do
+  delete "#{host}/api/v1/subscribers/1" do
     let!(:subscriber) { create(:subscriber, id: 1, account: account) }
     let(:raw_post) { params.to_json }
     let(:body) { JSON.parse(response_body) }

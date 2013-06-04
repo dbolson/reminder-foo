@@ -5,10 +5,6 @@ resource 'Event' do
   header 'Accept', 'application/json'
   header 'Content-Type', 'application/json'
 
-  def authenticate
-    ApiKey.stub(:find_by_access_token).and_return(stub(:api_token, account: account))
-  end
-
   def event
     @event ||= create(:event, :with_event_list, account: account, id: 1, name: 'event')
   end
@@ -17,7 +13,7 @@ resource 'Event' do
 
   before do
     Timecop.freeze(2000, 1, 1)
-    authenticate
+    grant_access
     event
   end
 
@@ -25,7 +21,7 @@ resource 'Event' do
     Timecop.return
   end
 
-  get '/api/v1/events/1/reminders ' do
+  get "#{host}/api/v1/events/1/reminders" do
     let!(:reminder1) {
       create(:reminder,
              event: event,
@@ -72,7 +68,7 @@ resource 'Event' do
     end
   end
 
-  get '/api/v1/events/1/reminders/1' do
+  get "#{host}/api/v1/events/1/reminders/1" do
     let!(:reminder) {
       create(:reminder,
              event: event,
@@ -99,7 +95,7 @@ resource 'Event' do
     end
   end
 
-  post '/api/v1/events/1/reminders' do
+  post "#{host}/api/v1/events/1/reminders" do
     parameter :reminded_at, 'Date event is due'
     required_parameters :reminded_at
     scope_parameters :reminder, [:reminded_at]
@@ -127,7 +123,7 @@ resource 'Event' do
     end
   end
 
-  delete '/api/v1/events/1/reminders/1' do
+  delete "#{host}/api/v1/events/1/reminders/1" do
     let!(:remidner) {
       create(:reminder,
              event: event,

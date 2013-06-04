@@ -5,29 +5,20 @@ resource 'Event List' do
   header 'Accept', 'application/json'
   header 'Content-Type', 'application/json'
 
-  def authenticate
-    ApiKey.stub(:find_by_access_token)
-      .and_return(stub(:api_token, account: account))
-  end
-
   let(:account) { create(:account) }
 
   before do
     Timecop.freeze(2000, 1, 1)
-    authenticate
+    grant_access
   end
 
   after do
     Timecop.return
   end
 
-  get '/api/v1/event_lists' do
-    let!(:event_list1) {
-      create(:event_list, id: 1, name: 'event list 1', account: account)
-    }
-    let!(:event_list2) {
-      create(:event_list, id: 2, name: 'event list 2', account: account)
-    }
+  get "#{host}/api/v1/event_lists" do
+    let!(:event_list1) { create(:event_list, id: 1, name: 'event list 1', account: account) }
+    let!(:event_list2) { create(:event_list, id: 2, name: 'event list 2', account: account) }
     let(:body) { JSON.parse(response_body) }
 
     example_request 'find all event lists' do
@@ -50,10 +41,8 @@ resource 'Event List' do
     end
   end
 
-  get '/api/v1/event_lists/1' do
-    let!(:event_list) {
-      create(:event_list, id: 1, name: 'event list', account: account)
-    }
+  get "#{host}/api/v1/event_lists/1" do
+    let!(:event_list) { create(:event_list, id: 1, name: 'event list', account: account) }
     let(:body) { JSON.parse(response_body) }
 
     example_request 'find an event list' do
@@ -68,7 +57,7 @@ resource 'Event List' do
     end
   end
 
-  get '/api/v1/event_lists/1/subscribers' do
+  get "#{host}/api/v1/event_lists/1/subscribers" do
     let!(:event_list) { create(:event_list, account: account, id: 1) }
     let!(:subscriber1) { create(:subscriber, account: account, id: 1) }
     let!(:subscriber2) { create(:subscriber, account: account, id: 2) }
@@ -106,7 +95,7 @@ resource 'Event List' do
     end
   end
 
-  get '/api/v1/event_lists/1/subscriptions' do
+  get "#{host}/api/v1/event_lists/1/subscriptions" do
     let!(:event_list) { create(:event_list, account: account, id: 1) }
     let!(:subscription1) {
       create(:subscription, account: account, event_list: event_list, id: 1)
@@ -144,7 +133,7 @@ resource 'Event List' do
     end
   end
 
-  post '/api/v1/event_lists/' do
+  post "#{host}/api/v1/event_lists" do
     parameter :name, 'Name of event list'
     required_parameters :name
     scope_parameters :event_list, [:name]
@@ -166,14 +155,12 @@ resource 'Event List' do
     end
   end
 
-  put '/api/v1/event_lists/1' do
+  put "#{host}/api/v1/event_lists/1" do
     parameter :name, 'Name of event list'
     required_parameters :name
     scope_parameters :event_list, [:name]
 
-    let!(:event_list) {
-      create(:event_list, account: account, id: 1)
-    }
+    let!(:event_list) { create(:event_list, account: account, id: 1) }
     let(:name) { 'new event list name' }
     let(:raw_post) { params.to_json }
     let(:body) { JSON.parse(response_body) }
@@ -189,10 +176,8 @@ resource 'Event List' do
     end
   end
 
-  delete '/api/v1/event_lists/1' do
-    let!(:event_list) {
-      create(:event_list, account: account, id: 1)
-    }
+  delete "#{host}/api/v1/event_lists/1" do
+    let!(:event_list) { create(:event_list, account: account, id: 1) }
     let(:raw_post) { params.to_json }
     let(:body) { JSON.parse(response_body) }
 

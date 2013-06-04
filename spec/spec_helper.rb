@@ -45,3 +45,20 @@ RSpec.configure do |config|
     config.keep_source_order = true
   end
 end
+
+def host
+  'https://localhost:3000'
+end
+
+def grant_access
+  authenticate
+  log_request
+end
+
+def authenticate
+  ApiKey.stub(:find_by_access_token).and_return(stub(:api_token, account: account))
+end
+
+def log_request
+  Request.stub(:log)
+end

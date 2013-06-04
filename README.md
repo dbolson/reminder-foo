@@ -73,3 +73,5 @@ curl -ikH "Accept: application/json" -X POST -d "reminder[reminded_at]=2013-07-0
 curl -ikH "Accept: application/json" -X PUT -d "reminder[reminded_at]=2013-07-02" https://localhost:3000/api/v1/events/3/reminders/3?access_token=ee8fb0303b4066b297266c1f06a24945
 # delete a reminder
 curl -ikH "Accept: application/json" -X DELETE https://localhost:3000/api/v1/events/3/reminders/4?access_token=ee8fb0303b4066b297266c1f06a24945
+
+thin start -p 3000 --ssl --ssl-verify --ssl-key-file ~/.ssl/server.key --ssl-cert-file ~/.ssl/server.crt

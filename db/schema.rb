@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521133745) do
+ActiveRecord::Schema.define(:version => 20130602183819) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",      :null => false
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(:version => 20130521133745) do
   end
 
   add_index "reminders", ["event_id"], :name => "index_reminders_on_event_id"
+
+  create_table "requests", :force => true do |t|
+    t.integer  "account_id", :null => false
+    t.integer  "api_key_id", :null => false
+    t.string   "ip_address", :null => false
+    t.string   "url",        :null => false
+    t.text     "params"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "subscribers", :force => true do |t|
     t.integer  "account_id",   :null => false

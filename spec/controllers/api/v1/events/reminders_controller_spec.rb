@@ -7,7 +7,7 @@ describe Api::V1::Events::RemindersController do
   let(:event) { create(:event, :with_event_list, account: account) }
 
   before do
-    ApiKey.stub(:find_by_access_token).and_return(stub(:api_token, account: account))
+    grant_access
   end
 
   describe '#create' do

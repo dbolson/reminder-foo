@@ -1,11 +1,11 @@
 FactoryGirl.define do
   factory :event do
-    sequence(:name ) { |n| "event  #{n}" }
+    sequence(:name) { |n| "event #{n}" }
     description { Faker::Lorem.sentence }
     due_at { 10.days.from_now }
 
     trait :with_account do
-      association :account, factory: :account
+      association :account
     end
 
     trait :with_event_list do

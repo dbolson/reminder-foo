@@ -5,26 +5,19 @@ resource 'Event' do
   header 'Accept', 'application/json'
   header 'Content-Type', 'application/json'
 
-  def authenticate
-    ApiKey.stub(:find_by_access_token)
-      .and_return(stub(:api_token, account: account))
-  end
-
   let(:account) { create(:account) }
-  let(:event_list) {
-    create(:event_list, account: account, id: 1, name: 'event list')
-  }
+  let(:event_list) { create(:event_list, account: account, id: 1, name: 'event list') }
 
   before do
     Timecop.freeze(2000, 1, 1)
-    authenticate
+    grant_access
   end
 
   after do
     Timecop.return
   end
 
-  get '/api/v1/events' do
+  get "#{host}/api/v1/events" do
     let!(:event1) {
       create(:event,
              event_list: event_list,
@@ -79,7 +72,7 @@ resource 'Event' do
     end
   end
 
-  get '/api/v1/events/1' do
+  get "#{host}/api/v1/events/1" do
     let!(:event) {
       create(:event,
              event_list: event_list,
@@ -110,7 +103,7 @@ resource 'Event' do
     end
   end
 
-  put '/api/v1/events/1' do
+  put "#{host}/api/v1/events/1" do
     parameter :name, 'Name of event'
     parameter :description, 'Description of event'
     parameter :due_at, 'Date event is due'
@@ -153,7 +146,7 @@ resource 'Event' do
     end
   end
 
-  delete '/api/v1/events/1' do
+  delete "#{host}/api/v1/events/1" do
     let!(:event) {
       create(:event,
              event_list: event_list,
