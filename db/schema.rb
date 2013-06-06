@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130602183819) do
+ActiveRecord::Schema.define(:version => 20130604145308) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",      :null => false
@@ -65,10 +65,25 @@ ActiveRecord::Schema.define(:version => 20130602183819) do
     t.integer  "api_key_id", :null => false
     t.string   "ip_address", :null => false
     t.string   "url",        :null => false
+    t.string   "http_verb",  :null => false
     t.text     "params"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "requests", ["account_id"], :name => "index_requests_on_account_id"
+  add_index "requests", ["api_key_id"], :name => "index_requests_on_api_key_id"
+
+  create_table "responses", :force => true do |t|
+    t.integer  "account_id",   :null => false
+    t.integer  "status",       :null => false
+    t.string   "content_type", :null => false
+    t.text     "body",         :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "responses", ["account_id"], :name => "index_responses_on_account_id"
 
   create_table "subscribers", :force => true do |t|
     t.integer  "account_id",   :null => false

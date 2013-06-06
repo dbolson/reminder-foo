@@ -5,7 +5,7 @@ class MockController < Api::ApiController; end
 describe Api::ApiController do
   controller(MockController) do
     def index
-      render nothing: true
+      render json: { rendered: 'text' }
     end
   end
 
@@ -17,15 +17,16 @@ describe Api::ApiController do
       before do
         ApiKey.stub(:find_by_access_token).with('valid token').and_return(api_key)
         controller.stub(:log_request)
+        controller.stub(:log_response)
       end
 
       it 'allows access' do
-        get :index, access_token: 'valid token'
+        get :index, access_token: 'valid token', format: :json
         expect(response.status).to eq(200)
       end
 
       it 'sets the current account' do
-        get :index, access_token: 'valid token'
+        get :index, access_token: 'valid token', format: :json
         expect(controller.send(:current_account)).to eq(account)
       end
     end
@@ -33,7 +34,7 @@ describe Api::ApiController do
     context 'with an invalid api key' do
       it 'prevents access' do
         ApiKey.stub(:find_by_access_token).with('invalid token').and_return(nil)
-        get :index, access_token: 'invalid token'
+        get :index, access_token: 'invalid token', format: :json
         expect(response.status).to eq 401
       end
     end
@@ -41,7 +42,7 @@ describe Api::ApiController do
     context 'without an api key' do
       it 'prevents access' do
         ApiKey.stub(:find_by_access_token).and_return(nil)
-        get :index
+        get :index, format: :json
         expect(response.status).to eq(401)
       end
     end
@@ -50,21 +51,40 @@ describe Api::ApiController do
   describe '#log_request' do
     before do
       ApiKey.stub(:find_by_access_token).with('valid token').and_return(api_key)
+      controller.stub(:log_response)
     end
 
     it 'logs the request' do
       Request.should_receive(:log).
         with(account: account,
-             url: 'http://test.host/anonymous?access_token=valid+token&param=my+param',
+             url: 'http://test.host/anonymous.json?access_token=valid+token&param=my+param',
+             http_verb: 'GET',
              ip_address: '0.0.0.0',
              params: {
                'access_token' => 'valid token',
+               'param' => 'my param',
+               'format' => 'json',
                'controller' => 'anonymous',
-               'action' => 'index',
-               'param' => 'my param'
+               'action' => 'index'
              })
 
-      get :index, access_token: 'valid token', 'param' => 'my param'
+      get :index, access_token: 'valid token', 'param' => 'my param', format: :json
+    end
+  end
+
+  describe '#log_response' do
+    before do
+      ApiKey.stub(:find_by_access_token).with('valid token').and_return(api_key)
+      Request.stub(:log)
+    end
+
+    it 'logs the response' do
+      Response.should_receive(:log).
+        with(account: account,
+             status: 200,
+             content_type: 'application/json',
+             body: { 'rendered' => 'text' })
+      get :index, access_token: 'valid token', format: :json
     end
   end
 end

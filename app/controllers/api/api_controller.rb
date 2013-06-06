@@ -2,6 +2,7 @@ module Api
   class ApiController < ApplicationController
     before_filter :restrict_access
     before_filter :log_request
+    after_filter :log_response
 
     private
 
@@ -17,12 +18,18 @@ module Api
     end
 
     def log_request
-      Request.log(
-        account: current_account,
-        url: request.original_url,
-        ip_address: request.remote_ip,
-        params: params
-      )
+      Request.log(account: current_account,
+                  url: request.original_url,
+                  http_verb: request.method,
+                  ip_address: request.remote_ip,
+                  params: params)
+    end
+
+    def log_response
+      Response.log(account: current_account,
+                   status: response.status,
+                   content_type: response.content_type.to_s,
+                   body: JSON.parse(response.body))
     end
   end
 end

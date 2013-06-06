@@ -11,6 +11,7 @@ describe Request do
     it { should validate_presence_of(:api_key) }
     it { should validate_presence_of(:ip_address) }
     it { should validate_presence_of(:url) }
+    it { should validate_presence_of(:http_verb) }
   end
 
   describe '#params' do
@@ -27,6 +28,7 @@ describe Request do
     let(:params) {{
       account: account,
       url: 'example.com?param=my+param',
+      http_verb: 'GET',
       ip_address: '0.0.0.0',
       params: {
         'controller' => 'resources',
@@ -46,6 +48,10 @@ describe Request do
 
     it 'logs the url' do
       expect(request.url).to eq('example.com?param=my+param')
+    end
+
+    it 'logs the http verb' do
+      expect(request.http_verb).to eq('GET')
     end
 
     it 'logs the ip address' do
