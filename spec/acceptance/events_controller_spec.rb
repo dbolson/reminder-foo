@@ -4,6 +4,7 @@ require 'rspec_api_documentation/dsl'
 resource 'Event' do
   header 'Accept', 'application/json'
   header 'Content-Type', 'application/json'
+  header 'Authorization', 'Basic'
 
   let(:account) { create(:account) }
   let(:event_list) { create(:event_list, account: account, id: 1, name: 'event list') }

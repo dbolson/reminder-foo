@@ -9,11 +9,13 @@ module Api
     attr_accessor :current_account
 
     def restrict_access
-      api_key = ApiKey.find_by_access_token(params[:access_token])
-      if api_key
-        @current_account = api_key.account
-      else
-        head :unauthorized
+      authenticate_or_request_with_http_basic do |token, _|
+        api_key = ApiKey.find_by_access_token(token)
+        if api_key
+          @current_account = api_key.account
+        else
+          head :unauthorized
+        end
       end
     end
 

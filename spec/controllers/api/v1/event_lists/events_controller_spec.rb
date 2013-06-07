@@ -7,6 +7,7 @@ describe Api::V1::EventLists::EventsController do
   let(:event_list) { create(:event_list, account: account) }
 
   before do
+    http_authorize
     grant_access
   end
 

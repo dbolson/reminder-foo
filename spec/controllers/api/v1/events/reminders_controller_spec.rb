@@ -7,6 +7,7 @@ describe Api::V1::Events::RemindersController do
   let(:event) { create(:event, :with_event_list, account: account) }
 
   before do
+    http_authorize
     grant_access
   end
 

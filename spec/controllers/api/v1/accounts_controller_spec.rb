@@ -6,6 +6,7 @@ describe Api::V1::AccountsController do
   let(:account) { create(:account) }
 
   before do
+    http_authorize
     grant_access
   end
 

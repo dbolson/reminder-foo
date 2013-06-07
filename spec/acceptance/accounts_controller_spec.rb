@@ -4,6 +4,7 @@ require 'rspec_api_documentation/dsl'
 resource 'Account' do
   header 'Accept', 'application/json'
   header 'Content-Type', 'application/json'
+  header 'Authorization', 'Basic'
 
   let(:account) { create(:account, id: 1) }
 
