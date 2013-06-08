@@ -6,6 +6,11 @@ class ErrorsController < ApplicationController
            status: :not_found
   end
 
+  def internal_server_error
+    render json: { errors: 'Internal server error. We have been notified of the problem.' },
+           status: :internal_server_error
+  end
+
   private
 
   def error_message

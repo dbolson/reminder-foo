@@ -8,14 +8,10 @@
 * https://github.com/applicake/doorkeeper
 
 ### REST Responses
-* SSL
 * https://github.com/rack/rack/blob/master/lib/rack/utils.rb#L453
 * https://dev.twitter.com/docs/error-codes-responses
 * http://stackoverflow.com/questions/7342851/catch-unknown-action-in-rails-3-for-custom-404
 * https://github.com/zipmark/rspec_api_documentation
-
-### Access Token
-* can use ActionController::HttpAuthentication::Token to pass in header
 
 ### A client can access:
 * a list of event lists @done
