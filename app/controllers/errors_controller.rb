@@ -1,13 +1,15 @@
 class ErrorsController < ApplicationController
-  respond_to :json, :xml
+  respond_to :json
 
   def not_found
-    render json: { errors: exception_message }, status: :not_found
+    render json: { errors: exception_message },
+           status: :not_found
   end
 
   def internal_server_error
     log_response
-    render json: response_body, status: :internal_server_error
+    render json: error_response_body,
+           status: :internal_server_error
   end
 
   private
@@ -20,7 +22,7 @@ class ErrorsController < ApplicationController
     Response.log(status: 500, content_type: 'application/json', body: response_body)
   end
 
-  def response_body
+  def error_response_body
     { errors: 'Internal server error. We have been notified of the problem.' }
   end
 end
