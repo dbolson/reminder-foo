@@ -2,7 +2,6 @@ RemindersApi::Application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       match 'accounts', to: 'accounts#show', via: :get
-      match 'accounts', to: 'accounts#update', via: :put
 
       resources :event_lists, except: [:new, :edit] do
         get :subscribers, on: :member
