@@ -3,11 +3,6 @@ class Response < ActiveRecord::Base
 
   serialize :body, JSON
 
-  attr_accessible :account,
-                  :status,
-                  :content_type,
-                  :body
-
   validates :account,
             :status,
             :content_type,

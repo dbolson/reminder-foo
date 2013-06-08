@@ -72,3 +72,5 @@ curl https://localhost:3000/api/v1/event_lists -ikH 'Authorization: Token token=
 curl https://localhost:3000/api/v1/events/3/reminders -ikH 'Authorization: Token token="ee8fb0303b4066b297266c1f06a24945"'
 
 curl -kiu ee8fb0303b4066b297266c1f06a24945: https://localhost:3000/api/v1/event_lists
+curl -kiu ee8fb0303b4066b297266c1f06a24945: -X PUT -d "event[name]=another name" https://localhost:3000/api/v1/events/3
+curl -kiu ee8fb0303b4066b297266c1f06a24945: -X PUT -d "event[name]=another name" -d "event[event_list_id]=4" https://localhost:3000/api/v1/events/3

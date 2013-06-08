@@ -4,8 +4,6 @@ class EventList < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   has_many :subscribers, through: :subscriptions
 
-  attr_accessible :name
-
   validates :name, presence: true
 
   scope :ordered, order('event_lists.created_at DESC')

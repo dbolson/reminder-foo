@@ -31,26 +31,4 @@ resource 'Account' do
       expect(status).to eq(200)
     end
   end
-
-  put "#{host}/api/v1/accounts" do
-    parameter :email, 'Email address of your account'
-    required_parameters :email
-    scope_parameters :account, [:email]
-
-    let(:email) { 'new-email@example.com' }
-
-    let(:raw_post) { params.to_json }
-    let(:body) { JSON.parse(response_body) }
-
-    example_request 'update your account' do
-      expect(body).to eq({
-        'id' => 1,
-        'email' => 'new-email@example.com',
-        'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z'
-      })
-
-      expect(status).to eq(200)
-    end
-  end
 end

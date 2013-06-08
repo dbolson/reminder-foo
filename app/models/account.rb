@@ -5,8 +5,6 @@ class Account < ActiveRecord::Base
   has_many :subscribers, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 
-  attr_accessible :email
-
   validates :email,
             presence: true,
             uniqueness: true,

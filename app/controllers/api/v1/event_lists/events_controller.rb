@@ -27,7 +27,7 @@ module Api
       def update
         @event = current_account.events.find(params[:id])
 
-        if @event.update_attributes(params[:event])
+        if @event.update_attributes(event_params)
           render 'update'
         else
           render 'update', status: :unprocessable_entity
@@ -45,6 +45,10 @@ module Api
       def create_params(event_list)
         params[:event] = {} if params[:event].blank?
         { account: current_account, event_list: event_list }.merge(params[:event])
+      end
+
+      def event_params
+        params.require(:event).permit(:name, :description, :due_at)
       end
     end
   end

@@ -1,8 +1,6 @@
 class ApiKey < ActiveRecord::Base
   belongs_to :account
 
-  attr_accessible :access_token
-
   validates :access_token,
             uniqueness: true
 

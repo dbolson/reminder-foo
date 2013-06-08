@@ -4,13 +4,6 @@ class Request < ActiveRecord::Base
 
   serialize :params, JSON
 
-  attr_accessible :account,
-                  :api_key,
-                  :ip_address,
-                  :url,
-                  :http_verb,
-                  :params
-
   validates :account,
             :api_key,
             :ip_address,

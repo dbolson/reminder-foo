@@ -16,7 +16,7 @@ module Api
       end
 
       def create
-        @reminder = @event.reminders.build(params[:reminder])
+        @reminder = @event.reminders.build(reminder_params)
 
         if @reminder.save
           render 'create', status: :created
@@ -28,7 +28,7 @@ module Api
       def update
         @reminder = @event.reminders.find(params[:id])
 
-        if @reminder.update_attributes(params[:reminder])
+        if @reminder.update_attributes(reminder_params)
           render 'update'
         else
           render 'update', status: :unprocessable_entity
@@ -45,6 +45,10 @@ module Api
 
       def find_event
         @event = current_account.events.find(params[:event_id])
+      end
+
+      def reminder_params
+        params.require(:reminder).permit(:reminded_at)
       end
     end
   end

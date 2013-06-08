@@ -20,7 +20,7 @@ module Api
       end
 
       def create
-        @subscriber = current_account.subscribers.build(params[:subscriber])
+        @subscriber = current_account.subscribers.build(subscriber_params)
 
         if @subscriber.save
           render 'create', status: :created
@@ -32,7 +32,7 @@ module Api
       def update
         @subscriber = current_account.subscribers.find(params[:id])
 
-        if @subscriber.update_attributes(params[:subscriber])
+        if @subscriber.update_attributes(subscriber_params)
           render 'update'
         else
           render 'update', status: :unprocessable_entity
@@ -42,6 +42,12 @@ module Api
       def destroy
         @subscriber = current_account.subscribers.find(params[:id])
         @subscriber.destroy
+      end
+
+      private
+
+      def subscriber_params
+        params.require(:subscriber).permit(:phone_number)
       end
     end
   end

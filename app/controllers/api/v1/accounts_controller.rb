@@ -6,16 +6,6 @@ module Api
       def show
         @account = @current_account
       end
-
-      def update
-        @account = @current_account
-
-        if @account.update_attributes(params[:account])
-          render 'update'
-        else
-          render 'update', status: :unprocessable_entity
-        end
-      end
     end
   end
 end

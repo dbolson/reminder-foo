@@ -5,8 +5,6 @@ class Reminder < ActiveRecord::Base
             presence: true,
             uniqueness: { scope: :event_id }
 
-  attr_accessible :reminded_at
-
   validate :not_in_past
   validate :with_correct_format
 

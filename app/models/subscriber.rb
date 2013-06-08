@@ -3,8 +3,6 @@ class Subscriber < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   has_many :event_lists, through: :subscriptions
 
-  attr_accessible :phone_number
-
   validates :phone_number,
             presence: true,
             uniqueness: true

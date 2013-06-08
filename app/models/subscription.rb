@@ -3,8 +3,6 @@ class Subscription < ActiveRecord::Base
   belongs_to :event_list
   belongs_to :subscriber
 
-  attr_accessible :event_list, :subscriber
-
   validates :event_list_id,
             :subscriber_id,
             presence: true
