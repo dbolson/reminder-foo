@@ -23,7 +23,7 @@ module Api
         @event_list = current_account.event_lists.new(event_list_params)
 
         if @event_list.save
-          render 'create', status: :created
+          render 'create', status: :created, location: api_v1_event_list_url(@event_list)
         else
           render 'create', status: :unprocessable_entity
         end

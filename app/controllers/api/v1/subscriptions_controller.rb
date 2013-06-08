@@ -8,7 +8,7 @@ module Api
                                                         subscription: params[:subscription])
 
         if @subscription.persisted?
-          render 'create', status: :created
+          render 'create', status: :created, location: api_v1_subscription_url(@subscription)
         else
           render 'create', status: :unprocessable_entity
         end

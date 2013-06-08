@@ -23,7 +23,7 @@ module Api
         @subscriber = current_account.subscribers.build(subscriber_params)
 
         if @subscriber.save
-          render 'create', status: :created
+          render 'create', status: :created, location: api_v1_subscriber_url(@subscriber)
         else
           render 'create', status: :unprocessable_entity
         end

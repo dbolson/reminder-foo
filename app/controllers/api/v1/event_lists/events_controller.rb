@@ -18,7 +18,7 @@ module Api
         @event = Services::EventCreating.create(create_params(@event_list))
 
         if @event.persisted?
-          render 'create', status: :created
+          render 'create', status: :created, location: api_v1_event_url(@event)
         else
           render 'create', status: :unprocessable_entity
         end

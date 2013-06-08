@@ -19,7 +19,7 @@ module Api
         @reminder = @event.reminders.build(reminder_params)
 
         if @reminder.save
-          render 'create', status: :created
+          render 'create', status: :created, location: api_v1_event_reminder_url(@event, @reminder)
         else
           render 'create', status: :unprocessable_entity
         end
