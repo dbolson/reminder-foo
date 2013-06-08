@@ -8,7 +8,6 @@ describe Response do
   end
 
   describe 'with validations' do
-    it { should validate_presence_of(:account) }
     it { should validate_presence_of(:status) }
     it { should validate_presence_of(:content_type) }
     it { should validate_presence_of(:body) }
@@ -23,7 +22,6 @@ describe Response do
 
   describe '.log' do
     let(:account) { build_stubbed(:account) }
-
     let(:params) {{
       account: account,
       status: 200,
@@ -32,8 +30,20 @@ describe Response do
     }}
     let(:response) { Response.log(params) }
 
-    it 'logs the account' do
-      expect(response.account).to eq(account)
+    context 'with an account' do
+      it 'logs the account' do
+        expect(response.account).to eq(account)
+      end
+    end
+
+    context 'with no account' do
+      before do
+        params.delete_if { |param| param == :account }
+      end
+
+      it 'does not log the account' do
+        expect(response.account).to be_nil
+      end
     end
 
     it 'logs the status' do

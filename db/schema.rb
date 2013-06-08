@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20130604145308) do
   add_index "requests", ["api_key_id"], :name => "index_requests_on_api_key_id"
 
   create_table "responses", :force => true do |t|
-    t.integer  "account_id",   :null => false
+    t.integer  "account_id"
     t.integer  "status",       :null => false
     t.string   "content_type", :null => false
     t.text     "body",         :null => false

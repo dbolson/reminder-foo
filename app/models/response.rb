@@ -3,18 +3,12 @@ class Response < ActiveRecord::Base
 
   serialize :body, JSON
 
-  validates :account,
-            :status,
+  validates :status,
             :content_type,
             :body,
             presence: true
 
   def self.log(params)
-    account = params.delete(:account)
-
-    response = new(params)
-    response.account = account
-    response.save!
-    response
+    create(params)
   end
 end
