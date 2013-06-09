@@ -42,6 +42,7 @@ module Api
       def destroy
         @event_list = current_account.event_lists.find(params[:id])
         @event_list.destroy
+        render nothing: true, status: :no_content
       end
 
       private

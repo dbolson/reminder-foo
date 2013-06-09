@@ -59,28 +59,9 @@ resource 'Subscription' do
   delete "#{host}/api/v1/subscriptions/1" do
     let!(:subscription) { create(:subscription, account: account, id: 1) }
     let(:raw_post) { params.to_json }
-    let(:body) { JSON.parse(response_body) }
 
     example_request 'delete a subscription' do
-      expect(body).to eq({
-        'id' => 1,
-        'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z',
-        'event_list' => {
-          'id' => subscription.event_list_id,
-          'name' => subscription.event_list.name,
-          'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
-        },
-        'subscriber' => {
-          'id' => subscription.subscriber_id,
-          'phone_number' => subscription.subscriber.phone_number,
-          'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z'
-        }
-      })
-
-      expect(status).to eq(200)
+      expect(status).to eq(204)
     end
   end
 end

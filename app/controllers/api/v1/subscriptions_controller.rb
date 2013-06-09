@@ -17,6 +17,7 @@ module Api
       def destroy
         @subscription = current_account.subscriptions.find(params[:id])
         @subscription.destroy
+        render nothing: true, status: :no_content
       end
     end
   end

@@ -38,7 +38,7 @@ module Api
       def destroy
         @reminder = @event.reminders.find(params[:id])
         @reminder.destroy
-        render 'destroy'
+        render nothing: true, status: :no_content
       end
 
       private

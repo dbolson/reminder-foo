@@ -180,17 +180,9 @@ resource 'Event List' do
   delete "#{host}/api/v1/event_lists/1" do
     let!(:event_list) { create(:event_list, account: account, id: 1) }
     let(:raw_post) { params.to_json }
-    let(:body) { JSON.parse(response_body) }
 
     example_request 'delete an event list' do
-      expect(body).to eq({
-        'id' => 1,
-        'name' => event_list.name,
-        'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z'
-      })
-
-      expect(status).to eq(200)
+      expect(status).to eq(204)
     end
   end
 end

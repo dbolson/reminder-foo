@@ -125,30 +125,16 @@ resource 'Event - Reminder' do
   end
 
   delete "#{host}/api/v1/events/1/reminders/1" do
-    let!(:remidner) {
+    let!(:reminder) {
       create(:reminder,
              event: event,
              id: 1,
              reminded_at: 11.days.from_now)
     }
     let(:raw_post) { params.to_json }
-    let(:body) { JSON.parse(response_body) }
 
     example_request 'deleting an event' do
-      expect(body).to eq({
-        'id' => 1,
-        'reminded_at' => '2000-01-12T00:00:00Z',
-        'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z',
-        'event' => {
-          'id' => 1,
-          'name' => 'event',
-          'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z',
-        }
-      })
-
-      expect(status).to eq(200)
+      expect(status).to eq(204)
     end
   end
 end

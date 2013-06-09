@@ -31,7 +31,7 @@ module Api
       Response.log(account: current_account,
                    status: response.status,
                    content_type: response.content_type.to_s,
-                   body: JSON.parse(response.body))
+                   body: response.body)
     end
   end
 end

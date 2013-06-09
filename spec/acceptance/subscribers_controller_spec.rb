@@ -184,17 +184,9 @@ resource 'Subscriber' do
   delete "#{host}/api/v1/subscribers/1" do
     let!(:subscriber) { create(:subscriber, id: 1, account: account) }
     let(:raw_post) { params.to_json }
-    let(:body) { JSON.parse(response_body) }
 
     example_request 'delete a subscriber' do
-      expect(body).to eq({
-        'id' => 1,
-        'phone_number' => subscriber.phone_number,
-        'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z'
-      })
-
-      expect(status).to eq(200)
+      expect(status).to eq(204)
     end
   end
 end

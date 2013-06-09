@@ -157,25 +157,9 @@ resource 'Event' do
              description: 'event description')
     }
     let(:raw_post) { params.to_json }
-    let(:body) { JSON.parse(response_body) }
 
     example_request 'deleting an event' do
-      expect(body).to eq({
-        'id' => 1,
-        'name' => 'event name',
-        'description' => 'event description',
-        'due_at' => '2000-01-11T00:00:00Z',
-        'created_at' => '2000-01-01T00:00:00Z',
-        'updated_at' => '2000-01-01T00:00:00Z',
-        'event_list' => {
-          'id' => 1,
-          'name' => 'event list',
-          'created_at' => '2000-01-01T00:00:00Z',
-          'updated_at' => '2000-01-01T00:00:00Z',
-        }
-      })
-
-      expect(status).to eq(200)
+      expect(status).to eq(204)
     end
   end
 end

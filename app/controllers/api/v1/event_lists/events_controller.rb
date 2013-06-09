@@ -37,7 +37,7 @@ module Api
       def destroy
         @event = current_account.events.find(params[:id])
         @event.destroy
-        render 'api/v1/events/destroy'
+        render nothing: true, status: :no_content
       end
 
       private

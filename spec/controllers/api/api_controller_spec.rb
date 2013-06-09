@@ -93,7 +93,7 @@ describe Api::ApiController do
         with(account: account,
              status: 200,
              content_type: 'application/json',
-             body: { 'rendered' => 'text' })
+             body: '{"rendered":"text"}')
       get :index, format: :json
     end
   end
