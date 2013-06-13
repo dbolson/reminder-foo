@@ -1,3 +1,67 @@
+// header
+
+// layout
+#page-header {
+  border-bottom: 1px solid #000;
+  height: 50px;
+  width: 100%;
+
+  .brand {
+    width: 100px;
+  }
+}
+
+#notifications {
+  div {
+    border: 1px solid #000;
+    margin: 15px 0;
+    padding: 10px;
+  }
+
+  .site {
+  }
+
+  .success,
+  .warning,
+  .error {
+  }
+}
+
+// elements
+body {
+  margin: 0 auto;
+  width: 960px;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 table caption {
   display: none;
+}
+
+// navigation component
+nav {
+  float: left;
+  height: inherit;
+
+  ul {
+    float: left;
+    height: inherit;
+    list-style-type: none;
+
+    li {
+      float: left;
+      margin-right: 20px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
 }
