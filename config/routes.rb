@@ -1,4 +1,6 @@
 RemindersApi::Application.routes.draw do
+  root to: 'pages#lists'
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       match 'accounts', to: 'accounts#show', via: :get
@@ -23,7 +25,9 @@ RemindersApi::Application.routes.draw do
     end
   end
 
-  match '/home', to: 'pages#home'
+  match '/lists', to: 'pages#lists'
+  match '/api', to: 'pages#api'
+  match '/account', to: 'pages#account'
 
   match '/docs' => Raddocs::App, anchor: false
   match '/404', to: 'errors#not_found'

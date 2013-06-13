@@ -1,13 +1,13 @@
 !!! 5
 %html(lang='en')
-%head
-  %title Reminders API
-  = stylesheet_link_tag 'application'
-  = javascript_include_tag 'application'
-  = csrf_meta_tags
+  %head
+    %title Reminders API
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
 
-%body
-  = render 'layouts/header'
-  #content
-    = yield
-    = render 'layouts/footer'
+  %body
+    = render 'layouts/header'
+    #container
+      = yield
+      = render 'layouts/footer'

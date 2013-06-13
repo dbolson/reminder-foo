@@ -1,4 +1,10 @@
 class PagesController < ApplicationController
-  def home
+  def lists
+  end
+
+  def api
+  end
+
+  def account
   end
 end

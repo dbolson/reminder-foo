@@ -1,12 +1,12 @@
 %header(role='banner')
   %nav
-    = link_to 'logo', home_path
+    = link_to 'logo', root_path
 
   %nav(role='navigation')
     %ul
       %li.active
-        = link_to 'Lists', '#'
-      %li= link_to 'API', '#'
-      %li= link_to 'Docs', '#'
-      %li= link_to 'Account', '#'
+        = link_to 'Lists', lists_path
+      %li= link_to 'API', api_path
+      %li= link_to 'Docs', docs_path
+      %li= link_to 'Account', account_path
       %li= link_to 'Log Out', '#'
