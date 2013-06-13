@@ -23,6 +23,8 @@ RemindersApi::Application.routes.draw do
     end
   end
 
+  match '/home', to: 'pages#home'
+
   match '/docs' => Raddocs::App, anchor: false
   match '/404', to: 'errors#not_found'
   match '/500', to: 'errors#internal_server_error'
