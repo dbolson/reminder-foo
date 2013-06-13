@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'awesome_print', '~> 1.1.0'
+gem 'haml-rails', '~> 0.4'
 gem 'jquery-rails', '~> 2.2.1'
 gem 'oj', '~> 2.0.10'
 gem 'pg', '~> 0.14.1'
