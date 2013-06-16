@@ -1,39 +1,98 @@
+// http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+// variables
+// https://kuler.adobe.com/Fall-Grass-color-theme-2487072/edit/?copy=true&base=2&rule=Custom&selected=1&name=Copy%20of%20Fall%20Grass&mode=rgb&rgbvalues=0.14901960784313725,0.3333333333333333,0.45098039215686275,0.2196078431372549,0.42745098039215684,0.45098039215686275,0.5058823529411764,0.6509803921568628,0.5411764705882353,0.6235294117647059,0.7490196078431373,0.5607843137254902,0.8313725490196079,0.8509803921568627,0.6901960784313725
+// https://kuler.adobe.com/TickTack-color-theme-2458657/edit/?copy=true&base=0&rule=Custom&selected=0&name=Copy%20of%20TickTack&mode=rgb&rgbvalues=0.8705882352941177,0.33725490196078434,0.0196078431372549,0.9686274509803922,0.6274509803921569,0.20784313725490197,0.6941176470588235,0.8705882352941177,0.7098039215686275,0.9372549019607843,0.9254901960784314,0.792156862745098,0.396078431372549,0.6705882352941176,0.6509803921568628
+
+$background-color: #ecf0f1;
+$warning-color: #e74c3c;
+$success-color: #82bf56;
+$info-color: #f7a035;
+
+$darkest-color: #2c3e50;
+$lightest-color: #3498db;
+$light-color: #2980b9;
+
+$default-color: #4b4b4b;
+$white: #fff;
+$border-color: $light-color;
+$link-color: #de5605;
+
 // header
 
 // layout
 #page-header {
-  border-bottom: 1px solid #000;
+  background-color: $lightest-color;
   height: 50px;
-  width: 100%;
 
   .brand {
     width: 100px;
+
+    a {
+      padding: 0;
+
+      &:hover {
+        background-color: $lightest-color;
+      }
+    }
+  }
+
+  li {
+    height: inherit;
+  }
+
+  li.active {
+    background-color: $darkest-color;
+  }
+
+  a {
+    color: $background-color;
+    display: block;
+    height: inherit;
+    padding: 20px 10px 0 10px;
+
+    &:hover {
+      background-color: $darkest-color;
+      text-decoration: none;
+    }
   }
 }
 
 #notifications {
   div {
-    border: 1px solid #000;
+    color: $background-color;
     margin: 15px 0;
     padding: 10px;
   }
 
   .site {
+    background-color: $warning-color;
   }
 
-  .success,
-  .warning,
+  .success {
+    background-color: $success-color;
+  }
+
+  .info {
+    background-color: $info-color;
+  }
+
   .error {
+    background-color: $warning-color;
   }
 }
 
 // elements
 body {
+  background-color: $background-color;
+  color: $default-color;
   margin: 0 auto;
   width: 960px;
 }
 
 a {
+  color: $light-color;
   text-decoration: none;
 
   &:hover {
@@ -54,14 +113,37 @@ nav {
     float: left;
     height: inherit;
     list-style-type: none;
+    margin: 0;
+    padding-left: 0;
 
     li {
       float: left;
-      margin-right: 20px;
+      margin-right: 5px;
 
       &:last-child {
         margin-right: 0;
       }
     }
+  }
+}
+
+#content {
+  clear: left;
+  padding: 20px 0;
+}
+
+table {
+  width: 100%;
+
+  th,
+  td {
+    padding: 10px 10px 10px 0;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  td {
   }
 }
