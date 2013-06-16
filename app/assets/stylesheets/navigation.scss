@@ -1,0 +1,21 @@
+nav {
+  float: left;
+  height: inherit;
+
+  ul {
+    float: left;
+    height: inherit;
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+
+    li {
+      float: left;
+      margin-right: 5px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

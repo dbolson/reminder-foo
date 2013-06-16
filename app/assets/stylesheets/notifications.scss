@@ -1,0 +1,26 @@
+@import "colors";
+
+#notifications {
+  div {
+    color: $background-color;
+    margin: 15px 0;
+    padding: 10px;
+  }
+
+  .site {
+    background-color: $warning-color;
+  }
+
+  .success {
+    background-color: $success-color;
+  }
+
+  .info {
+    background-color: $info-color;
+  }
+
+  .error {
+    background-color: $warning-color;
+  }
+}
+
