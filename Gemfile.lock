@@ -129,7 +129,7 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
-    rails_best_practices (1.13.6)
+    rails_best_practices (1.13.7)
       activesupport
       awesome_print
       code_analyzer
