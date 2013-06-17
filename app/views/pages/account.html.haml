@@ -1,14 +1,15 @@
-%h1 Account
+#main
+  %h1 Account
 
-%nav(role='navigation')
-  %ul
-    %li.active= link_to 'Foo', '#'
-    %li= link_to 'Bar', '#'
+  %nav(role='navigation')
+    %ul
+      %li.active= link_to 'Foo', '#'
+      %li= link_to 'Bar', '#'
 
-#content
-  %form
-    %label(for='email') Email:
-    %input(type='text' id='email')
+  #content
+    %form
+      %label(for='email') Email:
+      %input(type='text' id='email')
 
-    %div
-      %input(type='submit' value='Update')
+      %div
+        %input(type='submit' value='Update')
