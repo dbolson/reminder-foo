@@ -20,11 +20,35 @@ nav {
   }
 }
 
+@mixin tabbed($radius) {
+  border-top-right-radius: $radius;
+  border-top-left-radius: $radius;
+}
+
 nav#subnav {
   ul {
   }
 
   li {
+    background-color: $light-color;
+    @include tabbed(6px);
+
+    &.active {
+      background-color: $darkest-color;
+    }
+
+    a {
+      @include tabbed(6px);
+      color: $white;
+      display: block;
+      height: inherit;
+      padding: $default-spacing - 10;
+
+      &:hover {
+        background-color: $darkest-color;
+        text-decoration: none;
+      }
+    }
   }
 
   li.active {
