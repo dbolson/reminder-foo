@@ -1,0 +1,60 @@
+#color-scheme {
+  margin: $default-spacing 0;
+
+  div {
+    border: 1px solid #000;
+    margin: $default-spacing 0;
+    padding: $default-spacing;
+  }
+
+  .background-color {
+    background-color: $background-color;
+  }
+
+  .warning-color {
+    background-color: $warning-color;
+  }
+
+  .success-color {
+    background-color: $success-color;
+  }
+
+  .info-color {
+    background-color: $info-color;
+  }
+
+  .darkest-color {
+    background-color: $darkest-color;
+    color: $white;
+  }
+
+  .lightest-color {
+    background-color: $lightest-color;
+    color: $white;
+  }
+
+  .light-color {
+    background-color: $light-color;
+    color: $white;
+  }
+
+  .default-color {
+    background-color: $default-color;
+    color: $white;
+  }
+
+  .border-color {
+    background-color: $border-color;
+    color: $white;
+  }
+
+  .link-color {
+    background-color: $link-color;
+    color: $white;
+  }
+
+  .button-color {
+    background-color: $button-color;
+    color: $white;
+  }
+}
