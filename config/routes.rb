@@ -28,6 +28,7 @@ RemindersApi::Application.routes.draw do
   match '/lists', to: 'pages#lists'
   match '/api', to: 'pages#api'
   match '/account', to: 'pages#account'
+  match '/sign_in', to: 'pages#sign_in'
 
   match '/docs' => Raddocs::App, anchor: false
   match '/404', to: 'errors#not_found'

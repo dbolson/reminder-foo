@@ -1,0 +1,18 @@
+#main
+  %h1 Sign In
+
+  #content
+    %fieldset
+      %legend Enter your credentials
+
+      %ol
+        %li
+          %label(for='email') Email
+          %input(type='text' id='email')
+        %li
+          %label(for='password') Password
+          %input(type='password' id='password')
+          .field-note= link_to 'Forgot your password?', '#'
+
+    .form-actions
+      %input(type='submit' value='Sign In' class='button primary')
