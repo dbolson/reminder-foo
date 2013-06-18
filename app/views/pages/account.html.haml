@@ -1,15 +1,25 @@
 #main
   %h1 Account
 
-  %nav(role='navigation')
+  %nav#subnav(role='navigation')
     %ul
       %li.active= link_to 'Foo', '#'
       %li= link_to 'Bar', '#'
 
   #content
-    %form
-      %label(for='email') Email:
-      %input(type='text' id='email')
+    %fieldset
+      %legend Your Account
 
-      %div
-        %input(type='submit' value='Update')
+      %ol
+        %li
+          %label(for='email') Email
+          %input(type='text' id='email')
+        %li
+          %label(for='something-else') Something Else
+          %input(type='text' id='something-else')
+        %li
+          %label(for='another') Comments
+          %textarea(id='another')
+
+    %div
+      %input(type='submit' value='Update' class='button primary')
