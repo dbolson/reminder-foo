@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V1::EventLists::EventsController do
+describe API::V1::EventLists::EventsController do
   render_views
 
   let(:account) { create(:account) }

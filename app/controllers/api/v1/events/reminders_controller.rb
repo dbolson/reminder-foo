@@ -1,6 +1,6 @@
-module Api
+module API
   module V1
-    class Events::RemindersController < Api::ApiController
+    class Events::RemindersController < API::APIController
       before_filter :find_event
 
       respond_to :json, :xml

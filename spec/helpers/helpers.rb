@@ -5,7 +5,7 @@ module AuthenticationHelpers
   end
 
   def authenticate
-    ApiKey.stub(:find_by_access_token).and_return(stub(:api_token, account: account))
+    APIKey.stub(:find_by_access_token).and_return(stub(:api_token, account: account))
   end
 
   def stub_logging

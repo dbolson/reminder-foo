@@ -1,6 +1,6 @@
-module Api
+module API
   module V1
-    class SubscriptionsController < Api::ApiController
+    class SubscriptionsController < API::APIController
       respond_to :json, :xml
 
       def create

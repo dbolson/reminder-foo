@@ -1,4 +1,4 @@
-class ApiKey < ActiveRecord::Base
+class APIKey < ActiveRecord::Base
   belongs_to :account
 
   validates :access_token,

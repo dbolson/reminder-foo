@@ -1,5 +1,5 @@
-module Api
-  class ApiController < ApplicationController
+module API
+  class APIController < ApplicationController
     before_filter :restrict_access
     before_filter :log_request
     after_filter :log_response
@@ -10,7 +10,7 @@ module Api
 
     def restrict_access
       authenticate_or_request_with_http_basic do |token, _|
-        api_key = ApiKey.find_by_access_token(token)
+        api_key = APIKey.find_by_access_token(token)
         if api_key
           @current_account = api_key.account
         else

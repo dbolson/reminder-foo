@@ -1,6 +1,6 @@
-module Api
+module API
   module V1
-    class AccountsController < Api::ApiController
+    class AccountsController < API::APIController
       respond_to :json, :xml
 
       def show

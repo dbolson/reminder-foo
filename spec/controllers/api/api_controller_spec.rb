@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-class MockController < Api::ApiController; end
+class MockController < API::APIController; end
 
-describe Api::ApiController do
+describe API::APIController do
   controller(MockController) do
     def index
       render json: { rendered: 'text' }
@@ -16,7 +16,7 @@ describe Api::ApiController do
     context 'with a valid api key' do
       before do
         request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('valid token', nil)
-        ApiKey.stub(:find_by_access_token).with('valid token').and_return(api_key)
+        APIKey.stub(:find_by_access_token).with('valid token').and_return(api_key)
         controller.stub(:log_request)
         controller.stub(:log_response)
       end
@@ -38,7 +38,7 @@ describe Api::ApiController do
       end
 
       it 'prevents access' do
-        ApiKey.stub(:find_by_access_token).with('invalid token').and_return(nil)
+        APIKey.stub(:find_by_access_token).with('invalid token').and_return(nil)
         get :index, format: :json
         expect(response.status).to eq(401)
       end
@@ -50,7 +50,7 @@ describe Api::ApiController do
       end
 
       it 'prevents access' do
-        ApiKey.stub(:find_by_access_token).and_return(nil)
+        APIKey.stub(:find_by_access_token).and_return(nil)
         get :index, format: :json
         expect(response.status).to eq(401)
       end
@@ -60,7 +60,7 @@ describe Api::ApiController do
   describe '#log_request' do
     before do
       request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('valid token', nil)
-      ApiKey.stub(:find_by_access_token).with('valid token').and_return(api_key)
+      APIKey.stub(:find_by_access_token).with('valid token').and_return(api_key)
       controller.stub(:log_response)
     end
 
@@ -84,7 +84,7 @@ describe Api::ApiController do
   describe '#log_response' do
     before do
       request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('valid token', nil)
-      ApiKey.stub(:find_by_access_token).with('valid token').and_return(api_key)
+      APIKey.stub(:find_by_access_token).with('valid token').and_return(api_key)
       Request.stub(:log)
     end
 

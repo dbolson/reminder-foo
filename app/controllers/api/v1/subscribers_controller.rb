@@ -1,6 +1,6 @@
-module Api
+module API
   module V1
-    class SubscribersController < Api::ApiController
+    class SubscribersController < API::APIController
       respond_to :json, :xml
 
       def event_lists

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ApiKey do
+describe APIKey do
   describe 'with relationships' do
     it { should belong_to(:account) }
   end
