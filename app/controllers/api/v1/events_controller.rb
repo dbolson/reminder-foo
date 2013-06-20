@@ -1,8 +1,6 @@
 module API
   module V1
     class EventsController < API::APIController
-      respond_to :json, :xml
-
       def index
         @events = current_account.events.all
       end

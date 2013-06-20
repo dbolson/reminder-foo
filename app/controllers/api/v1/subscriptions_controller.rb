@@ -1,8 +1,6 @@
 module API
   module V1
     class SubscriptionsController < API::APIController
-      respond_to :json, :xml
-
       def create
         @subscription = Subscription.create_for_account(account: current_account,
                                                         subscription: params[:subscription])

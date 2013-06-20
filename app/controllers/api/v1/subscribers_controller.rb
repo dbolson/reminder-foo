@@ -1,8 +1,6 @@
 module API
   module V1
     class SubscribersController < API::APIController
-      respond_to :json, :xml
-
       def event_lists
         @subscriber = current_account.subscribers.find(params[:id])
       end

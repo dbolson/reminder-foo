@@ -3,8 +3,6 @@ module API
     class Events::RemindersController < API::APIController
       before_filter :find_event
 
-      respond_to :json, :xml
-
       def index
         @reminders = @event.reminders.all
         render 'index'

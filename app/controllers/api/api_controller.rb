@@ -4,6 +4,8 @@ module API
     before_filter :log_request
     after_filter :log_response
 
+    respond_to :json
+
     private
 
     attr_accessor :current_account
