@@ -33,7 +33,7 @@
 
       $(function () {
         window.swaggerUi = new SwaggerUi({
-          discoveryUrl: "https://#{request.host}:#{request.port}/api/resources.json",
+          discoveryUrl: "#{request.protocol}#{request.host}:#{request.port}/api/resources.json",
           apiKey:"",
           dom_id:"swagger-ui-container",
           supportHeaderParams: false,
