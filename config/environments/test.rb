@@ -35,5 +35,7 @@ RemindersApi::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
+  config.base_path = 'https://test.host'
+
   config.force_ssl = true
 end

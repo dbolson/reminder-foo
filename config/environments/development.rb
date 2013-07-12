@@ -35,5 +35,7 @@ RemindersApi::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+  config.base_path = 'https://localhost:3000'
+
   config.force_ssl = true
 end

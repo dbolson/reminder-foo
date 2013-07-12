@@ -15,6 +15,6 @@ module API
                               api_version: 'v1',
                               markdown: true,
                               hide_documentation_path: true,
-                              base_path: 'https://localhost:3000/api'
+                              base_path: "#{Rails.application.config.base_path}/api"
   end
 end
