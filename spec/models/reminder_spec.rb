@@ -18,8 +18,8 @@ describe Reminder do
     it { should allow_value('2000-01-02 00:01:01').for(:reminded_at) }
 
     it 'must have a unique reminded at date for an event' do
-      existing = create(:reminder_with_event)
-      new_record = build(:reminder_with_event,
+      existing = create(:reminder, :with_event)
+      new_record = build(:reminder, :with_event,
                          event: existing.event,
                          reminded_at: existing.reminded_at)
       new_record.should_not be_valid

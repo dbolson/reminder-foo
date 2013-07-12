@@ -2,7 +2,6 @@
 ENV["RAILS_ENV"] = 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require File.expand_path('spec/helpers/helpers')
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -38,14 +37,5 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
 
-  config.include AuthenticationHelpers
-  config.extend DescribeHelpers
-
-  RspecApiDocumentation.configure do |config|
-    config.api_name = 'Reminder API Documentation'
-    config.docs_dir = Rails.root.join('public', 'docs')
-    config.format = [:json, :html]
-    config.url_prefix = '/docs'
-    config.keep_source_order = true
-  end
+  config.include SpecHelpers
 end

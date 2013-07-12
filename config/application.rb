@@ -15,6 +15,9 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+module API
+end
+
 module RemindersApi
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -23,6 +26,7 @@ module RemindersApi
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/app)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -67,10 +71,5 @@ module RemindersApi
 
     # Set the exceptions application to the router
     config.exceptions_app = self.routes
-
-    config.force_ssl = true
-
-    config.middleware.use Rack::ContentLength
-    config.middleware.use Raddocs::Middleware
   end
 end

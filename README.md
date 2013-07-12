@@ -3,7 +3,6 @@
 ### References
 * https://app.zencoder.com/docs/api
 * http://engineering.gomiso.com/2011/06/27/building-a-platform-api-on-rails/
-* https://github.com/ccocchi/rabl-rails
 * http://blogs.plexibus.com/2009/01/15/rest-esting-with-curl/
 * https://github.com/applicake/doorkeeper
 
@@ -11,7 +10,6 @@
 * https://github.com/rack/rack/blob/master/lib/rack/utils.rb#L453
 * https://dev.twitter.com/docs/error-codes-responses
 * http://stackoverflow.com/questions/7342851/catch-unknown-action-in-rails-3-for-custom-404
-* https://github.com/zipmark/rspec_api_documentation
 
 ### A client can access:
 * a list of event lists @done
@@ -21,6 +19,58 @@
   * scoped to a reminder list @done
 * a list of reminder dates @done
   * scoped to events @done
+
+# TODO
+
+https://github.com/cutalion/grape-api-example
+http://petstore.swagger.wordnik.com/
+
+* set up namespace @done
+* set versioning @done
+* set up representation of event list @done
+  * roar gem @done
+  * only expose certain fields @done
+* expose all verbs for event list @done
+* manually add swagger ui @done
+* set up authorization @done
+* add hypermedia links to responses @done
+* add uuid field
+  * explore rails 4 for uuid primary key field
+  * create separate field to eventually phase out current id
+* create sandbox account
+  * own api key
+  * task to regenerate data
+* finish swagger data
+  * show status codes @done
+  * show field details
+* change due_at to be a date type
+
+* pagination
+* versioning
+  * slide 11
+  * http://www.slideshare.net/dblockdotorg/building-restful-apis-w-grape
+
+curl -X DELETE http://localhost:3000/api/v1/event_lists/9
+
+/event_lists @done
+/event_lists/1/events @done
+/events @done
+/events/1/reminders @done
+
+/subscribers
+  index
+  show
+  create
+  update
+  destroy
+
+/subscribers/1/event_lists
+/subscribers/1/subscriptions?
+
+/subscriptions?
+
+/accounts
+  show
 
 ### curl
 ```

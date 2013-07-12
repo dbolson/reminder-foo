@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :request do
     ip_address '127.0.0.1'
-    sequence(:url) { |n| "https://localhost:3000/api/v1/events/#{n}?access_token=abc-#{n}" }
+    sequence(:url) { |n| "https://local.com/api/v1/events/#{n}?access_token=abc-#{n}" }
     http_verb 'GET'
 
     trait :with_account do

@@ -2,13 +2,15 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'awesome_print', '~> 1.1.0'
+gem 'grape', '~> 0.5.0'
+gem 'grape-swagger', '~> 0.6.0'
 gem 'haml-rails', '~> 0.4'
 gem 'jquery-rails', '~> 2.2.1'
 gem 'oj', '~> 2.0.10'
 gem 'pg', '~> 0.14.1'
-gem 'rabl', '~> 0.8.2'
 gem 'rails', '3.2.13'
 gem 'rails_best_practices', '~> 1.13.4'
+gem 'roar', '~> 0.11.18'
 gem 'strong_parameters', '~> 0.2.1'
 gem 'thin', '~> 1.5.1'
 gem 'timecop', '~> 0.6.1'
@@ -23,8 +25,6 @@ end
 group :development, :test do
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'ffaker', '~> 1.15.0'
-  gem 'raddocs', '~> 0.1.3'
-  gem 'rspec_api_documentation', '~> 0.9.0'
   gem 'rspec-rails', '~> 2.13.0'
 end
 

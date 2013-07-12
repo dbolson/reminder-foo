@@ -3,7 +3,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "event list #{n}" }
 
     trait :with_account do
-      association :account, factory: :account
+      association :account
     end
 
     factory :event_list_with_account, traits: [:with_account]
