@@ -10,6 +10,7 @@ module API
     mount API::EventLists
     mount API::Events
     mount API::Reminders
+    mount API::Subscribers
 
     add_swagger_documentation mount_path: '/resources',
                               api_version: 'v1',
