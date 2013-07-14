@@ -12,48 +12,97 @@
 
 module Services
   class Sandbox
-    def self.populate
+    def self.populate!
+      new.populate!
+    end
+
+    def populate!
+      event_lists = create_event_lists_for!(account)
+      events = create_events_for(event_lists)
+      create_reminders_for!(events)
+      subscribers = create_subscribers_for!(account)
+      create_subscriptions_for!(event_lists, subscribers)
+      nil
+    end
+
+    private
+
+    def account
+      @_account ||= create_account!
+    end
+
+    def create_account!
+      ensure_one_account
+      Services::AccountCreating.create(email: ENV['SANDBOX_EMAIL'])
+    end
+
+    def ensure_one_account
       if account = ::Account.find_by_email(ENV['SANDBOX_EMAIL'])
         account.destroy
       end
+    end
 
-      account = ::Account.create!(email: ENV['SANDBOX_EMAIL'])
+    def create_subscribers_for!(account)
+      [
+        account.subscribers.create!(phone_number: '15555555555'),
+        account.subscribers.create!(phone_number: '15555555556'),
+        account.subscribers.create!(phone_number: '15555555557')
+      ]
+    end
 
-      subscriber1 = account.subscribers.create!(phone_number: '15555555555')
-      subscriber2 = account.subscribers.create!(phone_number: '15555555556')
-      subscriber3 = account.subscribers.create!(phone_number: '15555555557')
+    def create_event_lists_for!(account)
+      [
+        account.event_lists.create!(name: 'Event List 1'),
+        account.event_lists.create!(name: 'Event List 2')
 
-      event_list1 = account.event_lists.create!(name: 'Event List 1')
-      event_list2 = account.event_lists.create!(name: 'Event List 2')
+      ]
+    end
 
-      event1 = event_list1.events.new(name: 'Event 1', description: 'Event 1', due_at: 20.days.from_now) do |event|
-        event.account = account
-        event.save!
-      end
-      event2 = event_list1.events.new(name: 'Event 2', description: 'Event 2', due_at: 30.days.from_now) do |event|
-        event.account = account
-        event.save!
-      end
+    def create_events_for(event_lists)
+      [
+        event_lists[0].events.new { |event|
+          event.name = 'Event 1'
+          event.description = 'Event 1'
+          event.due_at = 20.days.from_now
+          event.account = account
+          event.save!
+        },
+        event_lists[0].events.new { |event|
+          event.name = 'Event 2'
+          event.description = 'Event 2'
+          event.due_at = 30.days.from_now
+          event.account = account
+          event.save!
+        }
+      ]
+    end
 
-      reminder1 = event1.reminders.create!(reminded_at: event1.due_at - 10.days)
-      reminder2 = event1.reminders.create!(reminded_at: event1.due_at - 1.day)
-      reminder3 = event2.reminders.create!(reminded_at: event2.due_at - 1.day)
+    def create_reminders_for!(events)
+      [
+        events[0].reminders.create!(reminded_at: events[0].due_at - 10.days),
+        events[0].reminders.create!(reminded_at: events[0].due_at - 1.day),
+        events[1].reminders.create!(reminded_at: events[1].due_at - 1.day)
+      ]
+    end
 
-      event_list1.subscriptions.new do |subscription|
-        subscription.account = account
-        subscription.subscriber = subscriber1
-        subscription.save!
-      end
-      event_list1.subscriptions.new do |subscription|
-        subscription.account = account
-        subscription.subscriber = subscriber2
-        subscription.save!
-      end
-      event_list2.subscriptions.new do |subscription|
-        subscription.account = account
-        subscription.subscriber = subscriber3
-        subscription.save!
-      end
+    def create_subscriptions_for!(event_lists, subscribers)
+      [
+        event_lists[0].subscriptions.new { |subscription|
+          subscription.account = account
+          subscription.subscriber = subscribers[0]
+          subscription.save!
+        },
+        event_lists[0].subscriptions.new { |subscription|
+          subscription.account = account
+          subscription.subscriber = subscribers[1]
+          subscription.save!
+        },
+        event_lists[1].subscriptions.new { |subscription|
+          subscription.account = account
+          subscription.subscriber = subscribers[2]
+          subscription.save!
+        }
+      ]
     end
   end
 end
