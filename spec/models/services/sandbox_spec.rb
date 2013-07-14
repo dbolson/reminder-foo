@@ -1,22 +1,18 @@
 require 'spec_helper'
 
-describe Services::Sandbox, slow: true do
+describe Services::Sandbox, :slow do
   describe '.populate' do
     context 'with no sandbox account' do
-      xit 'creates an account' do
-        Account.should_receive(:create!)
-        Services::Sandbox.populate
+      it 'creates an account' do
+        expect {
+          Services::Sandbox.populate
+        }.to change(Account, :count).by(1)
       end
 
       it 'creates subscribers for the account' do
         expect {
           Services::Sandbox.populate
         }.to change(Subscriber, :count).by(3)
-        #ap Account.all
-        #ap Subscriber.all
-        #ap EventList.all
-        #ap Event.all
-        #ap EventList.first.subscribers
       end
 
       it 'creates event lists for the account' do
