@@ -13,11 +13,11 @@
 module Services
   class Sandbox
     def self.populate
-      if account = ::Account.find_by_email('sandbox@reminderfoo.com')
+      if account = ::Account.find_by_email(ENV['SANDBOX_EMAIL'])
         account.destroy
       end
 
-      account = ::Account.create!(email: 'sandbox@reminderfoo.com')
+      account = ::Account.create!(email: ENV['SANDBOX_EMAIL'])
 
       subscriber1 = account.subscribers.create!(phone_number: '15555555555')
       subscriber2 = account.subscribers.create!(phone_number: '15555555556')

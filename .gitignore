@@ -5,3 +5,6 @@
 /public/docs
 /docs
 .sass-cache/
+
+# Ignore application configuration
+/config/application.yml

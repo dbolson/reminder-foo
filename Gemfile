@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'awesome_print', '~> 1.1.0'
+gem 'figaro', '~> 0.7.0'
 gem 'grape', '~> 0.5.0'
 gem 'grape-swagger', '~> 0.6.0'
 gem 'haml-rails', '~> 0.4'

@@ -41,7 +41,7 @@ describe Services::Sandbox, :slow do
     end
 
     context 'with an existing account' do
-      let!(:existing_account) { create(:account, email: 'sandbox@reminderfoo.com') }
+      let!(:existing_account) { create(:account, email: ENV['SANDBOX_EMAIL']) }
 
       it 'destroys the account to start over cleanly' do
         Services::Sandbox.populate
