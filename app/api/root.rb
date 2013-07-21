@@ -7,6 +7,7 @@ module API
 
     format :json
 
+    mount API::Accounts
     mount API::EventLists
     mount API::Events
     mount API::Reminders

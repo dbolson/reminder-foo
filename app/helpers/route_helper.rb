@@ -1,4 +1,8 @@
 module RouteHelper
+  def account_url(env)
+    "#{RouteBuilder.new(env).base_url}/accounts"
+  end
+
   def event_lists_url(env)
     "#{RouteBuilder.new(env).base_url}/event_lists"
   end

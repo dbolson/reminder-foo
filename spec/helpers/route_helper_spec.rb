@@ -14,6 +14,12 @@ describe RouteHelper do
     }
   }
 
+  describe '#account_url' do
+    specify do
+      expect(resource.account_url(env)).to eq('https://test.host/api/v1/accounts')
+    end
+  end
+
   describe '#event_lists_url' do
     specify do
       expect(resource.event_lists_url(env)).to eq('https://test.host/api/v1/event_lists')

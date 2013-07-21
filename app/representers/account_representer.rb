@@ -1,12 +1,12 @@
-module ReminderRepresenter
+module AccountRepresenter
   include BaseRepresenter
 
   property :id
-  property :reminded_at
+  property :email
   property :updated_at
   property :created_at
 
   link :self do
-    reminder_url(env, event_id, id)
+    account_url(env)
   end
 end

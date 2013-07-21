@@ -1,6 +1,4 @@
 module SubscriberRepresenter
-  include Roar::Representer::JSON
-  include Roar::Representer::Feature::Hypermedia
   include BaseRepresenter
 
   property :id

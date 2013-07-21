@@ -64,7 +64,7 @@ curl -X DELETE http://localhost:3000/api/v1/event_lists/9
   create
   destroy
 
-/accounts
+/accounts @done
   show
 
 ### curl
