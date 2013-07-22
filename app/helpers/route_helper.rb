@@ -19,6 +19,14 @@ module RouteHelper
     "#{subscribers_url(env)}/#{id}"
   end
 
+  def subscriptions_url(env)
+    "#{RouteBuilder.new(env).base_url}/subscriptions"
+  end
+
+  def subscription_url(env, id)
+    "#{subscriptions_url(env)}/#{id}"
+  end
+
   def event_url(env, event_list_id, id)
     "#{event_lists_url(env)}/#{event_list_id}/events/#{id}"
   end

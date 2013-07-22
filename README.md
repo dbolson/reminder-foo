@@ -58,12 +58,8 @@ curl -X DELETE http://localhost:3000/api/v1/event_lists/9
 /events/1/reminders @done
 /subscribers @done
 /subscribers/1/event_lists @done
-/subscribers/1/subscriptions?
-
-/subscriptions
-  create
-  destroy
-
+/subscribers/1
+/subscriptions @done
 /accounts @done
   show
 

@@ -44,6 +44,18 @@ describe RouteHelper do
     end
   end
 
+  describe '#subscriptions_url' do
+    specify do
+      expect(resource.subscriptions_url(env)).to eq('https://test.host/api/v1/subscriptions')
+    end
+  end
+
+  describe '#subscription_url' do
+    specify do
+      expect(resource.subscription_url(env, 1)).to eq('https://test.host/api/v1/subscriptions/1')
+    end
+  end
+
   describe '#event_url' do
     specify do
       expect(resource.event_url(env, 1, 2)).to eq('https://test.host/api/v1/event_lists/1/events/2')

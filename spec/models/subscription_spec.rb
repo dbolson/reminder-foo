@@ -52,14 +52,14 @@ describe Subscription do
       let(:another_account) { create(:account) }
 
       it 'does not create a subscription' do
-        subscription = record_type.
-          create_for_account(account: another_account,
-                             subscription: {
-                               subscriber_id: subscriber.id,
-                               event_list_id: event_list.id
-                             })
-
-        expect(subscription).to_not be_persisted
+        expect {
+          subscription = record_type.
+            create_for_account(account: another_account,
+                               subscription: {
+                                 subscriber_id: subscriber.id,
+                                 event_list_id: event_list.id
+                               })
+        }.to raise_error
       end
     end
   end

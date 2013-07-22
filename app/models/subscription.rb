@@ -19,7 +19,7 @@ class Subscription < ActiveRecord::Base
     subscription = account.subscriptions.build
     subscription.event_list_id = event_list_id
     subscription.subscriber_id = subscriber_id
-    subscription.save
+    subscription.save!
     subscription
   end
 
