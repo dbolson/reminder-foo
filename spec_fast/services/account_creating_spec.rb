@@ -1,5 +1,5 @@
 require File.expand_path('spec_fast/fast_spec_helper')
-require File.expand_path('app/models/services/account_creating')
+require File.expand_path('app/services/account_creating')
 
 describe Services::AccountCreating do
   describe '#create' do
