@@ -3,8 +3,8 @@ require File.expand_path('app/services/account_creating')
 
 describe Services::AccountCreating do
   describe '#create' do
-    let(:account_type) { stub(:account_type, new: new_account) }
-    let(:new_account) { stub(:new_account).as_null_object }
+    let(:account_type) { double(:account_type, new: new_account) }
+    let(:new_account) { double(:new_account).as_null_object }
     let(:creating) { Services::AccountCreating }
 
     def create
@@ -14,7 +14,7 @@ describe Services::AccountCreating do
 
     context 'with valid params' do
       before do
-        new_account.stub(:save) { true }
+        new_account.double(:save) { true }
       end
 
       it 'saves the account' do

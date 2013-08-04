@@ -4,8 +4,8 @@ require_relative '../../../app/models/sms/client'
 describe SMS::Client do
   describe '#create_message' do
     it 'sends a message to the phone number' do
-      sms_client = double('client')
-      sms_message = double('message')
+      sms_client = double(:client)
+      sms_message = double(:message)
       sms_client.stub_chain(:account, :sms, :messages).and_return(sms_message)
 
       sms_message.should_receive(:create).with({

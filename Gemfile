@@ -26,7 +26,7 @@ end
 group :development, :test do
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'ffaker', '~> 1.15.0'
-  gem 'rspec-rails', '~> 2.13.0'
+  gem 'rspec-rails', '~> 2.14.0'
 end
 
 group :development do

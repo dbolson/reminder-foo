@@ -8,7 +8,7 @@ describe Reminder do
   describe 'with validations' do
     before do
       now = Time.parse('Jan 01 2000')
-      Time.stub!(:now) { now }
+      Time.stub(:now) { now }
     end
 
     it { should validate_presence_of(:reminded_at) }
