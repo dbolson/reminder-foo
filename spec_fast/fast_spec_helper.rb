@@ -3,4 +3,4 @@ require 'ffaker'
 require 'ostruct'
 require 'timecop'
 
-Dir[File.expand_path('spec/support/**/*.rb')].each { |f| require f }
+Dir[File.expand_path('spec_fast/support/**/*.rb')].each { |f| require f }
