@@ -11,4 +11,6 @@ class Event < ActiveRecord::Base
 
   validates :description,
             length: { maximum: 140 }
+
+  scope :due_within_10_minutes, -> { where(due_at: 10.minutes.ago..Time.zone.now) }
 end
