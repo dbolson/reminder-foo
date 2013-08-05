@@ -14,7 +14,6 @@ gem 'rails_best_practices', '~> 1.13.4'
 gem 'roar', '~> 0.11.18'
 gem 'strong_parameters', '~> 0.2.1'
 gem 'thin', '~> 1.5.1'
-gem 'timecop', '~> 0.6.1'
 gem 'twilio-ruby', '~> 3.9.0'
 
 group :assets do
@@ -36,4 +35,6 @@ end
 
 group :test do
   gem 'shoulda-matchers', '~> 1.5.4'
+  gem 'timecop', '~> 0.6.1'
+  gem 'webmock', '~> 1.9.0'
 end

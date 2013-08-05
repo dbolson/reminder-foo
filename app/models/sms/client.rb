@@ -4,19 +4,15 @@ module SMS
 
     attr_accessor :sms_client
 
-    def self.create_message(args={})
-      new.create_message(args)
+    def self.send_message(args={})
+      new.send_message(args)
     end
 
-    def create_message(args={})
+    def send_message(args={})
       ensure_valid_phone_number!(args)
       ensure_valid_message!(args)
 
       sms_client.account.sms.messages.create(message_args(args))
-    end
-
-    def list
-      sms_client.account.sms.messages.list
     end
 
     def sms_client

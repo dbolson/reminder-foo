@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :subscriber do
-    sequence(:phone_number) { |n| "1555555555#{n % 10}" }
+    phone_number { "+1#{rand.to_s[2..11]}" }
 
     trait :with_account do
       association :account

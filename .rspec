@@ -1,2 +1,2 @@
 --color
---tag ~slow
+--tag ~slow --tag ~integration

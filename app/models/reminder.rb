@@ -8,6 +8,10 @@ class Reminder < ActiveRecord::Base
   validate :not_in_past
   validate :with_correct_format
 
+  scope :due_within_10_minutes, -> { where(reminded_at: 10.minutes.ago..Time.zone.now) }
+
+  delegate :subscribers, to: :event
+
   private
 
   def with_correct_format

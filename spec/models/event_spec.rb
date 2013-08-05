@@ -5,6 +5,7 @@ describe Event do
     it { should belong_to(:account) }
     it { should belong_to(:event_list) }
     it { should have_many(:reminders).dependent(:destroy) }
+    it { should have_many(:subscribers).through(:event_list) }
   end
 
   describe 'with validations' do
