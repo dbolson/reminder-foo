@@ -4,10 +4,6 @@ ReminderFoo is a RESTful SaaS application to send custom SMS reminders to specif
 
 ## TODOs
 
-- [feature] As a user, I want my reminders to get sent out at the correct time
-  - check all events with reminders set to time within the last 10 minutes or are themselves set to within the last 10 minutes
-  - send sms to all subscribers for all returned events
-
 ## Domain Model
 
 ### EventList
@@ -83,4 +79,5 @@ thin start -p 3000 --ssl --ssl-verify --ssl-key-file ~/.ssl/server.key --ssl-cer
 ### Tasks
 ```
 rake sandbox:populate
+rake notify:all
 ```

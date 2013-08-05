@@ -41,7 +41,7 @@ describe 'sending sms reminders', :integration do
           phone_number: '+15555555555',
           message: "#{reminder2.event.name} is due on 01-21"
         })
-        SMSReminder.new.notify_upcoming_reminders
+        Services::SMSReminder.new.notify_upcoming_reminders
       end
     end
 
@@ -53,7 +53,7 @@ describe 'sending sms reminders', :integration do
 
       it 'does not send the sms reminder' do
         SMS::Client.should_not_receive(:send_message)
-        SMSReminder.new.notify_upcoming_reminders
+        Services::SMSReminder.new.notify_upcoming_reminders
       end
     end
 
@@ -65,7 +65,7 @@ describe 'sending sms reminders', :integration do
 
       it 'does not send the sms reminder' do
         SMS::Client.should_not_receive(:send_message)
-        SMSReminder.new.notify_upcoming_reminders
+        Services::SMSReminder.new.notify_upcoming_reminders
       end
     end
   end
@@ -100,7 +100,7 @@ describe 'sending sms reminders', :integration do
           phone_number: '+15555555555',
           message: "#{event2.name} is due"
         })
-        SMSReminder.new.notify_upcoming_due_events
+        Services::SMSReminder.new.notify_upcoming_due_events
       end
     end
 
@@ -111,7 +111,7 @@ describe 'sending sms reminders', :integration do
 
       it 'does not send the sms reminder' do
         SMS::Client.should_not_receive(:send_message)
-        SMSReminder.new.notify_upcoming_due_events
+        Services::SMSReminder.new.notify_upcoming_due_events
       end
     end
 
@@ -122,7 +122,7 @@ describe 'sending sms reminders', :integration do
 
       it 'does not send the sms reminder' do
         SMS::Client.should_not_receive(:send_message)
-        SMSReminder.new.notify_upcoming_due_events
+        Services::SMSReminder.new.notify_upcoming_due_events
       end
     end
   end
