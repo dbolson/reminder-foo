@@ -8,10 +8,10 @@
 
   %body
     = render 'layouts/header'
-    = render 'layouts/notification'
 
     #container
+      = render 'layouts/notification'
       = yield
-      = render 'layouts/footer'
+    = render 'layouts/footer'
 
     =# render 'layouts/development'

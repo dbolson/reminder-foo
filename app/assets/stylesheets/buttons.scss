@@ -1,12 +1,12 @@
 .button {
 	background-color: $button-color;
   border: none;
-	border-radius: 6px;
   color: #ffffff;
 	display: inline-block;
 	font-size: 15px;
 	padding: 6px 24px;
 	text-decoration: none;
+  @include border-radius;
 
   &:hover {
     background-color: darken($button-color, 10%);

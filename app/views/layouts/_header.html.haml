@@ -1,12 +1,13 @@
 %header#page-header(role='banner')
-  %nav
-    .brand
-      = link_to 'Reminders', root_path
+  #nav
+    %nav
+      .brand
+        = link_to 'Reminders', root_path
 
-  %nav(role='navigation')
-    %ul
-      %li.active
-        = link_to 'Lists', lists_path
-      %li= link_to 'API Explorer', api_documentation_path
-      %li= link_to 'Account', account_path
-      %li= link_to 'Log Out', '#'
+    %nav(role='navigation')
+      %ul
+        %li.active
+          = link_to 'Lists', event_lists_path
+        %li= link_to 'API Explorer', api_documentation_path
+        %li= link_to 'Account', account_path
+        %li= link_to 'Log Out', '#'

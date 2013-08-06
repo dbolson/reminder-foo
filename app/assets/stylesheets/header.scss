@@ -1,6 +1,11 @@
 #page-header {
   background-color: $lightest-color;
-  height: 50px;
+  height: $default-height;
+
+  #nav {
+    height: $default-height;
+    @include centered;
+  }
 
   .brand {
     width: 100px;
@@ -26,7 +31,7 @@
     color: $background-color;
     display: block;
     height: inherit;
-    padding: $default-spacing 10px 0 10px;
+    padding: $default-spacing;
 
     &:hover {
       background-color: $darkest-color;

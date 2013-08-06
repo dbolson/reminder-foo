@@ -1,5 +1,11 @@
 footer {
   background-color: $lightest-color;
   color: $background-color;
-  padding: $default-spacing;
+  padding: $default-spacing / 2;
+  height: $default-height;
+
+  #footer {
+    text-align: center;
+    @include centered;
+  }
 }

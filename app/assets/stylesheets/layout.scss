@@ -1,7 +1,11 @@
-#main {
+#container {
   background-color: $white;
-  clear: left;
-  padding: $default-spacing;
+  @include centered;
+}
+
+#main {
+  margin-top: 30px;
+  padding: 0 $default-spacing $default-spacing $default-spacing;
 }
 
 #content {

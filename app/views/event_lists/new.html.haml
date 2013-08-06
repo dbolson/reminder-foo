@@ -1,0 +1,21 @@
+#main
+  %h1 New List
+
+  %nav#subnav(role='navigation')
+    %ul
+      %li.active= link_to 'Event Lists', event_lists_path
+      %li= link_to 'Events', '#'
+      %li= link_to 'Reminders', '#'
+      %li= link_to 'Subscribers', '#'
+
+  #content
+    = simple_form_for @event_list do |f|
+      %fieldset
+        %legend Create a New List
+
+        %ol
+          %li
+            = f.input :name
+
+      .form-actions
+        = f.button :submit, class: 'button primary'

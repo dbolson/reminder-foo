@@ -1,15 +1,19 @@
 #notifications {
+  height: 50px;
+  margin: 0 $default-spacing;
+  padding-top: $default-spacing;
+
   div {
     color: $background-color;
-    margin: 15px 0;
     padding: $default-spacing - 5 $default-spacing;
+    @include border-radius;
   }
 
   .site {
     background-color: $warning-color;
   }
 
-  .success {
+  .notice {
     background-color: $success-color;
   }
 
