@@ -12,13 +12,23 @@ class EventListsController < ApplicationController
   end
 
   def create
-    flash[:info] = 'Successfully created new list.'
-    redirect_to new_event_list_path
+    @event_list = current_account.event_lists.build(valid_params)
+
+    if @event_list.save
+      flash[:info] = 'Successfully created new list.'
+      redirect_to event_lists_path
+    else
+      render 'new'
+    end
   end
 
   private
 
   def current_account
     Account.first
+  end
+
+  def valid_params
+    params.require(:event_list).permit(:name)
   end
 end

@@ -20,11 +20,11 @@
 }
 
 .button.danger {
-  background-color: $warning-color;
+  background-color: $error-color;
 	font-size: 15px;
 
   &:hover {
-    background-color: darken($warning-color, 10%);
+    background-color: darken($error-color, 10%);
   }
 }
 

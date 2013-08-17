@@ -4,6 +4,8 @@ ReminderFoo is a RESTful SaaS application to send custom SMS reminders to specif
 
 ## TODOs
 
+- Dates in unix time
+
 ## Domain Model
 
 ### EventList

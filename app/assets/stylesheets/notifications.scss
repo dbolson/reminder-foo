@@ -10,7 +10,7 @@
   }
 
   .site {
-    background-color: $warning-color;
+    background-color: $error-color;
   }
 
   .notice {
@@ -22,6 +22,6 @@
   }
 
   .error {
-    background-color: $warning-color;
+    background-color: $error-color;
   }
 }
