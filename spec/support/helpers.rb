@@ -5,6 +5,6 @@ module SpecHelpers
   end
 
   def format_time(time)
-    time.to_json.gsub(/"/, '')
+    time.to_i.to_s
   end
 end

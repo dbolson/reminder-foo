@@ -13,6 +13,7 @@ module BaseRepresenter
   end
 
   def self.represent(resource, env)
+    resource = ::APIResource.new(resource)
     representer_name = "#{resource.class.to_s}Representer"
 
     representer = representer_name.constantize

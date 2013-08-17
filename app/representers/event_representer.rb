@@ -4,7 +4,7 @@ module EventRepresenter
   property :id
   property :name
   property :description
-  property :due_at
+  property :due_at, getter: ->(*) { due_at.to_i.to_s }
   property :updated_at
   property :created_at
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe API::Events do
+describe API::Events, :api do
   let(:api_key) { create(:api_key) }
   let(:account) { api_key.account }
   let(:access_token) { api_key.access_token }
@@ -267,7 +267,7 @@ describe API::Events do
             'id' => event.id,
             'name' => 'a new name',
             'description' => 'a new description',
-            'due_at' => '2000-01-21T00:00:00Z',
+            'due_at' => '948412800',
             'updated_at' => format_time(event.updated_at),
             'created_at' => format_time(event.created_at),
             'links' => [{

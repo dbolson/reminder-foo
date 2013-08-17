@@ -1,24 +1,6 @@
 require 'spec_helper'
 
-#shared_examples_for 'handles invalid IDs' do
-  #context 'with an event list for another account' do
-    #it 'does not get the event list' do
-      #do_action(verb, path, access_token, params)
-      #expect(response.status).to eq(404)
-    #end
-
-    #it 'displays an error message' do
-      #do_action(verb, path, access_token, params)
-      #expect(JSON.parse(response.body)).to eq(
-        #'status' => 404,
-        #'status_code' => 'not_found',
-        #'error' => "Couldn't find EventList with id=1"
-      #)
-    #end
-  #end
-#end
-
-describe API::EventLists do
+describe API::EventLists, :api do
   let(:api_key) { create(:api_key) }
   let(:account) { api_key.account }
   let(:access_token) { api_key.access_token }

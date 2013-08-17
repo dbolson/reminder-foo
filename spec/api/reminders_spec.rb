@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe API::Reminders do
+describe API::Reminders, :api do
   let(:api_key) { create(:api_key) }
   let(:account) { api_key.account }
   let(:access_token) { api_key.access_token }
@@ -209,7 +209,7 @@ describe API::Reminders do
           do_action(verb, path, access_token, params)
           expect(JSON.parse(response.body)).to eq(
             'id' => reminder.id,
-            'reminded_at' => '2000-01-21T00:00:00Z',
+            'reminded_at' => '948412800',
             'updated_at' => format_time(reminder.updated_at),
             'created_at' => format_time(reminder.created_at),
             'links' => [{

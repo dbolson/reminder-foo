@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe API::Accounts do
+describe API::Accounts, :api do
   let(:api_key) { create(:api_key) }
   let(:account) { api_key.account }
   let(:access_token) { api_key.access_token }
