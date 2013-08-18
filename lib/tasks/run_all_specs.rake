@@ -7,8 +7,6 @@ begin
     task.rspec_opts = '-O .rspec-no-tags'
   end
 
-  task default: :fast_spec
-
 rescue LoadError => e
   desc 'Run all tests regardless of tags'
   task 'spec:all' do
