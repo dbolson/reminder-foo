@@ -2,7 +2,7 @@ begin
   require 'rspec/core/rake_task'
 
   desc 'Run all tests regardless of exclude tags'
-  RSpec::Core::RakeTask.new(:spec_all) do |task|
+  RSpec::Core::RakeTask.new('spec:all') do |task|
     task.pattern = './**/*_spec.rb'
     task.rspec_opts = '-O .rspec-all-tests'
   end
