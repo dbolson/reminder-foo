@@ -24,10 +24,6 @@ class EventListsController < ApplicationController
 
   private
 
-  def current_account
-    Account.first
-  end
-
   def valid_params
     params.require(:event_list).permit(:name)
   end

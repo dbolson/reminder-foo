@@ -3,7 +3,8 @@ RemindersApi::Application.routes.draw do
   match '/account', to: 'pages#account'
   match '/sign_in', to: 'pages#sign_in'
 
-  resources :event_lists
+  resources :event_lists, only: [:index, :show]
+  resources :events, only: [:index, :show]
   mount API::Root => '/api'
   get '/api/documentation', to: 'api_documentation#index'
 

@@ -1,0 +1,22 @@
+#main
+  %h1 Events
+
+  %nav#subnav(role='navigation')
+    %ul
+      %li= link_to 'Event Lists', event_lists_path
+      %li.active= link_to 'Events', events_path
+      %li= link_to 'Reminders', '#'
+      %li= link_to 'Subscribers', '#'
+
+  #content
+    %table
+      %caption List of events and associated data
+      %thead
+        %tr
+          %th Name
+          %th Created At
+      %tbody
+        - @events.each do |event|
+          %tr
+            %td= link_to event.name, event_path(event)
+            %td= event.created_at.to_formatted_s(:date)

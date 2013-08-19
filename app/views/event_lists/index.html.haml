@@ -4,7 +4,7 @@
   %nav#subnav(role='navigation')
     %ul
       %li.active= link_to 'Event Lists', event_lists_path
-      %li= link_to 'Events', '#'
+      %li= link_to 'Events', events_path
       %li= link_to 'Reminders', '#'
       %li= link_to 'Subscribers', '#'
 
@@ -24,6 +24,3 @@
             %td= number_with_delimiter(event_list.events.count)
             %td= number_with_delimiter(event_list.subscribers.count)
             %td= event_list.created_at.to_formatted_s(:date)
-
-    %div
-      = link_to 'New List', new_event_list_path, class: 'button primary'
